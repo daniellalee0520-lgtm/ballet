@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#f7f4ef">
+  <title>芭蕾机构价格对比</title>
+
+  <!-- Excel 导入/导出 -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #292724;
+      --muted: #888078;
+      --border: #e6e0d8;
+      --accent: #75685c;
+      --accent-light: #eee9e2;
+      --danger: #b65d5d;
+      --green: #66846e;
+      --shadow: 0 5px 20px rgba(55, 45, 35, 0.06);
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 50px;
+    }
+
+    /* 顶部 */
+    .header {
+      margin-bottom: 18px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* 卡片 */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card-title h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .card-title small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* 表单 */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--accent);
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 9px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      border-radius: 11px;
+      min-height: 42px;
+      padding: 0 16px;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--accent-light);
+      color: var(--text);
+    }
+
+    .btn-danger {
+      background: #f8eaea;
+      color: var(--danger);
+    }
+
+    .btn-green {
+      background: #eaf1eb;
+      color: var(--green);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* 统计 */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: var(--accent-light);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .stat-value {
+      margin-top: 5px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* 筛选 */
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-row select,
+    .filter-row input {
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: white;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    .filter-row input {
+      min-width: 220px;
+      flex: 1;
+    }
+
+    /* 图表 */
+    .chart-container {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+
+    .chart {
+      min-width: 650px;
+      height: 330px;
+      display: flex;
+      align-items: flex-end;
+      gap: 18px;
+      padding: 20px 20px 45px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .chart::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 45px;
+      border-top: 1px dashed #ddd5cc;
+    }
+
+    .bar-group {
+      width: 72px;
+      min-width: 72px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bar-price {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      white-space: nowrap;
+    }
+
+    .bar {
+      width: 42px;
+      max-height: 220px;
+      min-height: 3px;
+      background: var(--accent);
+      border-radius: 8px 8px 2px 2px;
+      transition: height 0.25s ease;
+    }
+
+    .bar-name {
+      position: absolute;
+      bottom: -37px;
+      width: 90px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.3;
+      word-break: break-all;
+    }
+
+    /* 表格 */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      padding: 11px 9px;
+      white-space: nowrap;
+    }
+
+    td {
+      border-bottom: 1px solid #eee9e3;
+      padding: 12px 9px;
+      white-space: nowrap;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 20px;
+      background: var(--accent-light);
+      font-size: 12px;
+    }
+
+    .cheap {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .actions-cell {
+      display: flex;
+      gap: 6px;
+    }
+
+    .small-btn {
+      min-height: 34px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+
+    /* 机构汇总 */
+    .institution-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .institution-item {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .institution-name {
+      font-weight: 700;
+    }
+
+    .institution-info {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .institution-price {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .institution-price strong {
+      font-size: 16px;
+    }
+
+    /* 空状态 */
+    .empty {
+      text-align: center;
+      padding: 35px 15px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* 数据操作 */
+    .data-buttons {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .tip {
+      background: #faf7f2;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%) translateY(20px);
+      background: #292724;
+      color: white;
+      padding: 11px 17px;
+      border-radius: 12px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* 手机 */
+    @media (max-width: 700px) {
+      .app {
+        padding: 16px 12px 40px;
+      }
+
+      .header h1 {
+        font-size: 23px;
+      }
+
+      .card {
+        padding: 15px;
+        border-radius: 16px;
+      }
+
+      .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-buttons button {
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .filter-row {
+        align-items: stretch;
+      }
+
+      .filter-row select,
+      .filter-row input {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-value {
+        font-size: 20px;
+      }
+
+      .form-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-buttons button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- 顶部 -->
+  <div class="header">
+    <h1>芭蕾机构价格对比</h1>
+    <p>录入不同机构套餐，自动计算单节价格与每 60 分钟成本</p>
+  </div>
+
+  <!-- 添加套餐 -->
+  <div class="card">
+
+    <div class="card-title">
+      <div>
+        <h2 id="formTitle">新增套餐</h2>
+        <small>一家机构可以添加多个不同课时套餐</small>
+      </div>
+    </div>
+
+    <form id="packageForm">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>机构名称 *</label>
+          <input
+            id="institution"
+            type="text"
+            placeholder="例如：XX芭蕾"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>套餐名称 *</label>
+          <input
+            id="packageName"
+            type="text"
+            placeholder="例如：30节卡"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>套餐价格（元） *</label>
+          <input
+            id="price"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="3900"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>课时数量 *</label>
+          <input
+            id="lessons"
+            type="number"
+            min="1"
+            step="1"
+            placeholder="30"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>每节课时长（分钟） *</label>
+          <input
+            id="minutes"
+            type="number"
+            min="1"
+            step="1"
+            value="60"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>有效期（月）</label>
+          <input
+            id="validity"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="6"
+          >
+        </div>
+
+      </div>
+
+      <div class="form-buttons">
+
+        <button
+          type="submit"
+          class="btn-primary"
+          id="submitBtn"
+        >
+          ＋ 添加套餐
+        </button>
+
+        <button
+          type="button"
+          class="btn-secondary"
+          id="cancelEditBtn"
+          style="display:none;"
+        >
+          取消编辑
+        </button>
+
+        <button
+          type="button"
+          class="btn-secondary"
+          id="resetFormBtn"
+        >
+          清空输入
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- 数据统计 -->
+  <div class="card">
+
+    <div class="card-title">
+      <h2>整体概览</h2>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-label">机构数量</div>
+        <div class="stat-value" id="statInstitutions">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">套餐数量</div>
+        <div class="stat-value" id="statPackages">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">平均单节价格</div>
+        <div class="stat-value" id="statAverage">¥0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">最低单节价格</div>
+        <div class="stat-value" id="statLowest">¥0</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- 筛选 -->
+  <div class="card">
+
+    <div class="card-title">
+      <h2>筛选</h2>
+    </div>
+
+    <div class="filter-row">
+
+      <select id="institutionFilter">
+        <option value="">全部机构</option>
+      </select>
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="搜索机构或套餐..."
+      >
+
+      <button
+        type="button"
+        class="btn-secondary"
+        id="sortBtn"
+      >
+        单节价格 ↑
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- 图表 -->
+  <div class="card">
+
+    <div class="card-title">
+      <div>
+        <h2>单节价格比较</h2>
+        <small>价格越低，柱子越短</small>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div
+        class="chart"
+        id="chart"
+      ></div>
+    </div>
+
+  </div>
+
+
+  <!-- 机构汇总 -->
+  <div class="card">
+
+    <div class="card-title">
+      <div>
+        <h2>机构汇总</h2>
+        <small>按机构查看最低套餐价格</small>
+      </div>
+    </div>
+
+    <div
+      class="institution-list"
+      id="institutionSummary"
+    ></div>
+
+  </div>
+
+
+  <!-- 套餐列表 -->
+  <div class="card">
+
+    <div class="card-title">
+      <div>
+        <h2>全部套餐</h2>
+        <small>可以随时编辑或删除</small>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>机构</th>
+            <th>套餐</th>
+            <th>价格</th>
+            <th>课时</th>
+            <th>课时长度</th>
+            <th>单节价格</th>
+            <th>每60分钟</th>
+            <th>有效期</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+
+        <tbody id="packageTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- 数据管理 -->
+  <div class="card">
+
+    <div class="card-title">
+      <div>
+        <h2>数据管理</h2>
+        <small>建议定期导出备份</small>
+      </div>
+    </div>
+
+    <div class="data-buttons">
+
+      <button
+        type="button"
+        class="btn-green"
+        id="exportExcelBtn"
+      >
+        📥 导出 Excel
+      </button>
+
+      <button
+        type="button"
+        class="btn-secondary"
+        id="importExcelBtn"
+      >
+        📤 导入 Excel
+      </button>
+
+      <button
+        type="button"
+        class="btn-secondary"
+        id="backupBtn"
+      >
+        💾 备份数据
+      </button>
+
+      <button
+        type="button"
+        class="btn-secondary"
+        id="restoreBtn"
+      >
+        ♻️ 恢复备份
+      </button>
+
+      <button
+        type="button"
+        class="btn-danger"
+        id="clearAllBtn"
+      >
+        删除全部数据
+      </button>
+
+      <input
+        type="file"
+        id="excelFile"
+        accept=".xlsx,.xls,.csv"
+        style="display:none"
+      >
+
+      <input
+        type="file"
+        id="backupFile"
+        accept=".json"
+        style="display:none"
+      >
+
+    </div>
+
+    <div class="tip">
+      <strong>Excel 导入格式：</strong><br>
+      第一行建议使用：机构名称、套餐名称、套餐价格、课时数量、每节课时长、有效期（月）。<br>
+      导出 Excel 后，可以直接在 Excel 里继续整理，再重新导入。
+      <br><br>
+      <strong>数据保存：</strong><br>
+      平时添加的数据会自动保存在当前浏览器中。建议定期点击“导出 Excel”或“备份数据”，这样换手机/浏览器时也不会丢失。
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script>
+
+  /* ============================================================
+     芭蕾机构价格管理
+     ============================================================ */
+
+  const STORAGE_KEY = "ballet_price_database_v1";
+
+  let packages = [];
+  let editingId = null;
+  let sortAscending = true;
+
+
+  /* ---------- DOM ---------- */
+
+  const form = document.getElementById("packageForm");
+
+  const institutionInput =
+    document.getElementById("institution");
+
+  const packageNameInput =
+    document.getElementById("packageName");
+
+  const priceInput =
+    document.getElementById("price");
+
+  const lessonsInput =
+    document.getElementById("lessons");
+
+  const minutesInput =
+    document.getElementById("minutes");
+
+  const validityInput =
+    document.getElementById("validity");
+
+  const submitBtn =
+    document.getElementById("submitBtn");
+
+  const cancelEditBtn =
+    document.getElementById("cancelEditBtn");
+
+  const resetFormBtn =
+    document.getElementById("resetFormBtn");
+
+  const formTitle =
+    document.getElementById("formTitle");
+
+  const institutionFilter =
+    document.getElementById("institutionFilter");
+
+  const searchInput =
+    document.getElementById("searchInput");
+
+  const sortBtn =
+    document.getElementById("sortBtn");
+
+  const packageTable =
+    document.getElementById("packageTable");
+
+  const chart =
+    document.getElementById("chart");
+
+  const institutionSummary =
+    document.getElementById("institutionSummary");
+
+
+  /* ---------- 工具 ---------- */
+
+  function money(value) {
+
+    const number = Number(value);
+
+    if (!Number.isFinite(number)) {
+      return "¥0.00";
+    }
+
+    return "¥" + number.toFixed(2);
+  }
+
+
+  function escapeHTML(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  function getUnitPrice(item) {
+
+    if (!item.lessons || item.lessons <= 0) {
+      return 0;
+    }
+
+    return item.price / item.lessons;
+  }
+
+
+  function get60MinPrice(item) {
+
+    if (
+      !item.lessons ||
+      !item.minutes ||
+      item.lessons <= 0 ||
+      item.minutes <= 0
+    ) {
+      return 0;
+    }
+
+    return item.price /
+      (item.lessons * item.minutes) *
+      60;
+  }
+
+
+  function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    }, 2200);
+
+  }
+
+
+  /* ---------- 保存 ---------- */
+
+  function saveData() {
+
+    try {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(packages)
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast("浏览器无法保存数据");
+
+    }
+
+  }
+
+
+  function loadData() {
+
+    try {
+
+      const saved =
+        localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) {
+
+        packages = [];
+
+        return;
+      }
+
+      const parsed =
+        JSON.parse(saved);
+
+      if (Array.isArray(parsed)) {
+
+        packages = parsed;
+
+      } else {
+
+        packages = [];
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      packages = [];
+
+    }
+
+  }
+
+
+  /* ---------- 表单 ---------- */
+
+  form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const institution =
+      institutionInput.value.trim();
+
+    const packageName =
+      packageNameInput.value.trim();
+
+    const price =
+      Number(priceInput.value);
+
+    const lessons =
+      Number(lessonsInput.value);
+
+    const minutes =
+      Number(minutesInput.value);
+
+    const validity =
+      Number(validityInput.value) || 0;
+
+
+    if (!institution) {
+
+      showToast("请输入机构名称");
+
+      institutionInput.focus();
+
+      return;
+    }
+
+
+    if (!packageName) {
+
+      showToast("请输入套餐名称");
+
+      packageNameInput.focus();
+
+      return;
+    }
+
+
+    if (
+      !Number.isFinite(price) ||
+      price < 0
+    ) {
+
+      showToast("请输入正确的套餐价格");
+
+      return;
+    }
+
+
+    if (
+      !Number.isFinite(lessons) ||
+      lessons <= 0
+    ) {
+
+      showToast("课时数量必须大于0");
+
+      return;
+    }
+
+
+    if (
+      !Number.isFinite(minutes) ||
+      minutes <= 0
+    ) {
+
+      showToast("每节课时长必须大于0");
+
+      return;
+    }
+
+
+    if (editingId !== null) {
+
+      const index =
+        packages.findIndex(
+          item => item.id === editingId
+        );
+
+      if (index !== -1) {
+
+        packages[index] = {
+
+          ...packages[index],
+
+          institution,
+          packageName,
+          price,
+          lessons,
+          minutes,
+          validity
+
+        };
+
+      }
+
+      showToast("套餐已更新");
+
+    } else {
+
+      packages.push({
+
+        id:
+          Date.now() +
+          Math.random()
+            .toString(16)
+            .slice(2),
+
+        institution,
+        packageName,
+        price,
+        lessons,
+        minutes,
+        validity,
+
+        createdAt:
+          new Date().toISOString()
+
+      });
+
+      showToast("套餐已添加");
+
+    }
+
+
+    saveData();
+
+    resetForm();
+
+    renderAll();
+
+  });
+
+
+  function resetForm() {
+
+    editingId = null;
+
+    form.reset();
+
+    minutesInput.value = 60;
+
+    formTitle.textContent = "新增套餐";
+
+    submitBtn.textContent = "＋ 添加套餐";
+
+    cancelEditBtn.style.display = "none";
+
+  }
+
+
+  resetFormBtn.addEventListener(
+    "click",
+    resetForm
+  );
+
+
+  cancelEditBtn.addEventListener(
+    "click",
+    resetForm
+  );
+
+
+  /* ---------- 编辑 ---------- */
+
+  function editPackage(id) {
+
+    const item =
+      packages.find(
+        item => item.id === id
+      );
+
+    if (!item) return;
+
+    editingId = id;
+
+    institutionInput.value =
+      item.institution;
+
+    packageNameInput.value =
+      item.packageName;
+
+    priceInput.value =
+      item.price;
+
+    lessonsInput.value =
+      item.lessons;
+
+    minutesInput.value =
+      item.minutes;
+
+    validityInput.value =
+      item.validity || "";
+
+    formTitle.textContent =
+      "编辑套餐";
+
+    submitBtn.textContent =
+      "保存修改";
+
+    cancelEditBtn.style.display =
+      "inline-block";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* ---------- 删除 ---------- */
+
+  function deletePackage(id) {
+
+    const item =
+      packages.find(
+        item => item.id === id
+      );
+
+    if (!item) return;
+
+
+    const confirmed =
+      confirm(
+        `确定删除「${item.institution} · ${item.packageName}」吗？`
+      );
+
+
+    if (!confirmed) return;
+
+
+    packages =
+      packages.filter(
+        item => item.id !== id
+      );
+
+
+    saveData();
+
+    renderAll();
+
+    showToast("套餐已删除");
+
+  }
+
+
+  /* ---------- 筛选 ---------- */
+
+  function getFilteredPackages() {
+
+    const institution =
+      institutionFilter.value;
+
+    const keyword =
+      searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    let result =
+      packages.filter(item => {
+
+        const matchInstitution =
+          !institution ||
+          item.institution === institution;
+
+
+        const matchKeyword =
+          !keyword ||
+          item.institution
+            .toLowerCase()
+            .includes(keyword) ||
+          item.packageName
+            .toLowerCase()
+            .includes(keyword);
+
+
+        return (
+          matchInstitution &&
+          matchKeyword
+        );
+
+      });
+
+
+    result.sort((a, b) => {
+
+      const priceA =
+        getUnitPrice(a);
+
+      const priceB =
+        getUnitPrice(b);
+
+      return sortAscending
+        ? priceA - priceB
+        : priceB - priceA;
+
+    });
+
+
+    return result;
+
+  }
+
+
+  institutionFilter.addEventListener(
+    "change",
+    renderAll
+  );
+
+
+  searchInput.addEventListener(
+    "input",
+    renderAll
+  );
+
+
+  sortBtn.addEventListener(
+    "click",
+    function() {
+
+      sortAscending =
+        !sortAscending;
+
+      sortBtn.textContent =
+        sortAscending
+          ? "单节价格 ↑"
+          : "单节价格 ↓";
+
+      renderAll();
+
+    }
+  );
+
+
+  /* ---------- 更新机构筛选 ---------- */
+
+  function renderInstitutionFilter() {
+
+    const current =
+      institutionFilter.value;
+
+
+    const institutions =
+      [...new Set(
+        packages
+          .map(item => item.institution)
+          .filter(Boolean)
+      )]
+      .sort((a, b) =>
+        a.localeCompare(b, "zh-CN")
+      );
+
+
+    institutionFilter.innerHTML =
+      '<option value="">全部机构</option>' +
+
+      institutions
+        .map(name =>
+          `<option value="${escapeHTML(name)}">
+            ${escapeHTML(name)}
+          </option>`
+        )
+        .join("");
+
+
+    if (
+      institutions.includes(current)
+    ) {
+
+      institutionFilter.value =
+        current;
+
+    }
+
+  }
+
+
+  /* ---------- 统计 ---------- */
+
+  function renderStats() {
+
+    const count =
+      packages.length;
+
+
+    const institutions =
+      new Set(
+        packages.map(
+          item => item.institution
+        )
+      );
+
+
+    const prices =
+      packages
+        .map(getUnitPrice)
+        .filter(
+          price =>
+            Number.isFinite(price)
+        );
+
+
+    const average =
+      prices.length
+        ? prices.reduce(
+            (sum, price) =>
+              sum + price,
+            0
+          ) / prices.length
+        : 0;
+
+
+    const lowest =
+      prices.length
+        ? Math.min(...prices)
+        : 0;
+
+
+    document.getElementById(
+      "statInstitutions"
+    ).textContent =
+      institutions.size;
+
+
+    document.getElementById(
+      "statPackages"
+    ).textContent =
+      count;
+
+
+    document.getElementById(
+      "statAverage"
+    ).textContent =
+      money(average);
+
+
+    document.getElementById(
+      "statLowest"
+    ).textContent =
+      money(lowest);
+
+  }
+
+
+  /* ---------- 表格 ---------- */
+
+  function renderTable() {
+
+    const rows =
+      getFilteredPackages();
+
+
+    if (!rows.length) {
+
+      packageTable.innerHTML = `
+        <tr>
+          <td colspan="9">
+            <div class="empty">
+              还没有套餐数据
+            </div>
+          </td>
+        </tr>
+      `;
+
+      return;
+
+    }
+
+
+    const lowest =
+      Math.min(
+        ...rows.map(getUnitPrice)
+      );
+
+
+    packageTable.innerHTML =
+      rows
+        .map(item => {
+
+          const unit =
+            getUnitPrice(item);
+
+          const per60 =
+            get60MinPrice(item);
+
+
+          return `
+            <tr>
+
+              <td>
+                <span class="tag">
+                  ${escapeHTML(item.institution)}
+                </span>
+              </td>
+
+              <td>
+                ${escapeHTML(item.packageName)}
+              </td>
+
+              <td>
+                ${money(item.price)}
+              </td>
+
+              <td>
+                ${item.lessons} 节
+              </td>
+
+              <td>
+                ${item.minutes} 分钟
+              </td>
+
+              <td
+                class="${unit === lowest ? "cheap" : ""}"
+              >
+                ${money(unit)}
+                ${unit === lowest ? " ★" : ""}
+              </td>
+
+              <td>
+                ${money(per60)}
+              </td>
+
+              <td>
+                ${
+                  item.validity
+                    ? item.validity + "个月"
+                    : "—"
+                }
+              </td>
+
+              <td>
+
+                <div class="actions-cell">
+
+                  <button
+                    type="button"
+                    class="btn-secondary small-btn"
+                    onclick="editPackage('${item.id}')"
+                  >
+                    编辑
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-danger small-btn"
+                    onclick="deletePackage('${item.id}')"
+                  >
+                    删除
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  /* ---------- 图表 ---------- */
+
+  function renderChart() {
+
+    const rows =
+      getFilteredPackages();
+
+
+    if (!rows.length) {
+
+      chart.innerHTML = `
+        <div class="empty">
+          添加套餐后，这里会显示价格比较图
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const max =
+      Math.max(
+        ...rows.map(getUnitPrice),
+        1
+      );
+
+
+    chart.innerHTML =
+      rows
+        .map(item => {
+
+          const price =
+            getUnitPrice(item);
+
+
+          const height =
+            Math.max(
+              4,
+              (price / max) * 220
+            );
+
+
+          return `
+            <div
+              class="bar-group"
+              title="${escapeHTML(item.institution)} · ${escapeHTML(item.packageName)}"
+            >
+
+              <div class="bar-price">
+                ${money(price)}
+              </div>
+
+              <div
+                class="bar"
+                style="height:${height}px"
+              ></div>
+
+              <div class="bar-name">
+                ${escapeHTML(item.institution)}
+                <br>
+                ${escapeHTML(item.packageName)}
+              </div>
+
+            </div>
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  /* ---------- 机构汇总 ---------- */
+
+  function renderInstitutionSummary() {
+
+    if (!packages.length) {
+
+      institutionSummary.innerHTML = `
+        <div class="empty">
+          添加套餐后，这里会显示机构汇总
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const map = {};
+
+
+    packages.forEach(item => {
+
+      if (!map[item.institution]) {
+
+        map[item.institution] = [];
+
+      }
+
+      map[item.institution].push(item);
+
+    });
+
+
+    const institutions =
+      Object.keys(map)
+        .sort();
+
+
+    institutionSummary.innerHTML =
+      institutions
+        .map(name => {
+
+          const list =
+            map[name];
+
+
+          const prices =
+            list.map(
+              getUnitPrice
+            );
+
+
+          const min =
+            Math.min(...prices);
+
+
+          const max =
+            Math.max(...prices);
+
+
+          return `
+            <div class="institution-item">
+
+              <div>
+
+                <div class="institution-name">
+                  ${escapeHTML(name)}
+                </div>
+
+                <div class="institution-info">
+                  ${list.length} 个套餐
+                  · 单节价格 ${money(min)} ～ ${money(max)}
+                </div>
+
+              </div>
+
+              <div class="institution-price">
+
+                <span class="stat-label">
+                  最低单节
+                </span>
+
+                <br>
+
+                <strong>
+                  ${money(min)}
+                </strong>
+
+              </div>
+
+            </div>
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  /* ---------- 总渲染 ---------- */
+
+  function renderAll() {
+
+    renderInstitutionFilter();
+
+    renderStats();
+
+    renderTable();
+
+    renderChart();
+
+    renderInstitutionSummary();
+
+  }
+
+
+  /* ============================================================
+     Excel 导出
+     ============================================================ */
+
+  document
+    .getElementById("exportExcelBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        if (!packages.length) {
+
+          showToast("目前没有可以导出的数据");
+
+          return;
+
+        }
+
+
+        if (
+          typeof XLSX === "undefined"
+        ) {
+
+          showToast(
+            "Excel 模块加载失败，请检查网络"
+          );
+
+          return;
+
+        }
+
+
+        const data =
+          packages.map(item => ({
+
+            "机构名称":
+              item.institution,
+
+            "套餐名称":
+              item.packageName,
+
+            "套餐价格":
+              item.price,
+
+            "课时数量":
+              item.lessons,
+
+            "每节课时长":
+              item.minutes,
+
+            "有效期（月）":
+              item.validity || "",
+
+            "单节价格":
+              Number(
+                getUnitPrice(item)
+                  .toFixed(2)
+              ),
+
+            "每60分钟价格":
+              Number(
+                get60MinPrice(item)
+                  .toFixed(2)
+              )
+
+          }));
+
+
+        const worksheet =
+          XLSX.utils.json_to_sheet(
+            data
+          );
+
+
+        const workbook =
+          XLSX.utils.book_new();
+
+
+        XLSX.utils.book_append_sheet(
+          workbook,
+          worksheet,
+          "芭蕾套餐"
+        );
+
+
+        XLSX.writeFile(
+          workbook,
+          "芭蕾机构价格对比.xlsx"
+        );
+
+
+        showToast("Excel 已导出");
+
+      }
+    );
+
+
+  /* ============================================================
+     Excel 导入
+     ============================================================ */
+
+  document
+    .getElementById("importExcelBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        document
+          .getElementById("excelFile")
+          .click();
+
+      }
+    );
+
+
+  document
+    .getElementById("excelFile")
+    .addEventListener(
+      "change",
+      async function(event) {
+
+        const file =
+          event.target.files[0];
+
+
+        if (!file) return;
+
+
+        if (
+          typeof XLSX === "undefined"
+        ) {
+
+          showToast(
+            "Excel 模块加载失败，请检查网络"
+          );
+
+          return;
+
+        }
+
+
+        try {
+
+          const buffer =
+            await file.arrayBuffer();
+
+
+          const workbook =
+            XLSX.read(
+              buffer,
+              { type: "array" }
+            );
+
+
+          const firstSheet =
+            workbook.Sheets[
+              workbook.SheetNames[0]
+            ];
+
+
+          const rows =
+            XLSX.utils.sheet_to_json(
+              firstSheet,
+              { defval: "" }
+            );
+
+
+          let added = 0;
+
+
+          rows.forEach(row => {
+
+            const institution =
+              String(
+                row["机构名称"] ??
+                row["机构"] ??
+                ""
+              ).trim();
+
+
+            const packageName =
+              String(
+                row["套餐名称"] ??
+                row["套餐"] ??
+                ""
+              ).trim();
+
+
+            const price =
+              Number(
+                row["套餐价格"] ??
+                row["价格"] ??
+                0
+              );
+
+
+            const lessons =
+              Number(
+                row["课时数量"] ??
+                row["课时"] ??
+                row["节数"] ??
+                0
+              );
+
+
+            const minutes =
+              Number(
+                row["每节课时长"] ??
+                row["每节分钟"] ??
+                60
+              );
+
+
+            const validity =
+              Number(
+                row["有效期（月）"] ??
+                row["有效期"] ??
+                0
+              );
+
+
+            if (
+              institution &&
+              packageName &&
+              Number.isFinite(price) &&
+              price >= 0 &&
+              Number.isFinite(lessons) &&
+              lessons > 0 &&
+              Number.isFinite(minutes) &&
+              minutes > 0
+            ) {
+
+              packages.push({
+
+                id:
+                  Date.now() +
+                  Math.random()
+                    .toString(16)
+                    .slice(2),
+
+                institution,
+
+                packageName,
+
+                price,
+
+                lessons,
+
+                minutes,
+
+                validity:
+                  Number.isFinite(validity)
+                    ? validity
+                    : 0,
+
+                createdAt:
+                  new Date().toISOString()
+
+              });
+
+
+              added++;
+
+            }
+
+          });
+
+
+          saveData();
+
+          renderAll();
+
+          showToast(
+            `成功导入 ${added} 个套餐`
+          );
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          alert(
+            "Excel 导入失败。\n\n请检查文件格式以及第一行列名。"
+          );
+
+        }
+
+
+        event.target.value = "";
+
+      }
+    );
+
+
+  /* ============================================================
+     JSON 备份
+     ============================================================ */
+
+  document
+    .getElementById("backupBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        if (!packages.length) {
+
+          showToast("目前没有数据");
+
+          return;
+
+        }
+
+
+        const content =
+          JSON.stringify(
+            packages,
+            null,
+            2
+          );
+
+
+        const blob =
+          new Blob(
+            [content],
+            {
+              type:
+                "application/json;charset=utf-8"
+            }
+          );
+
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        const link =
+          document.createElement("a");
+
+
+        link.href = url;
+
+        link.download =
+          "芭蕾机构价格备份.json";
+
+
+        document.body.appendChild(
+          link
+        );
+
+
+        link.click();
+
+        link.remove();
+
+
+        URL.revokeObjectURL(url);
+
+
+        showToast("备份文件已生成");
+
+      }
+    );
+
+
+  /* ============================================================
+     JSON 恢复
+     ============================================================ */
+
+  document
+    .getElementById("restoreBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        document
+          .getElementById("backupFile")
+          .click();
+
+      }
+    );
+
+
+  document
+    .getElementById("backupFile")
+    .addEventListener(
+      "change",
+      async function(event) {
+
+        const file =
+          event.target.files[0];
+
+
+        if (!file) return;
+
+
+        try {
+
+          const text =
+            await file.text();
+
+
+          const restored =
+            JSON.parse(text);
+
+
+          if (
+            !Array.isArray(restored)
+          ) {
+
+            throw new Error(
+              "数据格式错误"
+            );
+
+          }
+
+
+          const confirmed =
+            confirm(
+              `备份中有 ${restored.length} 个套餐。\n\n恢复后将替换当前数据，确定继续吗？`
+            );
+
+
+          if (!confirmed) return;
+
+
+          packages =
+            restored;
+
+
+          saveData();
+
+          renderAll();
+
+          showToast("数据恢复成功");
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          alert(
+            "恢复失败，请选择正确的 JSON 备份文件。"
+          );
+
+        }
+
+
+        event.target.value = "";
+
+      }
+    );
+
+
+  /* ============================================================
+     清空全部
+     ============================================================ */
+
+  document
+    .getElementById("clearAllBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        if (!packages.length) {
+
+          showToast("目前没有数据");
+
+          return;
+
+        }
+
+
+        const confirmed =
+          confirm(
+            "确定删除全部套餐吗？\n\n如果没有备份，这些数据将无法恢复。"
+          );
+
+
+        if (!confirmed) return;
+
+
+        packages = [];
+
+        saveData();
+
+        resetForm();
+
+        renderAll();
+
+        showToast("全部数据已删除");
+
+      }
+    );
+
+
+  /* ============================================================
+     初始化
+     ============================================================ */
+
+  loadData();
+
+  renderAll();
+
+
+  /* 暴露给 HTML onclick */
+  window.editPackage =
+    editPackage;
+
+  window.deletePackage =
+    deletePackage;
+
+</script>
+
+</body>
+</html>
