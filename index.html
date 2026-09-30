@@ -2,3610 +2,2939 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f8f3f1">
-
-<title>Ballet Price Studio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>芭蕾机构价格对比</title>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <style>
+:root{
+  --bg:#f8f4f2;
+  --card:#fffdfc;
+  --text:#302c2d;
+  --muted:#8c8182;
+  --border:#e9dfdd;
 
-* {
-    box-sizing: border-box;
+  --pink:#c98f9f;
+  --pink-light:#f5e5e9;
+  --pink-soft:#fbf1f3;
+
+  --lavender:#a69bbd;
+  --lavender-light:#eeeaf5;
+
+  --cream:#f5eee6;
+
+  --green:#738d79;
+  --green-light:#eaf1eb;
+
+  --danger:#b86c70;
+  --danger-light:#f8e9ea;
+
+  --shadow:0 5px 20px rgba(70,45,50,.06);
 }
 
-:root {
-    --bg: #f8f4f2;
-    --card: #fffdfc;
-    --text: #302c2d;
-    --muted: #8c8182;
-    --border: #e9dfdd;
-
-    --pink: #c98f9f;
-    --pink-light: #f5e5e9;
-    --pink-soft: #fbf1f3;
-
-    --lavender: #a69bbd;
-    --lavender-light: #eeeaf5;
-
-    --cream: #f5eee6;
-
-    --green: #738d79;
-    --green-light: #eaf1eb;
-
-    --danger: #b86c70;
-    --danger-light: #f8e9ea;
-
-    --shadow: 0 8px 28px rgba(79, 55, 60, .06);
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "PingFang SC",
-        "Hiragino Sans GB",
-        "Microsoft YaHei",
-        sans-serif;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
 }
 
 button,
 input,
-select {
-    font: inherit;
+select{
+  font:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+  cursor:pointer;
 }
 
-.app {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 22px 16px 60px;
-}
-
-/* =========================
-   顶部
-========================= */
-
-.header {
-    position: relative;
-    margin-bottom: 20px;
-    padding: 24px 22px;
-    overflow: hidden;
-    border-radius: 22px;
-    background:
-        linear-gradient(
-            135deg,
-            #fffaf8 0%,
-            #f8edf0 55%,
-            #f0ebf5 100%
-        );
-    border: 1px solid #eee2e3;
-}
-
-.header::before {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 120px;
-    right: -80px;
-    top: -40px;
-    border: 1px solid rgba(201,143,159,.25);
-    border-radius: 50%;
-    transform: rotate(-12deg);
-}
-
-.header::after {
-    content: "";
-    position: absolute;
-    width: 260px;
-    height: 100px;
-    right: -45px;
-    top: -15px;
-    border: 1px solid rgba(166,155,189,.18);
-    border-radius: 50%;
-    transform: rotate(-12deg);
-}
-
-.brand {
-    position: relative;
-    z-index: 2;
-}
-
-.brand-small {
-    font-family: Georgia, serif;
-    letter-spacing: 3px;
-    font-size: 10px;
-    color: var(--pink);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-}
-
-.header h1 {
-    margin: 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 28px;
-    font-weight: 500;
-    letter-spacing: .5px;
-}
-
-.header p {
-    margin: 7px 0 0;
-    color: var(--muted);
-    font-size: 13px;
-}
-
-.ballet-mark {
-    position: absolute;
-    right: 22px;
-    bottom: 14px;
-    font-size: 54px;
-    opacity: .17;
+.container{
+  width:min(1180px,calc(100% - 28px));
+  margin:0 auto;
 }
 
 /* =========================
-   通用卡片
+   Header
 ========================= */
 
-.card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 16px;
-    box-shadow: var(--shadow);
+.header{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(201,143,159,.20),transparent 30%),
+    radial-gradient(circle at 5% 100%,rgba(166,155,189,.16),transparent 35%),
+    #fffaf8;
+  border-bottom:1px solid var(--border);
 }
 
-.card-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+.header-inner{
+  position:relative;
+  padding:28px 0 24px;
 }
 
-.card-title h2 {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 650;
+.header-kicker{
+  color:var(--pink);
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:700;
+  margin-bottom:7px;
 }
 
-.card-title small {
-    color: var(--muted);
-    font-size: 12px;
+.header h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:-.5px;
+}
+
+.header-sub{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.ballet-mark{
+  position:absolute;
+  right:10px;
+  top:17px;
+  font-size:58px;
+  opacity:.16;
+  transform:rotate(-7deg);
+}
+
+/* decorative ribbon */
+.ribbon{
+  position:absolute;
+  width:260px;
+  height:80px;
+  right:-80px;
+  bottom:-45px;
+  border:1px solid rgba(201,143,159,.25);
+  border-radius:50%;
+  transform:rotate(-18deg);
 }
 
 /* =========================
-   表单
+   Main
 ========================= */
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+main{
+  padding:20px 0 50px;
 }
 
-.field label {
-    display: block;
-    color: var(--muted);
-    font-size: 12px;
-    margin-bottom: 6px;
+.section{
+  margin-bottom:18px;
 }
 
-.field input,
-.field select {
-    width: 100%;
-    height: 43px;
-    padding: 0 11px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: white;
-    color: var(--text);
-    outline: none;
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
 }
 
-.field input:focus,
-.field select:focus {
-    border-color: var(--pink);
-    box-shadow: 0 0 0 3px rgba(201,143,159,.09);
+.section-title h2{
+  margin:0;
+  font-size:16px;
 }
 
-.section-label {
-    grid-column: 1 / -1;
-    margin-top: 5px;
-    padding-top: 12px;
-    border-top: 1px solid #eee6e3;
-    font-size: 12px;
-    color: var(--pink);
-    font-weight: 700;
-}
-
-.form-buttons {
-    display: flex;
-    gap: 9px;
-    margin-top: 15px;
-    flex-wrap: wrap;
-}
-
-button {
-    border: none;
-    min-height: 41px;
-    padding: 0 15px;
-    border-radius: 10px;
-    font-weight: 600;
-}
-
-.btn-primary {
-    background: var(--pink);
-    color: white;
-}
-
-.btn-secondary {
-    background: var(--cream);
-    color: var(--text);
-}
-
-.btn-soft {
-    background: var(--pink-light);
-    color: #8d5f6d;
-}
-
-.btn-green {
-    background: var(--green-light);
-    color: var(--green);
-}
-
-.btn-danger {
-    background: var(--danger-light);
-    color: var(--danger);
-}
-
-button:active {
-    transform: scale(.98);
+.section-title small{
+  color:var(--muted);
+  font-size:12px;
 }
 
 /* =========================
-   统计
+   Summary
 ========================= */
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
-.stat {
-    padding: 14px;
-    border-radius: 14px;
-    background: var(--pink-soft);
+.summary-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  box-shadow:var(--shadow);
+  min-width:0;
 }
 
-.stat:nth-child(2) {
-    background: var(--lavender-light);
+.summary-label{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:5px;
 }
 
-.stat:nth-child(3) {
-    background: var(--cream);
+.summary-value{
+  font-size:23px;
+  font-weight:700;
+  line-height:1.1;
 }
 
-.stat:nth-child(4) {
-    background: var(--green-light);
-}
-
-.stat-label {
-    font-size: 11px;
-    color: var(--muted);
-}
-
-.stat-value {
-    margin-top: 5px;
-    font-size: 21px;
-    font-weight: 700;
+.summary-note{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
 }
 
 /* =========================
-   筛选
+   Toolbar
 ========================= */
 
-.filter-row {
-    display: flex;
-    gap: 9px;
-    flex-wrap: wrap;
+.toolbar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
 }
 
-.filter-row select,
-.filter-row input {
-    height: 41px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: white;
-    padding: 0 11px;
-    outline: none;
+.search{
+  flex:1;
+  min-width:190px;
 }
 
-.filter-row input {
-    min-width: 230px;
-    flex: 1;
+input,
+select{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:10px;
+  padding:10px 11px;
+  outline:none;
+  color:var(--text);
+}
+
+input:focus,
+select:focus{
+  border-color:var(--pink);
+  box-shadow:0 0 0 3px rgba(201,143,159,.10);
+}
+
+.btn{
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  border-radius:10px;
+  padding:9px 13px;
+  font-size:13px;
+  transition:.15s;
+}
+
+.btn:active{
+  transform:scale(.98);
+}
+
+.btn-primary{
+  background:var(--pink);
+  color:white;
+  border-color:var(--pink);
+}
+
+.btn-soft{
+  background:var(--pink-soft);
+  border-color:#efd7dc;
+  color:#9a626d;
+}
+
+.btn-lavender{
+  background:var(--lavender-light);
+  border-color:#ddd5e9;
+  color:#746a88;
+}
+
+.btn-danger{
+  color:var(--danger);
+  background:var(--danger-light);
+  border-color:#efd4d5;
 }
 
 /* =========================
-   价格图表
+   Form
 ========================= */
 
-.chart-wrap {
-    overflow-x: auto;
+.form-panel{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
-.chart {
-    min-width: 650px;
-    height: 330px;
-    padding: 20px 20px 45px;
-    display: flex;
-    align-items: flex-end;
-    gap: 17px;
-    border-bottom: 1px solid var(--border);
+.form-toggle{
+  width:100%;
+  border:0;
+  background:transparent;
+  padding:14px 15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:var(--text);
 }
 
-.bar-group {
-    width: 72px;
-    min-width: 72px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-direction: column;
-    position: relative;
+.form-toggle-left{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:600;
 }
 
-.bar-price {
-    font-size: 10px;
-    font-weight: 700;
-    margin-bottom: 5px;
-    white-space: nowrap;
+.plus{
+  width:25px;
+  height:25px;
+  border-radius:8px;
+  background:var(--pink-light);
+  color:var(--pink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
 }
 
-.bar {
-    width: 40px;
-    min-height: 4px;
-    border-radius: 9px 9px 3px 3px;
-    background: linear-gradient(
-        to top,
-        var(--pink),
-        #dcaeb9
-    );
+.form-arrow{
+  color:var(--muted);
+  transition:.2s;
 }
 
-.bar-group:nth-child(2n) .bar {
-    background: linear-gradient(
-        to top,
-        var(--lavender),
-        #c6bfd5
-    );
+.form-panel.open .form-arrow{
+  transform:rotate(180deg);
 }
 
-.bar-name {
-    position: absolute;
-    bottom: -38px;
-    width: 90px;
-    text-align: center;
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.3;
+.form-body{
+  display:none;
+  padding:0 15px 16px;
+  border-top:1px solid var(--border);
+}
+
+.form-panel.open .form-body{
+  display:block;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding-top:14px;
+}
+
+.field label{
+  display:block;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+
+.field.full{
+  grid-column:span 2;
+}
+
+.field.wide{
+  grid-column:span 2;
+}
+
+.form-actions{
+  display:flex;
+  gap:8px;
+  justify-content:flex-end;
+  margin-top:14px;
+}
+
+/* validity */
+.validity-row{
+  display:grid;
+  grid-template-columns:1fr 100px;
+  gap:7px;
+}
+
+.permanent-check{
+  margin-top:7px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.permanent-check input{
+  width:auto;
+}
+
+/* time wheel */
+.time-picker{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.time-select{
+  position:relative;
+}
+
+.time-select select{
+  appearance:auto;
+  padding-right:5px;
+  text-align:center;
+  background:#fff;
 }
 
 /* =========================
-   机构汇总
+   Charts
 ========================= */
 
-.institution-list {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+.chart-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  box-shadow:var(--shadow);
+  padding:15px;
 }
 
-.institution-item {
-    border: 1px solid var(--border);
-    border-radius: 13px;
-    padding: 13px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.chart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:13px;
 }
 
-.institution-name {
-    font-weight: 700;
+.chart-header h3{
+  margin:0;
+  font-size:15px;
 }
 
-.institution-info {
-    margin-top: 4px;
-    font-size: 11px;
-    color: var(--muted);
+.chart-header p{
+  margin:4px 0 0;
+  font-size:11px;
+  color:var(--muted);
 }
 
-.institution-price {
-    text-align: right;
+.chart-wrap{
+  overflow-x:auto;
+  padding-bottom:4px;
 }
 
-.institution-price strong {
-    font-size: 16px;
+.price-chart{
+  min-width:500px;
+}
+
+.bar-row{
+  display:grid;
+  grid-template-columns:125px 1fr 70px;
+  align-items:center;
+  gap:10px;
+  margin:10px 0;
+}
+
+.bar-name{
+  font-size:11px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bar-track{
+  height:18px;
+  background:#f2eceb;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.bar-fill{
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--pink),#d9a7b4);
+  min-width:3px;
+}
+
+.bar-value{
+  font-size:11px;
+  font-weight:700;
+  text-align:right;
+  color:#765d63;
 }
 
 /* =========================
-   套餐卡片
+   Commute Chart
 ========================= */
 
-.package-list {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+.commute-chart{
+  display:grid;
+  gap:13px;
 }
 
-.package-card {
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    background: white;
+.commute-row{
+  display:grid;
+  grid-template-columns:145px 1fr;
+  gap:12px;
+  align-items:center;
 }
 
-.package-main {
-    display: grid;
-    grid-template-columns: 1.3fr .9fr .9fr auto;
-    align-items: center;
-    gap: 12px;
-    padding: 14px;
+.commute-name{
+  min-width:0;
 }
 
-.package-school {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 3px;
+.commute-institution{
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.package-name {
-    font-weight: 700;
+.commute-district{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:3px;
 }
 
-.package-price {
-    font-size: 16px;
-    font-weight: 700;
+.commute-bars{
+  display:grid;
+  gap:6px;
 }
 
-.package-price small {
-    display: block;
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-top: 3px;
+.commute-line{
+  display:grid;
+  grid-template-columns:34px 1fr 55px;
+  align-items:center;
+  gap:7px;
 }
 
-.package-unit {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--pink);
+.commute-icon{
+  font-size:12px;
+  text-align:center;
 }
 
-.package-unit small {
-    display: block;
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 400;
-    margin-top: 3px;
+.commute-track{
+  height:12px;
+  border-radius:20px;
+  background:#f0ebea;
+  overflow:hidden;
 }
 
-.package-actions {
-    display: flex;
-    gap: 5px;
+.commute-fill-home{
+  height:100%;
+  border-radius:20px;
+  background:#c9a1aa;
 }
 
-.small-btn {
-    min-height: 34px;
-    padding: 0 9px;
-    font-size: 11px;
+.commute-fill-work{
+  height:100%;
+  border-radius:20px;
+  background:#aaa0c1;
+}
+
+.commute-time{
+  text-align:right;
+  font-size:10px;
+  color:var(--muted);
 }
 
 /* =========================
-   详情
+   Package list
 ========================= */
 
-.details {
-    display: none;
-    padding: 0 14px 14px;
+.package-list{
+  display:grid;
+  gap:9px;
 }
 
-.details.show {
-    display: block;
+.package-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
-.details-inner {
-    border-radius: 12px;
-    background: #fcf8f7;
-    padding: 13px;
+.package-main{
+  padding:13px 14px;
 }
 
-.detail-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 9px;
+.package-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
 }
 
-.detail-item {
-    padding: 9px;
-    border-radius: 10px;
-    background: white;
-    border: 1px solid #eee5e2;
+.package-title{
+  min-width:0;
 }
 
-.detail-label {
-    font-size: 10px;
-    color: var(--muted);
+.institution{
+  font-size:11px;
+  color:var(--pink);
+  font-weight:700;
+  margin-bottom:3px;
 }
 
-.detail-value {
-    margin-top: 4px;
-    font-size: 13px;
-    font-weight: 600;
+.package-name{
+  font-size:14px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-/* 地理信息 */
-
-.location-box {
-    grid-column: 1 / -1;
-    margin-top: 2px;
-    padding-top: 10px;
-    border-top: 1px dashed #e6dcd9;
+.package-price{
+  text-align:right;
+  white-space:nowrap;
 }
 
-.location-title {
-    color: var(--pink);
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 8px;
+.package-price strong{
+  font-size:18px;
 }
 
-.location-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+.package-price span{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  margin-top:2px;
 }
 
-.location-item {
-    background: white;
-    border-radius: 10px;
-    padding: 9px;
-    border: 1px solid #eee5e2;
+.package-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:12px;
 }
 
-.location-icon {
-    font-size: 17px;
+.metric{
+  background:#faf6f5;
+  border-radius:9px;
+  padding:8px;
 }
 
-.location-label {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 3px;
+.metric-label{
+  font-size:9px;
+  color:var(--muted);
 }
 
-.location-value {
-    font-size: 12px;
-    font-weight: 650;
-    margin-top: 3px;
+.metric-value{
+  margin-top:3px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.package-actions{
+  display:flex;
+  gap:6px;
+  margin-top:11px;
+}
+
+.package-actions .btn{
+  padding:6px 9px;
+  font-size:11px;
+}
+
+.detail{
+  display:none;
+  padding:13px 14px 15px;
+  border-top:1px solid var(--border);
+  background:#fffaf9;
+}
+
+.package-card.show-detail .detail{
+  display:block;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.detail-item{
+  background:white;
+  border:1px solid #eee4e2;
+  border-radius:9px;
+  padding:9px;
+}
+
+.detail-item label{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-bottom:3px;
+}
+
+.detail-item div{
+  font-size:12px;
+  font-weight:600;
 }
 
 /* =========================
-   通勤图
+   Empty
 ========================= */
 
-.commute-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+.empty{
+  padding:35px 20px;
+  text-align:center;
+  background:var(--card);
+  border:1px dashed var(--border);
+  border-radius:14px;
+  color:var(--muted);
 }
 
-.commute-card {
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 14px;
-    background: linear-gradient(
-        135deg,
-        #fffdfc,
-        #faf5f4
-    );
-}
-
-.commute-head {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.commute-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: var(--pink-light);
-}
-
-.commute-title {
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.commute-sub {
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.commute-time {
-    margin-top: 14px;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--text);
-}
-
-.commute-time small {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--muted);
-}
-
-.time-track {
-    height: 7px;
-    background: #eee7e5;
-    border-radius: 10px;
-    margin-top: 10px;
-    overflow: hidden;
-}
-
-.time-track-fill {
-    height: 100%;
-    border-radius: 10px;
-    background: linear-gradient(
-        90deg,
-        var(--pink),
-        var(--lavender)
-    );
+.empty-icon{
+  font-size:32px;
+  opacity:.45;
+  margin-bottom:7px;
 }
 
 /* =========================
-   数据管理
+   Data tools
 ========================= */
 
-.data-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+.data-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.tip {
-    margin-top: 11px;
-    padding: 11px;
-    border-radius: 11px;
-    background: #faf6f3;
-    color: var(--muted);
-    font-size: 11px;
-    line-height: 1.7;
+.hidden-input{
+  display:none;
 }
 
 /* =========================
-   空状态
+   Responsive
 ========================= */
 
-.empty {
-    padding: 35px 10px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
+@media(max-width:760px){
+
+  .container{
+    width:calc(100% - 20px);
+  }
+
+  .header-inner{
+    padding:23px 0 20px;
+  }
+
+  .header h1{
+    font-size:23px;
+  }
+
+  .ballet-mark{
+    font-size:45px;
+    right:0;
+  }
+
+  main{
+    padding-top:14px;
+  }
+
+  .summary-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+  }
+
+  .summary-card{
+    padding:11px 8px;
+    border-radius:11px;
+  }
+
+  .summary-label{
+    font-size:10px;
+    white-space:nowrap;
+  }
+
+  .summary-value{
+    font-size:18px;
+  }
+
+  .summary-note{
+    display:none;
+  }
+
+  .form-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .field.full,
+  .field.wide{
+    grid-column:span 2;
+  }
+
+  .bar-row{
+    grid-template-columns:105px 1fr 60px;
+  }
+
+  .commute-row{
+    grid-template-columns:105px 1fr;
+  }
+
+  .detail-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
-/* =========================
-   Toast
-========================= */
+@media(max-width:430px){
 
-.toast {
-    position: fixed;
-    left: 50%;
-    bottom: 25px;
-    transform: translateX(-50%) translateY(20px);
-    background: #332f30;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 12px;
-    font-size: 12px;
-    opacity: 0;
-    pointer-events: none;
-    transition: .25s;
-    z-index: 9999;
+  .package-metrics{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .metric{
+    padding:7px 5px;
+  }
+
+  .metric-value{
+    font-size:12px;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .toolbar{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .search{
+    grid-column:span 2;
+  }
+
+  .toolbar select{
+    min-width:0;
+  }
+
+  .data-tools{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .data-tools .btn:last-child{
+    grid-column:span 2;
+  }
 }
-
-.toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* =========================
-   手机
-========================= */
-
-@media (max-width: 720px) {
-
-    .app {
-        padding: 12px 10px 45px;
-    }
-
-    .header {
-        padding: 20px 17px;
-        border-radius: 18px;
-    }
-
-    .header h1 {
-        font-size: 24px;
-    }
-
-    .ballet-mark {
-        font-size: 42px;
-        right: 15px;
-    }
-
-    .card {
-        padding: 14px;
-        border-radius: 15px;
-    }
-
-    .form-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .package-main {
-        grid-template-columns: 1.2fr .8fr .8fr;
-    }
-
-    .package-actions {
-        grid-column: 1 / -1;
-        justify-content: flex-end;
-    }
-
-    .detail-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .location-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .commute-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-@media (max-width: 430px) {
-
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stats {
-        gap: 7px;
-    }
-
-    .stat {
-        padding: 11px;
-    }
-
-    .stat-value {
-        font-size: 18px;
-    }
-
-    .package-main {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .package-price,
-    .package-unit {
-        text-align: right;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
-
-    <div class="brand">
-
-        <div class="brand-small">
-            BALLET STUDIO · PRICE BOOK
-        </div>
-
-        <h1>芭蕾机构价格对比</h1>
-
-        <p>
-            把价格、课程与通勤放在一起，找到真正适合自己的课程。
-        </p>
-
+  <div class="container header-inner">
+    <div class="header-kicker">BALLET STUDIO · PRICE BOOK</div>
+    <h1>芭蕾机构价格对比</h1>
+    <div class="header-sub">
+      用每小时价格比较不同课时长度，让套餐更容易横向比较
     </div>
-
     <div class="ballet-mark">🩰</div>
-
+    <div class="ribbon"></div>
+  </div>
 </header>
 
+<main class="container">
 
-<!-- =========================
-     添加套餐
-========================= -->
+  <!-- ======================
+       价格总览
+  ======================= -->
+  <section class="section">
+    <div class="section-title">
+      <h2>价格总览</h2>
+      <small id="packageCountText">0 个套餐</small>
+    </div>
 
-<section class="card">
+    <div class="summary-grid">
 
-    <div class="card-title">
+      <div class="summary-card">
+        <div class="summary-label">机构数量</div>
+        <div class="summary-value" id="institutionCount">0</div>
+        <div class="summary-note">已记录机构</div>
+      </div>
 
-        <div>
-            <h2 id="formTitle">新增套餐</h2>
+      <div class="summary-card">
+        <div class="summary-label">最低每小时</div>
+        <div class="summary-value" id="lowestHourly">—</div>
+        <div class="summary-note">按总课时换算</div>
+      </div>
 
-            <small>
-                价格信息
-            </small>
-        </div>
+      <div class="summary-card">
+        <div class="summary-label">最高每小时</div>
+        <div class="summary-value" id="highestHourly">—</div>
+        <div class="summary-note">按总课时换算</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================
+       搜索
+  ======================= -->
+  <section class="section">
+
+    <div class="toolbar">
+
+      <div class="search">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="搜索机构或套餐名称"
+        >
+      </div>
+
+      <select id="sortSelect">
+        <option value="hourlyAsc">每小时价格：低 → 高</option>
+        <option value="hourlyDesc">每小时价格：高 → 低</option>
+        <option value="priceAsc">套餐总价：低 → 高</option>
+        <option value="priceDesc">套餐总价：高 → 低</option>
+        <option value="institution">按机构名称</option>
+      </select>
 
     </div>
 
+  </section>
 
-    <form id="packageForm">
+
+  <!-- ======================
+       新建套餐
+  ======================= -->
+  <section class="section">
+
+    <div class="form-panel" id="formPanel">
+
+      <button class="form-toggle" id="formToggle">
+
+        <span class="form-toggle-left">
+          <span class="plus">＋</span>
+          <span id="formToggleText">新建套餐</span>
+        </span>
+
+        <span class="form-arrow">⌄</span>
+
+      </button>
+
+      <div class="form-body">
 
         <div class="form-grid">
 
-            <div class="field">
-                <label>机构名称 *</label>
-                <input
-                    id="institution"
-                    type="text"
-                    placeholder="例如：XX芭蕾"
-                    required
-                >
-            </div>
+          <div class="field">
+            <label>机构名称 *</label>
+            <input id="institution" placeholder="例如：XX芭蕾">
+          </div>
 
+          <div class="field">
+            <label>套餐名称 *</label>
+            <input id="packageName" placeholder="例如：10节课">
+          </div>
 
-            <div class="field">
-                <label>套餐名称 *</label>
-                <input
-                    id="packageName"
-                    type="text"
-                    placeholder="例如：30节卡"
-                    required
-                >
-            </div>
+          <div class="field">
+            <label>套餐价格 *</label>
+            <input id="price" type="number" step="0.01" placeholder="1500">
+          </div>
 
+          <div class="field">
+            <label>课时数量 *</label>
+            <input id="lessons" type="number" step="1" placeholder="10">
+          </div>
 
-            <div class="field">
-                <label>套餐价格（元） *</label>
-                <input
-                    id="price"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    placeholder="3900"
-                    required
-                >
-            </div>
+          <div class="field">
+            <label>每节课时长（分钟）</label>
+            <input id="minutes" type="number" step="1" value="60">
+          </div>
 
+          <div class="field">
+            <label>有效期</label>
 
-            <div class="field">
-                <label>课时数量 *</label>
-                <input
-                    id="lessons"
-                    type="number"
-                    min="1"
-                    step="1"
-                    placeholder="30"
-                    required
-                >
-            </div>
+            <div class="validity-row">
 
+              <input
+                id="validityValue"
+                type="number"
+                step="0.1"
+                placeholder="例如 3.5"
+              >
 
-            <div class="field">
-                <label>每节课时长（分钟） *</label>
-                <input
-                    id="minutes"
-                    type="number"
-                    min="1"
-                    step="1"
-                    value="60"
-                    required
-                >
-            </div>
-
-
-            <!-- 有效期 -->
-
-            <div class="field">
-
-                <label>有效期数值</label>
-
-                <input
-                    id="validityValue"
-                    type="number"
-                    min="0"
-                    step="0.1"
-                    placeholder="例如 3.5"
-                >
+              <select id="validityUnit">
+                <option value="month">月</option>
+                <option value="year">年</option>
+                <option value="day">天</option>
+              </select>
 
             </div>
 
+            <label class="permanent-check">
+              <input type="checkbox" id="permanent">
+              永久有效
+            </label>
 
-            <div class="field">
+          </div>
 
-                <label>有效期单位</label>
 
-                <select id="validityUnit">
+          <div class="field">
+            <label>区域</label>
+            <input id="district" placeholder="例如：朝阳区">
+          </div>
 
-                    <option value="month">
-                        月
-                    </option>
+          <div class="field">
+            <label>最近地铁站</label>
+            <input id="metroStation" placeholder="例如：XX站">
+          </div>
 
-                    <option value="year">
-                        年
-                    </option>
 
-                    <option value="day">
-                        天
-                    </option>
+          <div class="field">
+            <label>距家距离（km）</label>
+            <input id="homeDistance" type="number" step="0.1" placeholder="5.2">
+          </div>
 
+          <div class="field">
+            <label>距公司距离（km）</label>
+            <input id="workDistance" type="number" step="0.1" placeholder="3.8">
+          </div>
+
+
+          <!-- 到家时间 -->
+          <div class="field">
+            <label>到家时间</label>
+
+            <div class="time-picker">
+
+              <div class="time-select">
+                <select id="homeTimeHour">
+                  <option value="">小时</option>
                 </select>
+              </div>
+
+              <div class="time-select">
+                <select id="homeTimeMinute">
+                  <option value="">分钟</option>
+                </select>
+              </div>
 
             </div>
+          </div>
 
 
-            <div class="section-label">
-                LOCATION · 通勤信息（可选）
-            </div>
+          <!-- 到公司时间 -->
+          <div class="field">
+            <label>到公司时间</label>
 
+            <div class="time-picker">
 
-            <div class="field">
+              <div class="time-select">
+                <select id="workTimeHour">
+                  <option value="">小时</option>
+                </select>
+              </div>
 
-                <label>区域 / 商圈</label>
-
-                <input
-                    id="district"
-                    type="text"
-                    placeholder="例如：静安区 / 徐汇区"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>最近地铁站</label>
-
-                <input
-                    id="metroStation"
-                    type="text"
-                    placeholder="例如：静安寺站"
-                >
+              <div class="time-select">
+                <select id="workTimeMinute">
+                  <option value="">分钟</option>
+                </select>
+              </div>
 
             </div>
-
-
-            <div class="field">
-
-                <label>距家距离（km）</label>
-
-                <input
-                    id="homeDistance"
-                    type="number"
-                    min="0"
-                    step="0.1"
-                    placeholder="例如 4.8"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>到家时间（分钟）</label>
-
-                <input
-                    id="homeTime"
-                    type="number"
-                    min="0"
-                    step="1"
-                    placeholder="例如 35"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>到公司时间（分钟）</label>
-
-                <input
-                    id="workTime"
-                    type="number"
-                    min="0"
-                    step="1"
-                    placeholder="例如 48"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>距公司距离（km）</label>
-
-                <input
-                    id="workDistance"
-                    type="number"
-                    min="0"
-                    step="0.1"
-                    placeholder="例如 6.2"
-                >
-
-            </div>
+          </div>
 
         </div>
 
 
-        <div class="form-buttons">
+        <div class="form-actions">
 
-            <button
-                class="btn-primary"
-                type="submit"
-                id="submitBtn"
-            >
-                ＋ 添加套餐
-            </button>
+          <button class="btn" id="cancelEditBtn" style="display:none">
+            取消编辑
+          </button>
 
-            <button
-                class="btn-secondary"
-                type="button"
-                id="resetFormBtn"
-            >
-                清空
-            </button>
+          <button class="btn btn-soft" id="clearFormBtn">
+            清空
+          </button>
 
-            <button
-                class="btn-secondary"
-                type="button"
-                id="cancelEditBtn"
-                style="display:none;"
-            >
-                取消编辑
-            </button>
+          <button class="btn btn-primary" id="saveBtn">
+            保存套餐
+          </button>
 
         </div>
 
-    </form>
-
-</section>
-
-
-<!-- =========================
-     总览
-========================= -->
-
-<section class="card">
-
-    <div class="card-title">
-        <h2>价格总览</h2>
-    </div>
-
-    <div class="stats">
-
-        <div class="stat">
-            <div class="stat-label">
-                机构数量
-            </div>
-
-            <div
-                class="stat-value"
-                id="statInstitutions"
-            >
-                0
-            </div>
-        </div>
-
-
-        <div class="stat">
-            <div class="stat-label">
-                套餐数量
-            </div>
-
-            <div
-                class="stat-value"
-                id="statPackages"
-            >
-                0
-            </div>
-        </div>
-
-
-        <div class="stat">
-            <div class="stat-label">
-                平均单节
-            </div>
-
-            <div
-                class="stat-value"
-                id="statAverage"
-            >
-                ¥0
-            </div>
-        </div>
-
-
-        <div class="stat">
-            <div class="stat-label">
-                最低单节
-            </div>
-
-            <div
-                class="stat-value"
-                id="statLowest"
-            >
-                ¥0
-            </div>
-        </div>
+      </div>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- =========================
-     筛选
-========================= -->
+  <!-- ======================
+       价格图表
+  ======================= -->
+  <section class="section">
 
-<section class="card">
+    <div class="chart-card">
 
-    <div class="card-title">
+      <div class="chart-header">
+        <div>
+          <h3>价格比较</h3>
+          <p>
+            每小时价格 = 套餐总价 ÷（课次数 × 每节分钟数 ÷ 60）
+          </p>
+        </div>
+      </div>
 
-        <h2>筛选套餐</h2>
-
-    </div>
-
-
-    <div class="filter-row">
-
-        <select id="institutionFilter">
-            <option value="">
-                全部机构
-            </option>
-        </select>
-
-
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="搜索机构 / 套餐..."
-        >
-
-
-        <button
-            class="btn-secondary"
-            id="sortBtn"
-            type="button"
-        >
-            单节价格 ↑
-        </button>
+      <div class="chart-wrap">
+        <div class="price-chart" id="priceChart"></div>
+      </div>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- =========================
-     价格图
-========================= -->
+  <!-- ======================
+       通勤概览
+  ======================= -->
+  <section class="section">
 
-<section class="card">
+    <div class="chart-card">
 
-    <div class="card-title">
+      <div class="chart-header">
 
         <div>
-
-            <h2>价格比较</h2>
-
-            <small>
-                单节价格
-            </small>
-
+          <h3>通勤概览</h3>
+          <p>直接比较到家与到公司的时间</p>
         </div>
 
-    </div>
+      </div>
 
-
-    <div class="chart-wrap">
-
-        <div
-            class="chart"
-            id="chart"
-        ></div>
+      <div class="commute-chart" id="commuteChart"></div>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- =========================
-     机构汇总
-========================= -->
+  <!-- ======================
+       套餐列表
+  ======================= -->
+  <section class="section">
 
-<section class="card">
-
-    <div class="card-title">
-
-        <div>
-
-            <h2>机构概览</h2>
-
-            <small>
-                每家机构最低套餐
-            </small>
-
-        </div>
-
+    <div class="section-title">
+      <h2>套餐</h2>
+      <small>点击详情查看地点与通勤信息</small>
     </div>
 
+    <div class="package-list" id="packageList"></div>
 
-    <div
-        class="institution-list"
-        id="institutionSummary"
-    ></div>
-
-</section>
+  </section>
 
 
-<!-- =========================
-     通勤比较
-========================= -->
+  <!-- ======================
+       数据管理
+  ======================= -->
+  <section class="section">
 
-<section class="card">
-
-    <div class="card-title">
-
-        <div>
-
-            <h2>通勤概览</h2>
-
-            <small>
-                只显示核心时间，详细地点点击套餐查看
-            </small>
-
-        </div>
-
+    <div class="section-title">
+      <h2>数据管理</h2>
+      <small>适合长期维护</small>
     </div>
 
+    <div class="chart-card">
 
-    <div
-        class="commute-grid"
-        id="commuteGrid"
-    ></div>
+      <div class="data-tools">
 
-</section>
-
-
-<!-- =========================
-     套餐列表
-========================= -->
-
-<section class="card">
-
-    <div class="card-title">
-
-        <div>
-
-            <h2>套餐</h2>
-
-            <small>
-                点击“详情”查看完整信息
-            </small>
-
-        </div>
-
-    </div>
-
-
-    <div
-        class="package-list"
-        id="packageList"
-    ></div>
-
-</section>
-
-
-<!-- =========================
-     数据管理
-========================= -->
-
-<section class="card">
-
-    <div class="card-title">
-
-        <div>
-
-            <h2>数据管理</h2>
-
-            <small>
-                建议定期导出备份
-            </small>
-
-        </div>
-
-    </div>
-
-
-    <div class="data-buttons">
-
-        <button
-            class="btn-green"
-            id="exportExcelBtn"
-            type="button"
-        >
-            📥 导出 Excel
+        <button class="btn btn-soft" id="exportExcelBtn">
+          导出 Excel
         </button>
 
-
-        <button
-            class="btn-secondary"
-            id="importExcelBtn"
-            type="button"
-        >
-            📤 导入 Excel
+        <button class="btn btn-soft" id="importExcelBtn">
+          导入 Excel
         </button>
 
-
-        <button
-            class="btn-secondary"
-            id="backupBtn"
-            type="button"
-        >
-            💾 JSON 备份
+        <button class="btn btn-lavender" id="exportJsonBtn">
+          JSON 备份
         </button>
 
-
-        <button
-            class="btn-secondary"
-            id="restoreBtn"
-            type="button"
-        >
-            ♻️ 恢复备份
+        <button class="btn btn-lavender" id="importJsonBtn">
+          JSON 恢复
         </button>
 
-
-        <button
-            class="btn-danger"
-            id="clearAllBtn"
-            type="button"
-        >
-            删除全部
+        <button class="btn btn-danger" id="clearAllBtn">
+          删除全部数据
         </button>
 
+      </div>
 
-        <input
-            type="file"
-            id="excelFile"
-            accept=".xlsx,.xls,.csv"
-            style="display:none;"
-        >
+      <input
+        id="excelInput"
+        class="hidden-input"
+        type="file"
+        accept=".xlsx,.xls"
+      >
 
-
-        <input
-            type="file"
-            id="backupFile"
-            accept=".json"
-            style="display:none;"
-        >
+      <input
+        id="jsonInput"
+        class="hidden-input"
+        type="file"
+        accept=".json"
+      >
 
     </div>
 
+  </section>
 
-    <div class="tip">
-
-        <strong>有效期：</strong>
-        支持“年 / 月 / 天”，例如：
-        1年、3个月、3.5个月、360天。
-        <br>
-
-        <strong>通勤：</strong>
-        可以记录区域、地铁站、距离、到家时间、到公司时间。
-        这些信息不会全部堆在主列表中，点击“详情”查看。
-        <br>
-
-        <strong>保存：</strong>
-        数据自动保存在当前浏览器。
-        建议定期导出 Excel 或 JSON 备份。
-
-    </div>
-
-</section>
-
-</div>
-
-
-<div
-    class="toast"
-    id="toast"
-></div>
+</main>
 
 
 <script>
 
-/* =========================================================
-   BALLET PRICE STUDIO
-========================================================= */
+const STORAGE_KEY = "ballet_price_database_v3";
 
-const STORAGE_KEY =
-    "ballet_price_database_v2";
-
-
-let packages = [];
+let data = JSON.parse(
+  localStorage.getItem(STORAGE_KEY) || "[]"
+);
 
 let editingId = null;
 
-let sortAscending = true;
 
-
-/* =========================================================
+/* =================================
    DOM
-========================================================= */
+================================= */
 
-const form =
-    document.getElementById("packageForm");
-
-const institutionInput =
-    document.getElementById("institution");
-
-const packageNameInput =
-    document.getElementById("packageName");
-
-const priceInput =
-    document.getElementById("price");
-
-const lessonsInput =
-    document.getElementById("lessons");
-
-const minutesInput =
-    document.getElementById("minutes");
-
-const validityValueInput =
-    document.getElementById("validityValue");
-
-const validityUnitInput =
-    document.getElementById("validityUnit");
-
-const districtInput =
-    document.getElementById("district");
-
-const metroStationInput =
-    document.getElementById("metroStation");
-
-const homeDistanceInput =
-    document.getElementById("homeDistance");
-
-const workDistanceInput =
-    document.getElementById("workDistance");
-
-const homeTimeInput =
-    document.getElementById("homeTime");
-
-const workTimeInput =
-    document.getElementById("workTime");
-
-const submitBtn =
-    document.getElementById("submitBtn");
-
-const resetFormBtn =
-    document.getElementById("resetFormBtn");
-
-const cancelEditBtn =
-    document.getElementById("cancelEditBtn");
-
-const formTitle =
-    document.getElementById("formTitle");
-
-const institutionFilter =
-    document.getElementById("institutionFilter");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const sortBtn =
-    document.getElementById("sortBtn");
-
-const packageList =
-    document.getElementById("packageList");
-
-const chart =
-    document.getElementById("chart");
-
-const institutionSummary =
-    document.getElementById("institutionSummary");
-
-const commuteGrid =
-    document.getElementById("commuteGrid");
+const $ = id => document.getElementById(id);
 
 
-/* =========================================================
-   工具函数
-========================================================= */
+/* =================================
+   初始化时间选择器
+================================= */
 
-function money(value) {
+function initTimeSelects(){
 
-    const n = Number(value);
+  const homeHour = $("homeTimeHour");
+  const workHour = $("workTimeHour");
 
-    if (!Number.isFinite(n)) {
-        return "¥0.00";
-    }
+  const homeMinute = $("homeTimeMinute");
+  const workMinute = $("workTimeMinute");
 
-    return "¥" + n.toFixed(2);
-}
+  for(let i=0;i<=12;i++){
 
+    const text = `${i}小时`;
 
-function escapeHTML(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-function unitPrice(item) {
-
-    if (
-        !item.lessons ||
-        item.lessons <= 0
-    ) {
-        return 0;
-    }
-
-    return item.price / item.lessons;
-}
-
-
-function price60(item) {
-
-    if (
-        !item.lessons ||
-        !item.minutes ||
-        item.lessons <= 0 ||
-        item.minutes <= 0
-    ) {
-        return 0;
-    }
-
-    return (
-        item.price /
-        (
-            item.lessons *
-            item.minutes
-        )
-    ) * 60;
-}
-
-
-/* =========================================================
-   有效期
-========================================================= */
-
-function formatValidity(item) {
-
-    if (
-        item.validityValue === undefined ||
-        item.validityValue === null ||
-        item.validityValue === "" ||
-        Number(item.validityValue) === 0
-    ) {
-        return "未设置";
-    }
-
-    const value =
-        Number(item.validityValue);
-
-    const unit =
-        item.validityUnit || "month";
-
-    if (unit === "year") {
-        return `${value}年有效`;
-    }
-
-    if (unit === "day") {
-        return `${value}天有效`;
-    }
-
-    return `${value}个月有效`;
-}
-
-
-/* =========================================================
-   保存 / 读取
-========================================================= */
-
-function saveData() {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(packages)
+    homeHour.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${i}">${text}</option>`
     );
 
+    workHour.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${i}">${text}</option>`
+    );
+  }
+
+  for(let i=0;i<60;i++){
+
+    const text = `${i}分钟`;
+
+    homeMinute.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${i}">${text}</option>`
+    );
+
+    workMinute.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${i}">${text}</option>`
+    );
+  }
+}
+
+initTimeSelects();
+
+
+/* =================================
+   工具函数
+================================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
 }
 
 
-function loadData() {
+function uid(){
 
-    try {
+  return Date.now().toString(36)
+    + Math.random().toString(36).slice(2);
+}
 
-        const saved =
-            localStorage.getItem(STORAGE_KEY);
 
-        if (!saved) {
-            packages = [];
-            return;
-        }
+function money(value){
 
-        const parsed =
-            JSON.parse(saved);
+  if(value === "" || value == null || isNaN(value)){
+    return "—";
+  }
 
-        if (Array.isArray(parsed)) {
+  return "¥" + Number(value).toLocaleString(
+    "zh-CN",
+    {
+      minimumFractionDigits:0,
+      maximumFractionDigits:2
+    }
+  );
+}
 
-            packages =
-                parsed.map(normalizeItem);
 
-        } else {
+function getHourlyPrice(item){
 
-            packages = [];
+  const price = Number(item.price);
+  const lessons = Number(item.lessons);
+  const minutes = Number(item.minutes);
 
-        }
+  if(
+    !price ||
+    !lessons ||
+    !minutes ||
+    minutes <= 0
+  ){
+    return null;
+  }
 
-    } catch (error) {
+  const totalHours =
+    lessons * minutes / 60;
 
-        console.error(error);
+  return price / totalHours;
+}
 
-        packages = [];
+
+function formatDuration(hours, minutes){
+
+  hours = Number(hours || 0);
+  minutes = Number(minutes || 0);
+
+  if(!hours && !minutes){
+    return "—";
+  }
+
+  if(hours && minutes){
+    return `${hours}h ${minutes}min`;
+  }
+
+  if(hours){
+    return `${hours}h`;
+  }
+
+  return `${minutes}min`;
+}
+
+
+function validityText(item){
+
+  if(item.permanent){
+    return "永久有效";
+  }
+
+  if(
+    item.validityValue === "" ||
+    item.validityValue == null
+  ){
+    return "—";
+  }
+
+  const unitMap = {
+    year:"年",
+    month:"月",
+    day:"天"
+  };
+
+  return `${item.validityValue}${unitMap[item.validityUnit] || ""}`;
+}
+
+
+/* =================================
+   表单
+================================= */
+
+function getFormData(){
+
+  return {
+
+    id: editingId || uid(),
+
+    institution: $("institution").value.trim(),
+
+    packageName:
+      $("packageName").value.trim(),
+
+    price:
+      Number($("price").value),
+
+    lessons:
+      Number($("lessons").value),
+
+    minutes:
+      Number($("minutes").value || 60),
+
+    validityValue:
+      $("validityValue").value,
+
+    validityUnit:
+      $("validityUnit").value,
+
+    permanent:
+      $("permanent").checked,
+
+    district:
+      $("district").value.trim(),
+
+    metroStation:
+      $("metroStation").value.trim(),
+
+    homeDistance:
+      $("homeDistance").value === ""
+        ? ""
+        : Number($("homeDistance").value),
+
+    workDistance:
+      $("workDistance").value === ""
+        ? ""
+        : Number($("workDistance").value),
+
+    homeTimeHour:
+      $("homeTimeHour").value,
+
+    homeTimeMinute:
+      $("homeTimeMinute").value,
+
+    workTimeHour:
+      $("workTimeHour").value,
+
+    workTimeMinute:
+      $("workTimeMinute").value
+  };
+}
+
+
+function fillForm(item){
+
+  $("institution").value =
+    item.institution || "";
+
+  $("packageName").value =
+    item.packageName || "";
+
+  $("price").value =
+    item.price ?? "";
+
+  $("lessons").value =
+    item.lessons ?? "";
+
+  $("minutes").value =
+    item.minutes ?? 60;
+
+  $("validityValue").value =
+    item.validityValue ?? "";
+
+  $("validityUnit").value =
+    item.validityUnit || "month";
+
+  $("permanent").checked =
+    !!item.permanent;
+
+  $("district").value =
+    item.district || "";
+
+  $("metroStation").value =
+    item.metroStation || "";
+
+  $("homeDistance").value =
+    item.homeDistance ?? "";
+
+  $("workDistance").value =
+    item.workDistance ?? "";
+
+  $("homeTimeHour").value =
+    item.homeTimeHour ?? "";
+
+  $("homeTimeMinute").value =
+    item.homeTimeMinute ?? "";
+
+  $("workTimeHour").value =
+    item.workTimeHour ?? "";
+
+  $("workTimeMinute").value =
+    item.workTimeMinute ?? "";
+}
+
+
+function resetForm(){
+
+  editingId = null;
+
+  $("institution").value = "";
+  $("packageName").value = "";
+  $("price").value = "";
+  $("lessons").value = "";
+  $("minutes").value = 60;
+
+  $("validityValue").value = "";
+  $("validityUnit").value = "month";
+  $("permanent").checked = false;
+
+  $("district").value = "";
+  $("metroStation").value = "";
+
+  $("homeDistance").value = "";
+  $("workDistance").value = "";
+
+  $("homeTimeHour").value = "";
+  $("homeTimeMinute").value = "";
+
+  $("workTimeHour").value = "";
+  $("workTimeMinute").value = "";
+
+  $("formToggleText").textContent =
+    "新建套餐";
+
+  $("cancelEditBtn").style.display =
+    "none";
+
+  $("saveBtn").textContent =
+    "保存套餐";
+}
+
+
+function openForm(){
+
+  $("formPanel").classList.add("open");
+}
+
+
+function closeForm(){
+
+  $("formPanel").classList.remove("open");
+}
+
+
+/* =================================
+   保存
+================================= */
+
+$("saveBtn").addEventListener(
+  "click",
+  () => {
+
+    const item = getFormData();
+
+    if(!item.institution){
+      alert("请填写机构名称");
+      return;
+    }
+
+    if(!item.packageName){
+      alert("请填写套餐名称");
+      return;
+    }
+
+    if(!item.price || item.price < 0){
+      alert("请填写正确的套餐价格");
+      return;
+    }
+
+    if(!item.lessons || item.lessons <= 0){
+      alert("请填写正确的课时数量");
+      return;
+    }
+
+    if(!item.minutes || item.minutes <= 0){
+      alert("请填写正确的每节课时长");
+      return;
+    }
+
+    if(editingId){
+
+      const index =
+        data.findIndex(
+          x => x.id === editingId
+        );
+
+      if(index !== -1){
+        data[index] = item;
+      }
+
+    }else{
+
+      data.push(item);
 
     }
 
+    saveData();
+
+    resetForm();
+
+    closeForm();
+
+    renderAll();
+
+  }
+);
+
+
+/* =================================
+   新建套餐展开
+================================= */
+
+$("formToggle").addEventListener(
+  "click",
+  () => {
+
+    $("formPanel")
+      .classList.toggle("open");
+
+  }
+);
+
+
+/* =================================
+   编辑
+================================= */
+
+function editItem(id){
+
+  const item =
+    data.find(x => x.id === id);
+
+  if(!item) return;
+
+  editingId = id;
+
+  fillForm(item);
+
+  $("formToggleText").textContent =
+    "编辑套餐";
+
+  $("cancelEditBtn").style.display =
+    "inline-block";
+
+  $("saveBtn").textContent =
+    "保存修改";
+
+  openForm();
+
+  window.scrollTo({
+    top:$("formPanel").offsetTop - 10,
+    behavior:"smooth"
+  });
 }
 
 
-function normalizeItem(item) {
+$("cancelEditBtn").addEventListener(
+  "click",
+  () => {
 
-    return {
+    resetForm();
+    closeForm();
 
-        id:
-            item.id ||
-            Date.now() +
-            Math.random(),
+  }
+);
 
-        institution:
-            item.institution || "",
 
-        packageName:
-            item.packageName || "",
+$("clearFormBtn").addEventListener(
+  "click",
+  () => {
 
-        price:
-            Number(item.price) || 0,
+    resetForm();
 
-        lessons:
-            Number(item.lessons) || 0,
+  }
+);
 
-        minutes:
-            Number(item.minutes) || 60,
 
-        validityValue:
-            Number(
-                item.validityValue ??
-                item.validity ??
-                0
-            ),
+/* =================================
+   复制套餐
+================================= */
 
-        validityUnit:
-            item.validityUnit ||
-            "month",
+function duplicateItem(id){
 
-        district:
-            item.district || "",
+  const original =
+    data.find(x => x.id === id);
 
-        metroStation:
-            item.metroStation || "",
+  if(!original) return;
 
-        homeDistance:
-            Number(item.homeDistance) || 0,
+  /*
+    复制全部信息，
+    但生成新的ID。
+    这样同一家机构可以快速
+    建立第二个、第三个套餐。
+  */
 
-        workDistance:
-            Number(item.workDistance) || 0,
+  const copy = {
+    ...original,
+    id:uid(),
+    packageName:
+      original.packageName
+        ? original.packageName + "（复制）"
+        : "复制套餐"
+  };
 
-        homeTime:
-            Number(item.homeTime) || 0,
+  /*
+    复制不会直接保存，
+    而是放进“新建套餐”表单，
+    用户可以修改价格/课数等后再保存。
+  */
 
-        workTime:
-            Number(item.workTime) || 0,
+  editingId = null;
 
-        createdAt:
-            item.createdAt ||
-            new Date().toISOString()
+  fillForm(copy);
 
-    };
+  $("formToggleText").textContent =
+    "新建套餐";
+
+  $("cancelEditBtn").style.display =
+    "none";
+
+  $("saveBtn").textContent =
+    "保存套餐";
+
+  openForm();
+
+  window.scrollTo({
+    top:$("formPanel").offsetTop - 10,
+    behavior:"smooth"
+  });
 
 }
 
 
-/* =========================================================
-   Toast
-========================================================= */
+/* =================================
+   删除
+================================= */
 
-function toast(message) {
+function deleteItem(id){
 
-    const el =
-        document.getElementById("toast");
+  const item =
+    data.find(x => x.id === id);
 
-    el.textContent = message;
+  if(!item) return;
 
-    el.classList.add("show");
+  if(
+    !confirm(
+      `确定删除「${item.institution} · ${item.packageName}」吗？`
+    )
+  ){
+    return;
+  }
 
-    clearTimeout(window.__toastTimer);
+  data =
+    data.filter(x => x.id !== id);
 
-    window.__toastTimer =
-        setTimeout(
-            () => el.classList.remove("show"),
-            2200
+  saveData();
+
+  renderAll();
+}
+
+
+/* =================================
+   详情
+================================= */
+
+function toggleDetail(id){
+
+  const card =
+    document.querySelector(
+      `[data-card-id="${id}"]`
+    );
+
+  if(card){
+    card.classList.toggle(
+      "show-detail"
+    );
+  }
+}
+
+
+/* =================================
+   搜索 / 排序
+================================= */
+
+$("searchInput").addEventListener(
+  "input",
+  renderAll
+);
+
+$("sortSelect").addEventListener(
+  "change",
+  renderAll
+);
+
+
+function getFilteredData(){
+
+  const keyword =
+    $("searchInput").value
+      .trim()
+      .toLowerCase();
+
+  let result =
+    data.filter(item => {
+
+      if(!keyword){
+        return true;
+      }
+
+      return (
+        String(item.institution || "")
+          .toLowerCase()
+          .includes(keyword)
+        ||
+        String(item.packageName || "")
+          .toLowerCase()
+          .includes(keyword)
+      );
+
+    });
+
+  const sort =
+    $("sortSelect").value;
+
+  result.sort((a,b) => {
+
+    const ah =
+      getHourlyPrice(a) ?? Infinity;
+
+    const bh =
+      getHourlyPrice(b) ?? Infinity;
+
+    if(sort === "hourlyAsc"){
+      return ah - bh;
+    }
+
+    if(sort === "hourlyDesc"){
+      return bh - ah;
+    }
+
+    if(sort === "priceAsc"){
+      return Number(a.price) - Number(b.price);
+    }
+
+    if(sort === "priceDesc"){
+      return Number(b.price) - Number(a.price);
+    }
+
+    if(sort === "institution"){
+      return String(a.institution)
+        .localeCompare(
+          String(b.institution),
+          "zh-CN"
+        );
+    }
+
+    return 0;
+
+  });
+
+  return result;
+}
+
+
+/* =================================
+   价格总览
+================================= */
+
+function renderSummary(){
+
+  const institutions =
+    new Set(
+      data
+        .map(x => x.institution)
+        .filter(Boolean)
+    );
+
+  const hourlyPrices =
+    data
+      .map(getHourlyPrice)
+      .filter(x =>
+        x !== null &&
+        Number.isFinite(x)
+      );
+
+  $("institutionCount").textContent =
+    institutions.size;
+
+  $("packageCountText").textContent =
+    `${data.length} 个套餐`;
+
+  if(hourlyPrices.length){
+
+    const min =
+      Math.min(...hourlyPrices);
+
+    const max =
+      Math.max(...hourlyPrices);
+
+    $("lowestHourly").textContent =
+      money(min);
+
+    $("highestHourly").textContent =
+      money(max);
+
+  }else{
+
+    $("lowestHourly").textContent =
+      "—";
+
+    $("highestHourly").textContent =
+      "—";
+  }
+}
+
+
+/* =================================
+   价格图表
+================================= */
+
+function renderPriceChart(){
+
+  const container =
+    $("priceChart");
+
+  const list =
+    getFilteredData();
+
+  if(!list.length){
+
+    container.innerHTML =
+      `<div class="empty">
+        暂无可比较的套餐
+      </div>`;
+
+    return;
+  }
+
+  const prices =
+    list
+      .map(getHourlyPrice)
+      .filter(
+        x =>
+          x !== null &&
+          Number.isFinite(x)
+      );
+
+  if(!prices.length){
+
+    container.innerHTML =
+      `<div class="empty">
+        请先填写价格、课时数量和每节课时长
+      </div>`;
+
+    return;
+  }
+
+  const max =
+    Math.max(...prices);
+
+  container.innerHTML =
+    list.map(item => {
+
+      const value =
+        getHourlyPrice(item);
+
+      if(
+        value === null ||
+        !Number.isFinite(value)
+      ){
+        return "";
+      }
+
+      const width =
+        Math.max(
+          3,
+          value / max * 100
         );
 
+      return `
+
+        <div class="bar-row">
+
+          <div class="bar-name"
+               title="${escapeHtml(item.institution + " · " + item.packageName)}">
+
+            ${escapeHtml(item.institution)}
+            ·
+            ${escapeHtml(item.packageName)}
+
+          </div>
+
+          <div class="bar-track">
+
+            <div
+              class="bar-fill"
+              style="width:${width}%">
+            </div>
+
+          </div>
+
+          <div class="bar-value">
+            ${money(value)}/h
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
 }
 
 
-/* =========================================================
-   表单
-========================================================= */
+/* =================================
+   通勤图表
+================================= */
 
-form.addEventListener(
-    "submit",
-    function(event) {
+function renderCommuteChart(){
 
-        event.preventDefault();
+  const container =
+    $("commuteChart");
 
+  const list =
+    getFilteredData()
+      .filter(item =>
+        item.homeTimeHour !== "" ||
+        item.workTimeHour !== ""
+      );
 
-        const institution =
-            institutionInput.value.trim();
+  if(!list.length){
 
-        const packageName =
-            packageNameInput.value.trim();
+    container.innerHTML =
+      `<div class="empty">
+        还没有填写通勤时间
+      </div>`;
 
-        const price =
-            Number(priceInput.value);
+    return;
+  }
 
-        const lessons =
-            Number(lessonsInput.value);
+  const times =
+    list.flatMap(item => [
 
-        const minutes =
-            Number(minutesInput.value);
+      Number(item.homeTimeHour || 0) * 60 +
+      Number(item.homeTimeMinute || 0),
 
-        const validityValue =
-            Number(validityValueInput.value) || 0;
+      Number(item.workTimeHour || 0) * 60 +
+      Number(item.workTimeMinute || 0)
 
-        const validityUnit =
-            validityUnitInput.value;
+    ]);
 
+  const max =
+    Math.max(
+      ...times,
+      1
+    );
 
-        if (!institution) {
+  container.innerHTML =
+    list.map(item => {
 
-            toast("请输入机构名称");
+      const home =
+        Number(item.homeTimeHour || 0) * 60 +
+        Number(item.homeTimeMinute || 0);
 
-            return;
+      const work =
+        Number(item.workTimeHour || 0) * 60 +
+        Number(item.workTimeMinute || 0);
 
-        }
+      const homeWidth =
+        home ? Math.max(4,home/max*100) : 0;
 
+      const workWidth =
+        work ? Math.max(4,work/max*100) : 0;
 
-        if (!packageName) {
+      return `
 
-            toast("请输入套餐名称");
+        <div class="commute-row">
 
-            return;
+          <div class="commute-name">
 
-        }
+            <div class="commute-institution">
+              ${escapeHtml(item.institution)}
+            </div>
 
+            <div class="commute-district">
+              ${escapeHtml(
+                item.district || "未填写区域"
+              )}
+            </div>
 
-        if (
-            !Number.isFinite(price) ||
-            price < 0
-        ) {
-
-            toast("请输入正确价格");
-
-            return;
-
-        }
-
-
-        if (
-            !Number.isFinite(lessons) ||
-            lessons <= 0
-        ) {
-
-            toast("课时数量必须大于0");
-
-            return;
-
-        }
-
-
-        if (
-            !Number.isFinite(minutes) ||
-            minutes <= 0
-        ) {
-
-            toast("课时长度必须大于0");
-
-            return;
-
-        }
+          </div>
 
 
-        const data = {
+          <div class="commute-bars">
 
-            institution,
+            <div class="commute-line">
 
-            packageName,
+              <div class="commute-icon">
+                🏠
+              </div>
 
-            price,
+              <div class="commute-track">
+                <div
+                  class="commute-fill-home"
+                  style="width:${homeWidth}%">
+                </div>
+              </div>
 
-            lessons,
+              <div class="commute-time">
+                ${formatDuration(
+                  item.homeTimeHour,
+                  item.homeTimeMinute
+                )}
+              </div>
 
-            minutes,
+            </div>
 
-            validityValue,
 
-            validityUnit,
+            <div class="commute-line">
 
-            district:
-                districtInput.value.trim(),
+              <div class="commute-icon">
+                💼
+              </div>
 
-            metroStation:
-                metroStationInput.value.trim(),
+              <div class="commute-track">
+                <div
+                  class="commute-fill-work"
+                  style="width:${workWidth}%">
+                </div>
+              </div>
 
-            homeDistance:
-                Number(homeDistanceInput.value) || 0,
+              <div class="commute-time">
+                ${formatDuration(
+                  item.workTimeHour,
+                  item.workTimeMinute
+                )}
+              </div>
 
-            workDistance:
-                Number(workDistanceInput.value) || 0,
+            </div>
 
-            homeTime:
-                Number(homeTimeInput.value) || 0,
+          </div>
 
-            workTime:
-                Number(workTimeInput.value) || 0
+        </div>
+
+      `;
+
+    }).join("");
+}
+
+
+/* =================================
+   套餐列表
+================================= */
+
+function renderPackages(){
+
+  const container =
+    $("packageList");
+
+  const list =
+    getFilteredData();
+
+  if(!list.length){
+
+    container.innerHTML =
+      `<div class="empty">
+
+        <div class="empty-icon">🩰</div>
+
+        <div>还没有套餐数据</div>
+
+        <div style="font-size:11px;margin-top:5px">
+          点击上面的「新建套餐」开始记录
+        </div>
+
+      </div>`;
+
+    return;
+  }
+
+
+  container.innerHTML =
+    list.map(item => {
+
+      const hourly =
+        getHourlyPrice(item);
+
+      const totalHours =
+        item.lessons &&
+        item.minutes
+          ? item.lessons *
+            item.minutes /
+            60
+          : null;
+
+      return `
+
+        <div
+          class="package-card"
+          data-card-id="${item.id}"
+        >
+
+          <div class="package-main">
+
+            <div class="package-top">
+
+              <div class="package-title">
+
+                <div class="institution">
+                  ${escapeHtml(
+                    item.institution
+                  )}
+                </div>
+
+                <div class="package-name">
+                  ${escapeHtml(
+                    item.packageName
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="package-price">
+
+                <strong>
+                  ${money(item.price)}
+                </strong>
+
+                <span>
+                  套餐总价
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="package-metrics">
+
+              <div class="metric">
+
+                <div class="metric-label">
+                  每小时
+                </div>
+
+                <div class="metric-value">
+                  ${hourly === null
+                    ? "—"
+                    : money(hourly)}
+                </div>
+
+              </div>
+
+
+              <div class="metric">
+
+                <div class="metric-label">
+                  课时
+                </div>
+
+                <div class="metric-value">
+                  ${item.lessons || "—"}节
+                </div>
+
+              </div>
+
+
+              <div class="metric">
+
+                <div class="metric-label">
+                  每节
+                </div>
+
+                <div class="metric-value">
+                  ${item.minutes || "—"}min
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="package-actions">
+
+              <button
+                class="btn btn-soft"
+                onclick="toggleDetail('${item.id}')"
+              >
+                详情
+              </button>
+
+              <button
+                class="btn btn-lavender"
+                onclick="duplicateItem('${item.id}')"
+              >
+                复制
+              </button>
+
+              <button
+                class="btn"
+                onclick="editItem('${item.id}')"
+              >
+                编辑
+              </button>
+
+              <button
+                class="btn btn-danger"
+                onclick="deleteItem('${item.id}')"
+              >
+                删除
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- 详情 -->
+          <div class="detail">
+
+            <div class="detail-grid">
+
+              <div class="detail-item">
+
+                <label>总课时</label>
+
+                <div>
+                  ${
+                    totalHours
+                      ? totalHours.toFixed(2) + " 小时"
+                      : "—"
+                  }
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>每小时价格</label>
+
+                <div>
+                  ${
+                    hourly === null
+                      ? "—"
+                      : money(hourly)
+                  }
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>有效期</label>
+
+                <div>
+                  ${validityText(item)}
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>区域</label>
+
+                <div>
+                  ${escapeHtml(
+                    item.district || "—"
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>最近地铁站</label>
+
+                <div>
+                  ${escapeHtml(
+                    item.metroStation || "—"
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>距家</label>
+
+                <div>
+                  ${
+                    item.homeDistance !== ""
+                      ? item.homeDistance + " km"
+                      : "—"
+                  }
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>距公司</label>
+
+                <div>
+                  ${
+                    item.workDistance !== ""
+                      ? item.workDistance + " km"
+                      : "—"
+                  }
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>到家时间</label>
+
+                <div>
+                  ${formatDuration(
+                    item.homeTimeHour,
+                    item.homeTimeMinute
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>到公司时间</label>
+
+                <div>
+                  ${formatDuration(
+                    item.workTimeHour,
+                    item.workTimeMinute
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+}
+
+
+/* =================================
+   HTML安全
+================================= */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* =================================
+   Excel 导出
+================================= */
+
+$("exportExcelBtn").addEventListener(
+  "click",
+  () => {
+
+    if(!data.length){
+
+      alert("目前没有数据可以导出");
+
+      return;
+    }
+
+    const rows =
+      data.map(item => {
+
+        const hourly =
+          getHourlyPrice(item);
+
+        return {
+
+          "机构名称":
+            item.institution,
+
+          "套餐名称":
+            item.packageName,
+
+          "套餐价格":
+            item.price,
+
+          "课时数量":
+            item.lessons,
+
+          "每节课时长":
+            item.minutes,
+
+          "总课时":
+            item.lessons *
+            item.minutes /
+            60,
+
+          "每小时价格":
+            hourly,
+
+          "有效期数值":
+            item.validityValue,
+
+          "有效期单位":
+            item.permanent
+              ? "永久"
+              : item.validityUnit,
+
+          "有效期":
+            validityText(item),
+
+          "区域":
+            item.district,
+
+          "最近地铁站":
+            item.metroStation,
+
+          "距家距离(km)":
+            item.homeDistance,
+
+          "距公司距离(km)":
+            item.workDistance,
+
+          "到家时间":
+            formatDuration(
+              item.homeTimeHour,
+              item.homeTimeMinute
+            ),
+
+          "到公司时间":
+            formatDuration(
+              item.workTimeHour,
+              item.workTimeMinute
+            ),
+
+          "到家小时":
+            item.homeTimeHour,
+
+          "到家分钟":
+            item.homeTimeMinute,
+
+          "到公司小时":
+            item.workTimeHour,
+
+          "到公司分钟":
+            item.workTimeMinute
 
         };
 
-
-        if (editingId !== null) {
-
-            const index =
-                packages.findIndex(
-                    item =>
-                        item.id === editingId
-                );
-
-            if (index !== -1) {
-
-                packages[index] = {
-
-                    ...packages[index],
-
-                    ...data
-
-                };
-
-            }
-
-            toast("套餐已更新");
-
-        } else {
-
-            packages.push({
-
-                id:
-                    Date.now() +
-                    Math.random()
-                        .toString(16)
-                        .slice(2),
-
-                ...data,
-
-                createdAt:
-                    new Date().toISOString()
-
-            });
-
-            toast("套餐已添加");
-
-        }
+      });
 
 
-        saveData();
+    const ws =
+      XLSX.utils.json_to_sheet(rows);
 
-        resetForm();
+    const wb =
+      XLSX.utils.book_new();
 
-        renderAll();
+    XLSX.utils.book_append_sheet(
+      wb,
+      ws,
+      "芭蕾价格"
+    );
 
-    }
+    XLSX.writeFile(
+      wb,
+      "芭蕾机构价格对比.xlsx"
+    );
+
+  }
 );
 
 
-/* =========================================================
-   清空表单
-========================================================= */
+/* =================================
+   Excel 导入
+================================= */
 
-function resetForm() {
+$("importExcelBtn").addEventListener(
+  "click",
+  () => {
 
-    editingId = null;
+    $("excelInput").click();
 
-    form.reset();
-
-    minutesInput.value = 60;
-
-    validityUnitInput.value =
-        "month";
-
-    formTitle.textContent =
-        "新增套餐";
-
-    submitBtn.textContent =
-        "＋ 添加套餐";
-
-    cancelEditBtn.style.display =
-        "none";
-
-}
-
-
-resetFormBtn.addEventListener(
-    "click",
-    resetForm
+  }
 );
 
 
-cancelEditBtn.addEventListener(
-    "click",
-    resetForm
-);
+$("excelInput").addEventListener(
+  "change",
+  async event => {
 
+    const file =
+      event.target.files[0];
 
-/* =========================================================
-   编辑
-========================================================= */
+    if(!file) return;
 
-function editPackage(id) {
+    try{
 
-    const item =
-        packages.find(
-            x => x.id === id
-        );
+      const buffer =
+        await file.arrayBuffer();
 
-    if (!item) return;
+      const workbook =
+        XLSX.read(buffer,{
+          type:"array"
+        });
 
+      const sheet =
+        workbook.Sheets[
+          workbook.SheetNames[0]
+        ];
 
-    editingId = id;
+      const rows =
+        XLSX.utils.sheet_to_json(sheet);
 
+      if(!rows.length){
 
-    institutionInput.value =
-        item.institution;
+        alert("Excel里没有数据");
 
-    packageNameInput.value =
-        item.packageName;
-
-    priceInput.value =
-        item.price;
-
-    lessonsInput.value =
-        item.lessons;
-
-    minutesInput.value =
-        item.minutes;
-
-    validityValueInput.value =
-        item.validityValue || "";
-
-    validityUnitInput.value =
-        item.validityUnit || "month";
-
-    districtInput.value =
-        item.district || "";
-
-    metroStationInput.value =
-        item.metroStation || "";
-
-    homeDistanceInput.value =
-        item.homeDistance || "";
-
-    workDistanceInput.value =
-        item.workDistance || "";
-
-    homeTimeInput.value =
-        item.homeTime || "";
-
-    workTimeInput.value =
-        item.workTime || "";
-
-
-    formTitle.textContent =
-        "编辑套餐";
-
-    submitBtn.textContent =
-        "保存修改";
-
-    cancelEditBtn.style.display =
-        "inline-block";
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-window.editPackage =
-    editPackage;
-
-
-/* =========================================================
-   删除
-========================================================= */
-
-function deletePackage(id) {
-
-    const item =
-        packages.find(
-            x => x.id === id
-        );
-
-    if (!item) return;
-
-
-    if (
-        !confirm(
-            `确定删除「${item.institution} · ${item.packageName}」吗？`
-        )
-    ) {
         return;
+      }
+
+
+      const imported =
+        rows.map(row => {
+
+          let unit =
+            row["有效期单位"];
+
+          let permanent =
+            unit === "永久";
+
+          if(unit === "年"){
+            unit = "year";
+          }
+
+          else if(unit === "月"){
+            unit = "month";
+          }
+
+          else if(unit === "天"){
+            unit = "day";
+          }
+
+          else if(
+            unit !== "year" &&
+            unit !== "month" &&
+            unit !== "day"
+          ){
+
+            unit = "month";
+
+          }
+
+
+          return {
+
+            id:uid(),
+
+            institution:
+              String(
+                row["机构名称"] || ""
+              ),
+
+            packageName:
+              String(
+                row["套餐名称"] || ""
+              ),
+
+            price:
+              Number(
+                row["套餐价格"] || 0
+              ),
+
+            lessons:
+              Number(
+                row["课时数量"] || 0
+              ),
+
+            minutes:
+              Number(
+                row["每节课时长"] || 60
+              ),
+
+            validityValue:
+              row["有效期数值"] ?? "",
+
+            validityUnit:
+              unit,
+
+            permanent,
+
+            district:
+              String(
+                row["区域"] || ""
+              ),
+
+            metroStation:
+              String(
+                row["最近地铁站"] || ""
+              ),
+
+            homeDistance:
+              row["距家距离(km)"] ?? "",
+
+            workDistance:
+              row["距公司距离(km)"] ?? "",
+
+            homeTimeHour:
+              row["到家小时"] ?? "",
+
+            homeTimeMinute:
+              row["到家分钟"] ?? "",
+
+            workTimeHour:
+              row["到公司小时"] ?? "",
+
+            workTimeMinute:
+              row["到公司分钟"] ?? ""
+
+          };
+
+        });
+
+
+      data =
+        data.concat(imported);
+
+      saveData();
+
+      renderAll();
+
+      alert(
+        `成功导入 ${imported.length} 个套餐`
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Excel导入失败，请检查文件格式"
+      );
+
     }
 
+    event.target.value = "";
 
-    packages =
-        packages.filter(
-            x => x.id !== id
+  }
+);
+
+
+/* =================================
+   JSON备份
+================================= */
+
+$("exportJsonBtn").addEventListener(
+  "click",
+  () => {
+
+    const blob =
+      new Blob(
+        [
+          JSON.stringify(
+            data,
+            null,
+            2
+          )
+        ],
+        {
+          type:"application/json"
+        }
+      );
+
+    const url =
+      URL.createObjectURL(blob);
+
+    const a =
+      document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+      "芭蕾机构价格备份.json";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+  }
+);
+
+
+/* =================================
+   JSON恢复
+================================= */
+
+$("importJsonBtn").addEventListener(
+  "click",
+  () => {
+
+    $("jsonInput").click();
+
+  }
+);
+
+
+$("jsonInput").addEventListener(
+  "change",
+  async event => {
+
+    const file =
+      event.target.files[0];
+
+    if(!file) return;
+
+    try{
+
+      const text =
+        await file.text();
+
+      const imported =
+        JSON.parse(text);
+
+      if(!Array.isArray(imported)){
+
+        throw new Error(
+          "格式错误"
         );
 
+      }
+
+      if(
+        !confirm(
+          `确定用备份数据替换现在的 ${data.length} 条数据吗？`
+        )
+      ){
+        return;
+      }
+
+      data = imported;
+
+      saveData();
+
+      renderAll();
+
+      alert("恢复成功");
+
+    }catch(error){
+
+      alert(
+        "JSON文件格式不正确"
+      );
+
+    }
+
+    event.target.value = "";
+
+  }
+);
+
+
+/* =================================
+   删除全部
+================================= */
+
+$("clearAllBtn").addEventListener(
+  "click",
+  () => {
+
+    if(!data.length){
+
+      alert("目前没有数据");
+
+      return;
+    }
+
+    if(
+      !confirm(
+        `确定删除全部 ${data.length} 个套餐吗？此操作不可恢复。`
+      )
+    ){
+
+      return;
+
+    }
+
+    data = [];
 
     saveData();
 
     renderAll();
 
-    toast("套餐已删除");
-
-}
-
-
-window.deletePackage =
-    deletePackage;
-
-
-/* =========================================================
-   详情展开
-========================================================= */
-
-function toggleDetails(id) {
-
-    const element =
-        document.getElementById(
-            `details-${id}`
-        );
-
-    if (!element) return;
-
-
-    element.classList.toggle("show");
-
-
-    const button =
-        document.querySelector(
-            `[data-detail-id="${id}"]`
-        );
-
-
-    if (button) {
-
-        button.textContent =
-            element.classList.contains("show")
-                ? "收起"
-                : "详情";
-
-    }
-
-}
-
-
-window.toggleDetails =
-    toggleDetails;
-
-
-/* =========================================================
-   筛选
-========================================================= */
-
-function filteredPackages() {
-
-    const institution =
-        institutionFilter.value;
-
-    const keyword =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-
-    let result =
-        packages.filter(item => {
-
-            const matchInstitution =
-                !institution ||
-                item.institution === institution;
-
-
-            const matchKeyword =
-                !keyword ||
-
-                item.institution
-                    .toLowerCase()
-                    .includes(keyword) ||
-
-                item.packageName
-                    .toLowerCase()
-                    .includes(keyword);
-
-
-            return (
-                matchInstitution &&
-                matchKeyword
-            );
-
-        });
-
-
-    result.sort(
-        (a, b) => {
-
-            const x =
-                unitPrice(a);
-
-            const y =
-                unitPrice(b);
-
-            return sortAscending
-                ? x - y
-                : y - x;
-
-        }
-    );
-
-
-    return result;
-
-}
-
-
-institutionFilter.addEventListener(
-    "change",
-    renderAll
+  }
 );
 
 
-searchInput.addEventListener(
-    "input",
-    renderAll
+/* =================================
+   永久有效联动
+================================= */
+
+$("permanent").addEventListener(
+  "change",
+  () => {
+
+    const disabled =
+      $("permanent").checked;
+
+    $("validityValue").disabled =
+      disabled;
+
+    $("validityUnit").disabled =
+      disabled;
+
+    if(disabled){
+
+      $("validityValue").value = "";
+
+    }
+
+  }
 );
 
 
-sortBtn.addEventListener(
-    "click",
-    function() {
+/* =================================
+   渲染
+================================= */
 
-        sortAscending =
-            !sortAscending;
+function renderAll(){
 
-        sortBtn.textContent =
-            sortAscending
-                ? "单节价格 ↑"
-                : "单节价格 ↓";
+  renderSummary();
 
-        renderAll();
+  renderPriceChart();
 
-    }
-);
+  renderCommuteChart();
 
-
-/* =========================================================
-   机构筛选
-========================================================= */
-
-function renderInstitutionFilter() {
-
-    const current =
-        institutionFilter.value;
-
-
-    const names =
-        [
-            ...new Set(
-                packages
-                    .map(
-                        item =>
-                            item.institution
-                    )
-                    .filter(Boolean)
-            )
-        ]
-        .sort(
-            (a,b) =>
-                a.localeCompare(
-                    b,
-                    "zh-CN"
-                )
-        );
-
-
-    institutionFilter.innerHTML =
-        `<option value="">
-            全部机构
-        </option>` +
-
-        names
-            .map(
-                name =>
-                    `<option value="${escapeHTML(name)}">
-                        ${escapeHTML(name)}
-                    </option>`
-            )
-            .join("");
-
-
-    if (names.includes(current)) {
-
-        institutionFilter.value =
-            current;
-
-    }
+  renderPackages();
 
 }
 
-
-/* =========================================================
-   统计
-========================================================= */
-
-function renderStats() {
-
-    const institutionCount =
-        new Set(
-            packages.map(
-                item =>
-                    item.institution
-            )
-        ).size;
-
-
-    const prices =
-        packages
-            .map(unitPrice)
-            .filter(
-                x =>
-                    Number.isFinite(x)
-            );
-
-
-    const average =
-        prices.length
-            ? prices.reduce(
-                (a,b) => a + b,
-                0
-              ) / prices.length
-            : 0;
-
-
-    const lowest =
-        prices.length
-            ? Math.min(...prices)
-            : 0;
-
-
-    document.getElementById(
-        "statInstitutions"
-    ).textContent =
-        institutionCount;
-
-
-    document.getElementById(
-        "statPackages"
-    ).textContent =
-        packages.length;
-
-
-    document.getElementById(
-        "statAverage"
-    ).textContent =
-        money(average);
-
-
-    document.getElementById(
-        "statLowest"
-    ).textContent =
-        money(lowest);
-
-}
-
-
-/* =========================================================
-   套餐列表
-========================================================= */
-
-function renderPackages() {
-
-    const rows =
-        filteredPackages();
-
-
-    if (!rows.length) {
-
-        packageList.innerHTML =
-            `<div class="empty">
-                还没有套餐数据
-            </div>`;
-
-        return;
-
-    }
-
-
-    packageList.innerHTML =
-        rows.map(item => {
-
-            const price =
-                unitPrice(item);
-
-            const p60 =
-                price60(item);
-
-
-            return `
-
-            <div class="package-card">
-
-                <div class="package-main">
-
-                    <div>
-
-                        <div class="package-school">
-                            ${escapeHTML(item.institution)}
-                        </div>
-
-                        <div class="package-name">
-                            ${escapeHTML(item.packageName)}
-                        </div>
-
-                    </div>
-
-
-                    <div class="package-price">
-
-                        ${money(item.price)}
-
-                        <small>
-                            ${item.lessons}节 · ${item.minutes}分钟
-                        </small>
-
-                    </div>
-
-
-                    <div class="package-unit">
-
-                        ${money(price)}
-
-                        <small>
-                            每节
-                        </small>
-
-                    </div>
-
-
-                    <div class="package-actions">
-
-                        <button
-                            class="btn-soft small-btn"
-                            type="button"
-                            data-detail-id="${item.id}"
-                            onclick="toggleDetails('${item.id}')"
-                        >
-                            详情
-                        </button>
-
-
-                        <button
-                            class="btn-secondary small-btn"
-                            type="button"
-                            onclick="editPackage('${item.id}')"
-                        >
-                            编辑
-                        </button>
-
-
-                        <button
-                            class="btn-danger small-btn"
-                            type="button"
-                            onclick="deletePackage('${item.id}')"
-                        >
-                            删除
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="details"
-                    id="details-${item.id}"
-                >
-
-                    <div class="details-inner">
-
-                        <div class="detail-grid">
-
-                            <div class="detail-item">
-
-                                <div class="detail-label">
-                                    套餐价格
-                                </div>
-
-                                <div class="detail-value">
-                                    ${money(item.price)}
-                                </div>
-
-                            </div>
-
-
-                            <div class="detail-item">
-
-                                <div class="detail-label">
-                                    课时
-                                </div>
-
-                                <div class="detail-value">
-                                    ${item.lessons} 节
-                                </div>
-
-                            </div>
-
-
-                            <div class="detail-item">
-
-                                <div class="detail-label">
-                                    每60分钟
-                                </div>
-
-                                <div class="detail-value">
-                                    ${money(p60)}
-                                </div>
-
-                            </div>
-
-
-                            <div class="detail-item">
-
-                                <div class="detail-label">
-                                    每节课时长
-                                </div>
-
-                                <div class="detail-value">
-                                    ${item.minutes} 分钟
-                                </div>
-
-                            </div>
-
-
-                            <div class="detail-item">
-
-                                <div class="detail-label">
-                                    有效期
-                                </div>
-
-                                <div class="detail-value">
-                                    ${formatValidity(item)}
-                                </div>
-
-                            </div>
-
-
-                            <div class="detail-item">
-
-                                <div class="detail-label">
-                                    单节价格
-                                </div>
-
-                                <div class="detail-value">
-                                    ${money(price)}
-                                </div>
-
-                            </div>
-
-
-                            <div class="location-box">
-
-                                <div class="location-title">
-                                    ♡ LOCATION · 通勤信息
-                                </div>
-
-
-                                <div class="location-grid">
-
-                                    <div class="location-item">
-
-                                        <div class="location-icon">
-                                            📍
-                                        </div>
-
-                                        <div class="location-label">
-                                            区域 / 商圈
-                                        </div>
-
-                                        <div class="location-value">
-                                            ${
-                                                escapeHTML(
-                                                    item.district ||
-                                                    "未填写"
-                                                )
-                                            }
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="location-item">
-
-                                        <div class="location-icon">
-                                            🚇
-                                        </div>
-
-                                        <div class="location-label">
-                                            最近地铁站
-                                        </div>
-
-                                        <div class="location-value">
-                                            ${
-                                                escapeHTML(
-                                                    item.metroStation ||
-                                                    "未填写"
-                                                )
-                                            }
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="location-item">
-
-                                        <div class="location-icon">
-                                            🏠
-                                        </div>
-
-                                        <div class="location-label">
-                                            到家
-                                        </div>
-
-                                        <div class="location-value">
-                                            ${
-                                                item.homeTime
-                                                    ? item.homeTime + " 分钟"
-                                                    : "未填写"
-                                            }
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="location-item">
-
-                                        <div class="location-icon">
-                                            💼
-                                        </div>
-
-                                        <div class="location-label">
-                                            到公司
-                                        </div>
-
-                                        <div class="location-value">
-                                            ${
-                                                item.workTime
-                                                    ? item.workTime + " 分钟"
-                                                    : "未填写"
-                                            }
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="location-item">
-
-                                        <div class="location-icon">
-                                            🏠
-                                        </div>
-
-                                        <div class="location-label">
-                                            距家
-                                        </div>
-
-                                        <div class="location-value">
-                                            ${
-                                                item.homeDistance
-                                                    ? item.homeDistance + " km"
-                                                    : "未填写"
-                                            }
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="location-item">
-
-                                        <div class="location-icon">
-                                            💼
-                                        </div>
-
-                                        <div class="location-label">
-                                            距公司
-                                        </div>
-
-                                        <div class="location-value">
-                                            ${
-                                                item.workDistance
-                                                    ? item.workDistance + " km"
-                                                    : "未填写"
-                                            }
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================================================
-   价格图
-========================================================= */
-
-function renderChart() {
-
-    const rows =
-        filteredPackages();
-
-
-    if (!rows.length) {
-
-        chart.innerHTML =
-            `<div class="empty">
-                添加套餐后显示价格比较
-            </div>`;
-
-        return;
-
-    }
-
-
-    const max =
-        Math.max(
-            ...rows.map(unitPrice),
-            1
-        );
-
-
-    chart.innerHTML =
-        rows.map(item => {
-
-            const price =
-                unitPrice(item);
-
-
-            const height =
-                Math.max(
-                    4,
-                    price / max * 220
-                );
-
-
-            return `
-
-                <div class="bar-group">
-
-                    <div class="bar-price">
-                        ${money(price)}
-                    </div>
-
-                    <div
-                        class="bar"
-                        style="height:${height}px"
-                    ></div>
-
-                    <div class="bar-name">
-                        ${escapeHTML(item.institution)}
-                        <br>
-                        ${escapeHTML(item.packageName)}
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================================================
-   机构汇总
-========================================================= */
-
-function renderInstitutionSummary() {
-
-    if (!packages.length) {
-
-        institutionSummary.innerHTML =
-            `<div class="empty">
-                暂无机构
-            </div>`;
-
-        return;
-
-    }
-
-
-    const map = {};
-
-
-    packages.forEach(item => {
-
-        if (!map[item.institution]) {
-            map[item.institution] = [];
-        }
-
-        map[item.institution].push(item);
-
-    });
-
-
-    institutionSummary.innerHTML =
-        Object.keys(map)
-            .sort()
-            .map(name => {
-
-                const list =
-                    map[name];
-
-
-                const prices =
-                    list.map(unitPrice);
-
-
-                const min =
-                    Math.min(...prices);
-
-
-                return `
-
-                <div class="institution-item">
-
-                    <div>
-
-                        <div class="institution-name">
-                            ${escapeHTML(name)}
-                        </div>
-
-                        <div class="institution-info">
-                            ${list.length} 个套餐
-                            · 最低 ${money(min)}/节
-                        </div>
-
-                    </div>
-
-
-                    <div class="institution-price">
-
-                        <span class="stat-label">
-                            最低单节
-                        </span>
-
-                        <br>
-
-                        <strong>
-                            ${money(min)}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-                `;
-
-            })
-            .join("");
-
-}
-
-
-/* =========================================================
-   通勤比较
-========================================================= */
-
-function renderCommute() {
-
-    const rows =
-        filteredPackages()
-            .filter(
-                item =>
-                    item.homeTime ||
-                    item.workTime
-            );
-
-
-    if (!rows.length) {
-
-        commuteGrid.innerHTML =
-            `<div class="empty">
-                添加到家时间或到公司时间后，
-                这里会自动生成通勤比较。
-            </div>`;
-
-        return;
-
-    }
-
-
-    const maxTime =
-        Math.max(
-            ...rows.flatMap(
-                item => [
-                    item.homeTime || 0,
-                    item.workTime || 0
-                ]
-            ),
-            60
-        );
-
-
-    commuteGrid.innerHTML =
-        rows.map(item => {
-
-            const time =
-                item.homeTime ||
-                item.workTime ||
-                0;
-
-
-            const percent =
-                Math.min(
-                    100,
-                    time / maxTime * 100
-                );
-
-
-            return `
-
-                <div class="commute-card">
-
-                    <div class="commute-head">
-
-                        <div class="commute-icon">
-                            🩰
-                        </div>
-
-                        <div>
-
-                            <div class="commute-title">
-                                ${escapeHTML(item.institution)}
-                            </div>
-
-                            <div class="commute-sub">
-                                ${escapeHTML(item.packageName)}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="commute-time">
-
-                        ${
-                            item.homeTime ||
-                            "—"
-                        }
-
-                        <small>
-                            分钟回家
-                        </small>
-
-                    </div>
-
-
-                    <div class="time-track">
-
-                        <div
-                            class="time-track-fill"
-                            style="width:${percent}%"
-                        ></div>
-
-                    </div>
-
-
-                    <div
-                        style="
-                            margin-top:9px;
-                            color:#8c8182;
-                            font-size:11px;
-                        "
-                    >
-
-                        ${
-                            item.workTime
-                                ? "到公司 " +
-                                  item.workTime +
-                                  " 分钟"
-                                : "未填写到公司时间"
-                        }
-
-                    </div>
-
-                </div>
-
-            `;
-
-        })
-        .join("");
-
-}
-
-
-/* =========================================================
-   Excel 导出
-========================================================= */
-
-document
-    .getElementById("exportExcelBtn")
-    .addEventListener(
-        "click",
-        function() {
-
-            if (!packages.length) {
-
-                toast("目前没有数据");
-
-                return;
-
-            }
-
-
-            if (
-                typeof XLSX ===
-                "undefined"
-            ) {
-
-                toast(
-                    "Excel 模块加载失败"
-                );
-
-                return;
-
-            }
-
-
-            const rows =
-                packages.map(item => ({
-
-                    "机构名称":
-                        item.institution,
-
-                    "套餐名称":
-                        item.packageName,
-
-                    "套餐价格":
-                        item.price,
-
-                    "课时数量":
-                        item.lessons,
-
-                    "每节课时长":
-                        item.minutes,
-
-                    "有效期数值":
-                        item.validityValue,
-
-                    "有效期单位":
-                        item.validityUnit === "year"
-                            ? "年"
-                            : item.validityUnit === "day"
-                                ? "天"
-                                : "月",
-
-                    "有效期":
-                        formatValidity(item),
-
-                    "单节价格":
-                        Number(
-                            unitPrice(item)
-                                .toFixed(2)
-                        ),
-
-                    "每60分钟价格":
-                        Number(
-                            price60(item)
-                                .toFixed(2)
-                        ),
-
-                    "区域":
-                        item.district,
-
-                    "最近地铁站":
-                        item.metroStation,
-
-                    "距家距离(km)":
-                        item.homeDistance,
-
-                    "距公司距离(km)":
-                        item.workDistance,
-
-                    "到家时间(分钟)":
-                        item.homeTime,
-
-                    "到公司时间(分钟)":
-                        item.workTime
-
-                }));
-
-
-            const sheet =
-                XLSX.utils.json_to_sheet(
-                    rows
-                );
-
-
-            const workbook =
-                XLSX.utils.book_new();
-
-
-            XLSX.utils.book_append_sheet(
-                workbook,
-                sheet,
-                "芭蕾套餐"
-            );
-
-
-            XLSX.writeFile(
-                workbook,
-                "芭蕾机构价格对比.xlsx"
-            );
-
-
-            toast("Excel 已导出");
-
-        }
-    );
-
-
-/* =========================================================
-   Excel 导入
-========================================================= */
-
-document
-    .getElementById("importExcelBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            document
-                .getElementById("excelFile")
-                .click();
-
-        }
-    );
-
-
-document
-    .getElementById("excelFile")
-    .addEventListener(
-        "change",
-        async function(event) {
-
-            const file =
-                event.target.files[0];
-
-            if (!file) return;
-
-
-            try {
-
-                const buffer =
-                    await file.arrayBuffer();
-
-
-                const workbook =
-                    XLSX.read(
-                        buffer,
-                        {
-                            type: "array"
-                        }
-                    );
-
-
-                const sheet =
-                    workbook.Sheets[
-                        workbook.SheetNames[0]
-                    ];
-
-
-                const rows =
-                    XLSX.utils.sheet_to_json(
-                        sheet,
-                        {
-                            defval: ""
-                        }
-                    );
-
-
-                let count = 0;
-
-
-                rows.forEach(row => {
-
-                    const institution =
-                        String(
-                            row["机构名称"] ||
-                            ""
-                        ).trim();
-
-
-                    const packageName =
-                        String(
-                            row["套餐名称"] ||
-                            ""
-                        ).trim();
-
-
-                    const price =
-                        Number(
-                            row["套餐价格"] ||
-                            0
-                        );
-
-
-                    const lessons =
-                        Number(
-                            row["课时数量"] ||
-                            0
-                        );
-
-
-                    const minutes =
-                        Number(
-                            row["每节课时长"] ||
-                            60
-                        );
-
-
-                    let validityUnit =
-                        row["有效期单位"];
-
-
-                    if (
-                        validityUnit === "年"
-                    ) {
-
-                        validityUnit =
-                            "year";
-
-                    } else if (
-                        validityUnit === "天"
-                    ) {
-
-                        validityUnit =
-                            "day";
-
-                    } else {
-
-                        validityUnit =
-                            "month";
-
-                    }
-
-
-                    const item = {
-
-                        id:
-                            Date.now() +
-                            Math.random()
-                                .toString(16)
-                                .slice(2),
-
-                        institution,
-
-                        packageName,
-
-                        price,
-
-                        lessons,
-
-                        minutes,
-
-                        validityValue:
-                            Number(
-                                row["有效期数值"] ||
-                                0
-                            ),
-
-                        validityUnit,
-
-                        district:
-                            String(
-                                row["区域"] ||
-                                ""
-                            ),
-
-                        metroStation:
-                            String(
-                                row["最近地铁站"] ||
-                                ""
-                            ),
-
-                        homeDistance:
-                            Number(
-                                row["距家距离(km)"] ||
-                                0
-                            ),
-
-                        workDistance:
-                            Number(
-                                row["距公司距离(km)"] ||
-                                0
-                            ),
-
-                        homeTime:
-                            Number(
-                                row["到家时间(分钟)"] ||
-                                0
-                            ),
-
-                        workTime:
-                            Number(
-                                row["到公司时间(分钟)"] ||
-                                0
-                            ),
-
-                        createdAt:
-                            new Date()
-                                .toISOString()
-
-                    };
-
-
-                    if (
-                        institution &&
-                        packageName &&
-                        lessons > 0
-                    ) {
-
-                        packages.push(item);
-
-                        count++;
-
-                    }
-
-                });
-
-
-                saveData();
-
-                renderAll();
-
-                toast(
-                    `成功导入 ${count} 个套餐`
-                );
-
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(
-                    "Excel 导入失败，请检查文件格式。"
-                );
-
-            }
-
-
-            event.target.value = "";
-
-        }
-    );
-
-
-/* =========================================================
-   JSON 备份
-========================================================= */
-
-document
-    .getElementById("backupBtn")
-    .addEventListener(
-        "click",
-        function() {
-
-            if (!packages.length) {
-
-                toast("目前没有数据");
-
-                return;
-
-            }
-
-
-            const blob =
-                new Blob(
-                    [
-                        JSON.stringify(
-                            packages,
-                            null,
-                            2
-                        )
-                    ],
-                    {
-                        type:
-                            "application/json"
-                    }
-                );
-
-
-            const url =
-                URL.createObjectURL(
-                    blob
-                );
-
-
-            const a =
-                document.createElement("a");
-
-
-            a.href = url;
-
-            a.download =
-                "芭蕾机构价格备份.json";
-
-
-            a.click();
-
-
-            URL.revokeObjectURL(url);
-
-
-            toast("备份成功");
-
-        }
-    );
-
-
-/* =========================================================
-   JSON 恢复
-========================================================= */
-
-document
-    .getElementById("restoreBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            document
-                .getElementById("backupFile")
-                .click();
-
-        }
-    );
-
-
-document
-    .getElementById("backupFile")
-    .addEventListener(
-        "change",
-        async function(event) {
-
-            const file =
-                event.target.files[0];
-
-            if (!file) return;
-
-
-            try {
-
-                const text =
-                    await file.text();
-
-
-                const data =
-                    JSON.parse(text);
-
-
-                if (
-                    !Array.isArray(data)
-                ) {
-
-                    throw new Error(
-                        "invalid"
-                    );
-
-                }
-
-
-                if (
-                    !confirm(
-                        `备份文件中有 ${data.length} 条数据。\n恢复后会替换当前数据，确定继续吗？`
-                    )
-                ) {
-
-                    return;
-
-                }
-
-
-                packages =
-                    data.map(
-                        normalizeItem
-                    );
-
-
-                saveData();
-
-                renderAll();
-
-                toast("数据恢复成功");
-
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(
-                    "恢复失败，请选择正确的 JSON 文件。"
-                );
-
-            }
-
-
-            event.target.value = "";
-
-        }
-    );
-
-
-/* =========================================================
-   删除全部
-========================================================= */
-
-document
-    .getElementById("clearAllBtn")
-    .addEventListener(
-        "click",
-        function() {
-
-            if (!packages.length) {
-
-                toast("目前没有数据");
-
-                return;
-
-            }
-
-
-            if (
-                !confirm(
-                    "确定删除全部套餐吗？\n\n建议先导出 Excel 备份。"
-                )
-            ) {
-
-                return;
-
-            }
-
-
-            packages = [];
-
-            saveData();
-
-            resetForm();
-
-            renderAll();
-
-            toast("已删除全部数据");
-
-        }
-    );
-
-
-/* =========================================================
-   总渲染
-========================================================= */
-
-function renderAll() {
-
-    renderInstitutionFilter();
-
-    renderStats();
-
-    renderChart();
-
-    renderInstitutionSummary();
-
-    renderCommute();
-
-    renderPackages();
-
-}
-
-
-/* =========================================================
-   初始化
-========================================================= */
-
-loadData();
 
 renderAll();
 
