@@ -12,17 +12,16 @@
   --bg:#f8f4f2;
   --card:#fffdfc;
   --text:#302c2d;
-  --muted:#8c8182;
+  --muted:#8f8586;
   --border:#e9dfdd;
 
   --pink:#c98f9f;
+  --pink-dark:#a96f7c;
   --pink-light:#f5e5e9;
   --pink-soft:#fbf1f3;
 
   --lavender:#a69bbd;
   --lavender-light:#eeeaf5;
-
-  --cream:#f5eee6;
 
   --green:#738d79;
   --green-light:#eaf1eb;
@@ -30,12 +29,16 @@
   --danger:#b86c70;
   --danger-light:#f8e9ea;
 
-  --shadow:0 5px 20px rgba(70,45,50,.06);
+  --shadow:0 5px 20px rgba(70,45,50,.055);
 }
 
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -66,76 +69,73 @@ button{
   margin:0 auto;
 }
 
-/* =========================
-   Header
-========================= */
+/* =========================================
+   HEADER
+========================================= */
 
 .header{
   position:relative;
   overflow:hidden;
   background:
-    radial-gradient(circle at 90% 10%,rgba(201,143,159,.20),transparent 30%),
-    radial-gradient(circle at 5% 100%,rgba(166,155,189,.16),transparent 35%),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(201,143,159,.20),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 5% 100%,
+      rgba(166,155,189,.16),
+      transparent 35%
+    ),
     #fffaf8;
+
   border-bottom:1px solid var(--border);
 }
 
 .header-inner{
   position:relative;
-  padding:28px 0 24px;
+  padding:27px 0 23px;
 }
 
 .header-kicker{
   color:var(--pink);
-  font-size:11px;
-  letter-spacing:2px;
+  font-size:10px;
+  letter-spacing:2.2px;
   font-weight:700;
   margin-bottom:7px;
 }
 
 .header h1{
   margin:0;
-  font-size:28px;
-  letter-spacing:-.5px;
+  font-size:27px;
+  letter-spacing:-.6px;
 }
 
 .header-sub{
   margin-top:7px;
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
 .ballet-mark{
   position:absolute;
-  right:10px;
-  top:17px;
-  font-size:58px;
-  opacity:.16;
+  right:5px;
+  top:14px;
+  font-size:54px;
+  opacity:.13;
   transform:rotate(-7deg);
 }
 
-/* decorative ribbon */
-.ribbon{
-  position:absolute;
-  width:260px;
-  height:80px;
-  right:-80px;
-  bottom:-45px;
-  border:1px solid rgba(201,143,159,.25);
-  border-radius:50%;
-  transform:rotate(-18deg);
-}
-
-/* =========================
-   Main
-========================= */
+/* =========================================
+   MAIN
+========================================= */
 
 main{
-  padding:20px 0 50px;
+  padding:18px 0 50px;
 }
 
 .section{
-  margin-bottom:18px;
+  margin-bottom:17px;
 }
 
 .section-title{
@@ -143,70 +143,68 @@ main{
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:9px;
 }
 
 .section-title h2{
   margin:0;
-  font-size:16px;
+  font-size:15px;
 }
 
 .section-title small{
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
 }
 
-/* =========================
-   Summary
-========================= */
+/* =========================================
+   SUMMARY
+========================================= */
 
 .summary-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:9px;
 }
 
 .summary-card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px;
+  border-radius:13px;
+  padding:12px 10px;
   box-shadow:var(--shadow);
-  min-width:0;
 }
 
 .summary-label{
   color:var(--muted);
-  font-size:12px;
+  font-size:10px;
   margin-bottom:5px;
 }
 
 .summary-value{
-  font-size:23px;
+  font-size:21px;
   font-weight:700;
   line-height:1.1;
 }
 
 .summary-note{
   color:var(--muted);
-  font-size:11px;
+  font-size:9px;
   margin-top:4px;
 }
 
-/* =========================
-   Toolbar
-========================= */
+/* =========================================
+   TOOLBAR
+========================================= */
 
 .toolbar{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  align-items:center;
 }
 
 .search{
   flex:1;
-  min-width:190px;
+  min-width:180px;
 }
 
 input,
@@ -215,7 +213,7 @@ select{
   border:1px solid var(--border);
   background:#fff;
   border-radius:10px;
-  padding:10px 11px;
+  padding:9px 10px;
   outline:none;
   color:var(--text);
 }
@@ -223,33 +221,37 @@ select{
 input:focus,
 select:focus{
   border-color:var(--pink);
-  box-shadow:0 0 0 3px rgba(201,143,159,.10);
+  box-shadow:0 0 0 3px rgba(201,143,159,.09);
 }
+
+/* =========================================
+   BUTTON
+========================================= */
 
 .btn{
   border:1px solid var(--border);
   background:#fff;
   color:var(--text);
-  border-radius:10px;
-  padding:9px 13px;
-  font-size:13px;
+  border-radius:9px;
+  padding:8px 11px;
+  font-size:12px;
   transition:.15s;
 }
 
 .btn:active{
-  transform:scale(.98);
+  transform:scale(.97);
 }
 
 .btn-primary{
   background:var(--pink);
-  color:white;
+  color:#fff;
   border-color:var(--pink);
 }
 
 .btn-soft{
   background:var(--pink-soft);
   border-color:#efd7dc;
-  color:#9a626d;
+  color:#99636e;
 }
 
 .btn-lavender{
@@ -264,14 +266,14 @@ select:focus{
   border-color:#efd4d5;
 }
 
-/* =========================
-   Form
-========================= */
+/* =========================================
+   NEW PACKAGE FORM
+========================================= */
 
 .form-panel{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:15px;
+  border-radius:14px;
   box-shadow:var(--shadow);
   overflow:hidden;
 }
@@ -280,10 +282,10 @@ select:focus{
   width:100%;
   border:0;
   background:transparent;
-  padding:14px 15px;
+  padding:13px 14px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   color:var(--text);
 }
 
@@ -292,6 +294,7 @@ select:focus{
   align-items:center;
   gap:9px;
   font-weight:600;
+  font-size:13px;
 }
 
 .plus{
@@ -303,7 +306,7 @@ select:focus{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:19px;
+  font-size:18px;
 }
 
 .form-arrow{
@@ -317,7 +320,7 @@ select:focus{
 
 .form-body{
   display:none;
-  padding:0 15px 16px;
+  padding:0 14px 15px;
   border-top:1px solid var(--border);
 }
 
@@ -329,236 +332,494 @@ select:focus{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:10px;
-  padding-top:14px;
+  padding-top:13px;
 }
 
 .field label{
   display:block;
-  font-size:11px;
+  font-size:10px;
   color:var(--muted);
   margin-bottom:5px;
 }
 
-.field.full{
-  grid-column:span 2;
-}
-
+.field.full,
 .field.wide{
   grid-column:span 2;
 }
 
 .form-actions{
   display:flex;
-  gap:8px;
+  gap:7px;
   justify-content:flex-end;
-  margin-top:14px;
+  margin-top:13px;
 }
 
 /* validity */
+
 .validity-row{
   display:grid;
-  grid-template-columns:1fr 100px;
+  grid-template-columns:1fr 90px;
   gap:7px;
 }
 
 .permanent-check{
-  margin-top:7px;
-  display:flex;
+  margin-top:6px;
+  display:flex !important;
   align-items:center;
-  gap:6px;
-  color:var(--muted);
-  font-size:11px;
+  gap:5px;
+  font-size:10px !important;
 }
 
 .permanent-check input{
   width:auto;
 }
 
-/* time wheel */
-.time-picker{
+/* =========================================
+   CUSTOM TIME PICKER
+========================================= */
+
+.time-input{
+  position:relative;
+  width:100%;
+}
+
+.time-display{
+  width:100%;
+  min-height:38px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:10px;
+  padding:9px 10px;
+  color:var(--text);
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+}
+
+.time-display.placeholder{
+  color:#aaa;
+}
+
+.time-display::after{
+  content:"⌄";
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* popup */
+
+.time-picker-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(45,35,38,.25);
+  backdrop-filter:blur(3px);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.time-picker-overlay.show{
+  display:flex;
+}
+
+.time-picker-sheet{
+  width:min(520px,100%);
+  background:#fff;
+  border-radius:22px 22px 0 0;
+  padding:12px 15px 25px;
+  box-shadow:0 -8px 35px rgba(40,25,30,.15);
+  animation:sheetUp .2s ease;
+}
+
+@keyframes sheetUp{
+  from{
+    transform:translateY(100%);
+  }
+  to{
+    transform:translateY(0);
+  }
+}
+
+.time-picker-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.time-picker-title{
+  font-size:15px;
+  font-weight:600;
+}
+
+.time-picker-done{
+  border:0;
+  background:var(--pink);
+  color:#fff;
+  border-radius:9px;
+  padding:6px 12px;
+  font-size:12px;
+}
+
+.wheel-area{
+  position:relative;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:7px;
+  gap:5px;
+  height:210px;
+  overflow:hidden;
 }
 
-.time-select{
+.wheel-column{
   position:relative;
+  height:210px;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  padding:84px 0;
 }
 
-.time-select select{
-  appearance:auto;
-  padding-right:5px;
-  text-align:center;
-  background:#fff;
+.wheel-column::-webkit-scrollbar{
+  display:none;
 }
 
-/* =========================
-   Charts
-========================= */
+.wheel-item{
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  scroll-snap-align:center;
+  font-size:25px;
+  color:#bcbcbc;
+  transition:.12s;
+  user-select:none;
+}
+
+.wheel-item.selected{
+  color:#333;
+  font-weight:600;
+  transform:scale(1.02);
+}
+
+.wheel-highlight{
+  position:absolute;
+  pointer-events:none;
+  left:0;
+  right:0;
+  top:84px;
+  height:42px;
+  border-radius:25px;
+  background:#f3f3f3;
+}
+
+.wheel-unit{
+  position:absolute;
+  top:98px;
+  font-size:11px;
+  color:#999;
+  pointer-events:none;
+}
+
+.wheel-unit.hour{
+  left:calc(25% + 17px);
+}
+
+.wheel-unit.minute{
+  right:calc(25% + 13px);
+}
+
+/* =========================================
+   CHART CARD
+========================================= */
 
 .chart-card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:15px;
+  border-radius:14px;
   box-shadow:var(--shadow);
-  padding:15px;
+  padding:14px;
 }
 
 .chart-header{
   display:flex;
-  justify-content:space-between;
   align-items:flex-start;
+  justify-content:space-between;
   gap:10px;
-  margin-bottom:13px;
+  margin-bottom:11px;
 }
 
 .chart-header h3{
   margin:0;
-  font-size:15px;
+  font-size:14px;
 }
 
 .chart-header p{
   margin:4px 0 0;
-  font-size:11px;
+  font-size:10px;
   color:var(--muted);
 }
 
-.chart-wrap{
-  overflow-x:auto;
-  padding-bottom:4px;
-}
+/* =========================================
+   PRICE COMPARISON
+   不再使用长进度条
+========================================= */
 
-.price-chart{
-  min-width:500px;
-}
-
-.bar-row{
+.price-list{
   display:grid;
-  grid-template-columns:125px 1fr 70px;
+  gap:7px;
+}
+
+.price-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
   align-items:center;
   gap:10px;
-  margin:10px 0;
+
+  padding:10px 11px;
+
+  background:#faf7f6;
+  border-radius:10px;
 }
 
-.bar-name{
-  font-size:11px;
+.price-left{
+  min-width:0;
+}
+
+.price-institution{
+  color:var(--pink-dark);
+  font-size:10px;
+  font-weight:700;
+  margin-bottom:2px;
+}
+
+.price-package{
+  font-size:12px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
-.bar-track{
-  height:18px;
-  background:#f2eceb;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.bar-fill{
-  height:100%;
-  border-radius:20px;
-  background:linear-gradient(90deg,var(--pink),#d9a7b4);
-  min-width:3px;
-}
-
-.bar-value{
-  font-size:11px;
-  font-weight:700;
+.price-right{
   text-align:right;
-  color:#765d63;
+  white-space:nowrap;
 }
 
-/* =========================
-   Commute Chart
-========================= */
-
-.commute-chart{
-  display:grid;
-  gap:13px;
+.price-right strong{
+  font-size:16px;
+  color:#57474b;
 }
 
-.commute-row{
+.price-right span{
+  display:block;
+  font-size:9px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+/* =========================================
+   COMMUTE
+========================================= */
+
+.commute-list{
   display:grid;
-  grid-template-columns:145px 1fr;
-  gap:12px;
+  gap:10px;
+}
+
+.commute-card{
+  background:#faf7f6;
+  border-radius:11px;
+  padding:11px 12px;
+}
+
+.commute-head{
+  display:flex;
   align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:9px;
 }
 
-.commute-name{
+.commute-title{
   min-width:0;
 }
 
 .commute-institution{
-  font-size:12px;
-  font-weight:600;
+  font-size:13px;
+  font-weight:650;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
-.commute-district{
-  font-size:10px;
-  color:var(--muted);
-  margin-top:3px;
-}
-
-.commute-bars{
-  display:grid;
-  gap:6px;
-}
-
-.commute-line{
-  display:grid;
-  grid-template-columns:34px 1fr 55px;
+.commute-location{
+  display:flex;
   align-items:center;
-  gap:7px;
+  gap:5px;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.commute-icon{
-  font-size:12px;
-  text-align:center;
+.location-decoration{
+  color:var(--pink);
+  font-size:11px;
 }
 
-.commute-track{
-  height:12px;
-  border-radius:20px;
-  background:#f0ebea;
+.commute-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.commute-stat{
+  position:relative;
+  background:#fff;
+  border:1px solid #eee4e2;
+  border-radius:9px;
+  padding:8px;
   overflow:hidden;
 }
 
-.commute-fill-home{
-  height:100%;
-  border-radius:20px;
-  background:#c9a1aa;
+.commute-stat::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:var(--pink);
 }
 
-.commute-fill-work{
-  height:100%;
-  border-radius:20px;
-  background:#aaa0c1;
+.commute-stat.work::before{
+  background:var(--lavender);
 }
 
-.commute-time{
-  text-align:right;
-  font-size:10px;
+.commute-stat-label{
+  font-size:9px;
   color:var(--muted);
 }
 
-/* =========================
-   Package list
-========================= */
+.commute-stat-time{
+  font-size:14px;
+  font-weight:700;
+  margin-top:3px;
+}
+
+.commute-bar{
+  height:4px;
+  background:#eee9e7;
+  border-radius:10px;
+  margin-top:6px;
+  overflow:hidden;
+}
+
+.commute-bar-fill{
+  height:100%;
+  border-radius:10px;
+  background:linear-gradient(
+    90deg,
+    #d3a6b0,
+    var(--pink)
+  );
+}
+
+.commute-stat.work .commute-bar-fill{
+  background:linear-gradient(
+    90deg,
+    #c2b8d2,
+    var(--lavender)
+  );
+}
+
+/* =========================================
+   PACKAGE LIST
+========================================= */
 
 .package-list{
   display:grid;
   gap:9px;
 }
 
-.package-card{
+/*
+  滑动结构：
+  外层负责隐藏
+  中间 content 可以向左移动
+  右边 actions 被隐藏
+*/
+
+.package-swipe{
+  position:relative;
+  overflow:hidden;
+  border-radius:14px;
+  background:#fff;
+}
+
+.package-actions-reveal{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  width:282px;
+
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+
+  z-index:1;
+}
+
+.swipe-action{
+  border:0;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font-size:10px;
+}
+
+.swipe-action-icon{
+  font-size:19px;
+  line-height:1;
+}
+
+.action-detail{
+  background:#c18d9c;
+}
+
+.action-copy{
+  background:#9f94b7;
+}
+
+.action-edit{
+  background:#555255;
+}
+
+.action-delete{
+  background:#d46d73;
+}
+
+.package-content{
+  position:relative;
+  z-index:2;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:14px;
   box-shadow:var(--shadow);
-  overflow:hidden;
+  transform:translateX(0);
+  transition:transform .22s ease;
+  touch-action:pan-y;
+}
+
+.package-swipe.revealed .package-content{
+  transform:translateX(-282px);
 }
 
 .package-main{
@@ -577,8 +838,8 @@ select:focus{
 }
 
 .institution{
-  font-size:11px;
   color:var(--pink);
+  font-size:10px;
   font-weight:700;
   margin-bottom:3px;
 }
@@ -597,27 +858,27 @@ select:focus{
 }
 
 .package-price strong{
-  font-size:18px;
+  font-size:17px;
 }
 
 .package-price span{
   display:block;
-  font-size:10px;
   color:var(--muted);
+  font-size:9px;
   margin-top:2px;
 }
 
 .package-metrics{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:12px;
+  gap:7px;
+  margin-top:11px;
 }
 
 .metric{
   background:#faf6f5;
   border-radius:9px;
-  padding:8px;
+  padding:7px 8px;
 }
 
 .metric-label{
@@ -627,43 +888,46 @@ select:focus{
 
 .metric-value{
   margin-top:3px;
-  font-size:13px;
+  font-size:12px;
   font-weight:700;
 }
 
-.package-actions{
+/* hint */
+
+.swipe-hint{
   display:flex;
-  gap:6px;
-  margin-top:11px;
+  align-items:center;
+  justify-content:flex-end;
+  gap:4px;
+  color:#b7acad;
+  font-size:9px;
+  margin-top:7px;
 }
 
-.package-actions .btn{
-  padding:6px 9px;
-  font-size:11px;
-}
+/* detail */
 
 .detail{
   display:none;
-  padding:13px 14px 15px;
+  padding:12px 14px 14px;
   border-top:1px solid var(--border);
   background:#fffaf9;
 }
 
-.package-card.show-detail .detail{
+.package-swipe.show-detail .detail{
   display:block;
 }
 
 .detail-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:9px;
+  gap:8px;
 }
 
 .detail-item{
-  background:white;
+  background:#fff;
   border:1px solid #eee4e2;
   border-radius:9px;
-  padding:9px;
+  padding:8px;
 }
 
 .detail-item label{
@@ -674,36 +938,37 @@ select:focus{
 }
 
 .detail-item div{
-  font-size:12px;
+  font-size:11px;
   font-weight:600;
 }
 
-/* =========================
-   Empty
-========================= */
+/* =========================================
+   EMPTY
+========================================= */
 
 .empty{
-  padding:35px 20px;
+  padding:30px 18px;
   text-align:center;
   background:var(--card);
   border:1px dashed var(--border);
-  border-radius:14px;
+  border-radius:13px;
   color:var(--muted);
+  font-size:12px;
 }
 
 .empty-icon{
-  font-size:32px;
-  opacity:.45;
-  margin-bottom:7px;
+  font-size:29px;
+  opacity:.4;
+  margin-bottom:6px;
 }
 
-/* =========================
-   Data tools
-========================= */
+/* =========================================
+   DATA
+========================================= */
 
 .data-tools{
   display:flex;
-  gap:8px;
+  gap:7px;
   flex-wrap:wrap;
 }
 
@@ -711,9 +976,9 @@ select:focus{
   display:none;
 }
 
-/* =========================
-   Responsive
-========================= */
+/* =========================================
+   MOBILE
+========================================= */
 
 @media(max-width:760px){
 
@@ -722,7 +987,7 @@ select:focus{
   }
 
   .header-inner{
-    padding:23px 0 20px;
+    padding:23px 0 19px;
   }
 
   .header h1{
@@ -730,8 +995,7 @@ select:focus{
   }
 
   .ballet-mark{
-    font-size:45px;
-    right:0;
+    font-size:44px;
   }
 
   main{
@@ -744,12 +1008,12 @@ select:focus{
   }
 
   .summary-card{
-    padding:11px 8px;
+    padding:10px 8px;
     border-radius:11px;
   }
 
   .summary-label{
-    font-size:10px;
+    font-size:9px;
     white-space:nowrap;
   }
 
@@ -770,36 +1034,12 @@ select:focus{
     grid-column:span 2;
   }
 
-  .bar-row{
-    grid-template-columns:105px 1fr 60px;
-  }
-
-  .commute-row{
-    grid-template-columns:105px 1fr;
-  }
-
   .detail-grid{
     grid-template-columns:repeat(2,1fr);
   }
 }
 
 @media(max-width:430px){
-
-  .package-metrics{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .metric{
-    padding:7px 5px;
-  }
-
-  .metric-value{
-    font-size:12px;
-  }
-
-  .detail-grid{
-    grid-template-columns:1fr 1fr;
-  }
 
   .toolbar{
     display:grid;
@@ -810,8 +1050,28 @@ select:focus{
     grid-column:span 2;
   }
 
-  .toolbar select{
-    min-width:0;
+  .summary-value{
+    font-size:17px;
+  }
+
+  .package-metrics{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .metric{
+    padding:7px 5px;
+  }
+
+  .metric-value{
+    font-size:11px;
+  }
+
+  .commute-stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr 1fr;
   }
 
   .data-tools{
@@ -829,23 +1089,38 @@ select:focus{
 <body>
 
 <header class="header">
+
   <div class="container header-inner">
-    <div class="header-kicker">BALLET STUDIO · PRICE BOOK</div>
-    <h1>芭蕾机构价格对比</h1>
-    <div class="header-sub">
-      用每小时价格比较不同课时长度，让套餐更容易横向比较
+
+    <div class="header-kicker">
+      BALLET STUDIO · PRICE BOOK
     </div>
-    <div class="ballet-mark">🩰</div>
-    <div class="ribbon"></div>
+
+    <h1>
+      芭蕾机构价格对比
+    </h1>
+
+    <div class="header-sub">
+      用每小时价格比较不同课时长度
+    </div>
+
+    <div class="ballet-mark">
+      🩰
+    </div>
+
   </div>
+
 </header>
+
 
 <main class="container">
 
-  <!-- ======================
+  <!-- =====================================
        价格总览
-  ======================= -->
+  ====================================== -->
+
   <section class="section">
+
     <div class="section-title">
       <h2>价格总览</h2>
       <small id="packageCountText">0 个套餐</small>
@@ -854,48 +1129,98 @@ select:focus{
     <div class="summary-grid">
 
       <div class="summary-card">
-        <div class="summary-label">机构数量</div>
-        <div class="summary-value" id="institutionCount">0</div>
-        <div class="summary-note">已记录机构</div>
+
+        <div class="summary-label">
+          机构数量
+        </div>
+
+        <div
+          class="summary-value"
+          id="institutionCount"
+        >
+          0
+        </div>
+
       </div>
 
-      <div class="summary-card">
-        <div class="summary-label">最低每小时</div>
-        <div class="summary-value" id="lowestHourly">—</div>
-        <div class="summary-note">按总课时换算</div>
-      </div>
 
       <div class="summary-card">
-        <div class="summary-label">最高每小时</div>
-        <div class="summary-value" id="highestHourly">—</div>
-        <div class="summary-note">按总课时换算</div>
+
+        <div class="summary-label">
+          最低每小时
+        </div>
+
+        <div
+          class="summary-value"
+          id="lowestHourly"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-label">
+          最高每小时
+        </div>
+
+        <div
+          class="summary-value"
+          id="highestHourly"
+        >
+          —
+        </div>
+
       </div>
 
     </div>
+
   </section>
 
 
-  <!-- ======================
+  <!-- =====================================
        搜索
-  ======================= -->
+  ====================================== -->
+
   <section class="section">
 
     <div class="toolbar">
 
       <div class="search">
+
         <input
           id="searchInput"
           type="search"
           placeholder="搜索机构或套餐名称"
         >
+
       </div>
 
+
       <select id="sortSelect">
-        <option value="hourlyAsc">每小时价格：低 → 高</option>
-        <option value="hourlyDesc">每小时价格：高 → 低</option>
-        <option value="priceAsc">套餐总价：低 → 高</option>
-        <option value="priceDesc">套餐总价：高 → 低</option>
-        <option value="institution">按机构名称</option>
+
+        <option value="hourlyAsc">
+          每小时价格：低 → 高
+        </option>
+
+        <option value="hourlyDesc">
+          每小时价格：高 → 低
+        </option>
+
+        <option value="priceAsc">
+          套餐总价：低 → 高
+        </option>
+
+        <option value="priceDesc">
+          套餐总价：高 → 低
+        </option>
+
+        <option value="institution">
+          按机构名称
+        </option>
+
       </select>
 
     </div>
@@ -903,55 +1228,127 @@ select:focus{
   </section>
 
 
-  <!-- ======================
-       新建套餐
-  ======================= -->
+  <!-- =====================================
+       新建
+  ====================================== -->
+
   <section class="section">
 
-    <div class="form-panel" id="formPanel">
+    <div
+      class="form-panel"
+      id="formPanel"
+    >
 
-      <button class="form-toggle" id="formToggle">
+      <button
+        class="form-toggle"
+        id="formToggle"
+      >
 
         <span class="form-toggle-left">
-          <span class="plus">＋</span>
-          <span id="formToggleText">新建套餐</span>
+
+          <span class="plus">
+            ＋
+          </span>
+
+          <span id="formToggleText">
+            新建套餐
+          </span>
+
         </span>
 
-        <span class="form-arrow">⌄</span>
+        <span class="form-arrow">
+          ⌄
+        </span>
 
       </button>
+
 
       <div class="form-body">
 
         <div class="form-grid">
 
-          <div class="field">
-            <label>机构名称 *</label>
-            <input id="institution" placeholder="例如：XX芭蕾">
-          </div>
 
           <div class="field">
-            <label>套餐名称 *</label>
-            <input id="packageName" placeholder="例如：10节课">
+
+            <label>
+              机构名称 *
+            </label>
+
+            <input
+              id="institution"
+              placeholder="例如：XX芭蕾"
+            >
+
           </div>
 
-          <div class="field">
-            <label>套餐价格 *</label>
-            <input id="price" type="number" step="0.01" placeholder="1500">
-          </div>
 
           <div class="field">
-            <label>课时数量 *</label>
-            <input id="lessons" type="number" step="1" placeholder="10">
+
+            <label>
+              套餐名称 *
+            </label>
+
+            <input
+              id="packageName"
+              placeholder="例如：10节课"
+            >
+
           </div>
 
-          <div class="field">
-            <label>每节课时长（分钟）</label>
-            <input id="minutes" type="number" step="1" value="60">
-          </div>
 
           <div class="field">
-            <label>有效期</label>
+
+            <label>
+              套餐价格 *
+            </label>
+
+            <input
+              id="price"
+              type="number"
+              step="0.01"
+              placeholder="1500"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              课时数量 *
+            </label>
+
+            <input
+              id="lessons"
+              type="number"
+              step="1"
+              placeholder="10"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              每节课时长（分钟）
+            </label>
+
+            <input
+              id="minutes"
+              type="number"
+              step="1"
+              value="60"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              有效期
+            </label>
 
             <div class="validity-row">
 
@@ -963,84 +1360,147 @@ select:focus{
               >
 
               <select id="validityUnit">
-                <option value="month">月</option>
-                <option value="year">年</option>
-                <option value="day">天</option>
+
+                <option value="month">
+                  月
+                </option>
+
+                <option value="year">
+                  年
+                </option>
+
+                <option value="day">
+                  天
+                </option>
+
               </select>
 
             </div>
 
+
             <label class="permanent-check">
-              <input type="checkbox" id="permanent">
+
+              <input
+                type="checkbox"
+                id="permanent"
+              >
+
               永久有效
+
             </label>
 
           </div>
 
 
           <div class="field">
-            <label>区域</label>
-            <input id="district" placeholder="例如：朝阳区">
+
+            <label>
+              区域
+            </label>
+
+            <input
+              id="district"
+              placeholder="例如：朝阳区"
+            >
+
           </div>
 
+
           <div class="field">
-            <label>最近地铁站</label>
-            <input id="metroStation" placeholder="例如：XX站">
+
+            <label>
+              最近地铁站
+            </label>
+
+            <input
+              id="metroStation"
+              placeholder="例如：国贸站"
+            >
+
           </div>
 
 
           <div class="field">
-            <label>距家距离（km）</label>
-            <input id="homeDistance" type="number" step="0.1" placeholder="5.2">
+
+            <label>
+              距家距离（km）
+            </label>
+
+            <input
+              id="homeDistance"
+              type="number"
+              step="0.1"
+              placeholder="5.2"
+            >
+
           </div>
 
+
           <div class="field">
-            <label>距公司距离（km）</label>
-            <input id="workDistance" type="number" step="0.1" placeholder="3.8">
+
+            <label>
+              距公司距离（km）
+            </label>
+
+            <input
+              id="workDistance"
+              type="number"
+              step="0.1"
+              placeholder="3.8"
+            >
+
           </div>
 
 
           <!-- 到家时间 -->
+
           <div class="field">
-            <label>到家时间</label>
 
-            <div class="time-picker">
+            <label>
+              到家时间
+            </label>
 
-              <div class="time-select">
-                <select id="homeTimeHour">
-                  <option value="">小时</option>
-                </select>
-              </div>
+            <div
+              class="time-input"
+              id="homeTimeInput"
+              data-type="home"
+            >
 
-              <div class="time-select">
-                <select id="homeTimeMinute">
-                  <option value="">分钟</option>
-                </select>
+              <div
+                class="time-display placeholder"
+                id="homeTimeDisplay"
+              >
+                请选择时间
               </div>
 
             </div>
+
           </div>
 
 
           <!-- 到公司时间 -->
+
           <div class="field">
-            <label>到公司时间</label>
 
-            <div class="time-picker">
+            <label>
+              到公司时间
+            </label>
 
-              <div class="time-select">
-                <select id="workTimeHour">
-                  <option value="">小时</option>
-                </select>
-              </div>
+            <div
+              class="time-input"
+              id="workTimeInput"
+              data-type="work"
+            >
 
-              <div class="time-select">
-                <select id="workTimeMinute">
-                  <option value="">分钟</option>
-                </select>
+              <div
+                class="time-display placeholder"
+                id="workTimeDisplay"
+              >
+                请选择时间
               </div>
 
             </div>
+
           </div>
 
         </div>
@@ -1048,15 +1508,25 @@ select:focus{
 
         <div class="form-actions">
 
-          <button class="btn" id="cancelEditBtn" style="display:none">
+          <button
+            class="btn"
+            id="cancelEditBtn"
+            style="display:none"
+          >
             取消编辑
           </button>
 
-          <button class="btn btn-soft" id="clearFormBtn">
+          <button
+            class="btn btn-soft"
+            id="clearFormBtn"
+          >
             清空
           </button>
 
-          <button class="btn btn-primary" id="saveBtn">
+          <button
+            class="btn btn-primary"
+            id="saveBtn"
+          >
             保存套餐
           </button>
 
@@ -1069,34 +1539,45 @@ select:focus{
   </section>
 
 
-  <!-- ======================
-       价格图表
-  ======================= -->
+  <!-- =====================================
+       价格比较
+  ====================================== -->
+
   <section class="section">
 
     <div class="chart-card">
 
       <div class="chart-header">
+
         <div>
-          <h3>价格比较</h3>
+
+          <h3>
+            价格比较
+          </h3>
+
           <p>
-            每小时价格 = 套餐总价 ÷（课次数 × 每节分钟数 ÷ 60）
+            按每小时实际价格比较
           </p>
+
         </div>
+
       </div>
 
-      <div class="chart-wrap">
-        <div class="price-chart" id="priceChart"></div>
-      </div>
+
+      <div
+        class="price-list"
+        id="priceChart"
+      ></div>
 
     </div>
 
   </section>
 
 
-  <!-- ======================
+  <!-- =====================================
        通勤概览
-  ======================= -->
+  ====================================== -->
+
   <section class="section">
 
     <div class="chart-card">
@@ -1104,69 +1585,117 @@ select:focus{
       <div class="chart-header">
 
         <div>
-          <h3>通勤概览</h3>
-          <p>直接比较到家与到公司的时间</p>
+
+          <h3>
+            通勤概览
+          </h3>
+
+          <p>
+            同一家机构只显示一次
+          </p>
+
         </div>
 
       </div>
 
-      <div class="commute-chart" id="commuteChart"></div>
+
+      <div
+        class="commute-list"
+        id="commuteChart"
+      ></div>
 
     </div>
 
   </section>
 
 
-  <!-- ======================
-       套餐列表
-  ======================= -->
+  <!-- =====================================
+       套餐
+  ====================================== -->
+
   <section class="section">
 
     <div class="section-title">
-      <h2>套餐</h2>
-      <small>点击详情查看地点与通勤信息</small>
+
+      <h2>
+        套餐
+      </h2>
+
+      <small>
+        左滑套餐查看操作
+      </small>
+
     </div>
 
-    <div class="package-list" id="packageList"></div>
+
+    <div
+      class="package-list"
+      id="packageList"
+    ></div>
 
   </section>
 
 
-  <!-- ======================
+  <!-- =====================================
        数据管理
-  ======================= -->
+  ====================================== -->
+
   <section class="section">
 
     <div class="section-title">
-      <h2>数据管理</h2>
-      <small>适合长期维护</small>
+
+      <h2>
+        数据管理
+      </h2>
+
+      <small>
+        长期保存
+      </small>
+
     </div>
+
 
     <div class="chart-card">
 
       <div class="data-tools">
 
-        <button class="btn btn-soft" id="exportExcelBtn">
+        <button
+          class="btn btn-soft"
+          id="exportExcelBtn"
+        >
           导出 Excel
         </button>
 
-        <button class="btn btn-soft" id="importExcelBtn">
+        <button
+          class="btn btn-soft"
+          id="importExcelBtn"
+        >
           导入 Excel
         </button>
 
-        <button class="btn btn-lavender" id="exportJsonBtn">
+        <button
+          class="btn btn-lavender"
+          id="exportJsonBtn"
+        >
           JSON 备份
         </button>
 
-        <button class="btn btn-lavender" id="importJsonBtn">
+        <button
+          class="btn btn-lavender"
+          id="importJsonBtn"
+        >
           JSON 恢复
         </button>
 
-        <button class="btn btn-danger" id="clearAllBtn">
-          删除全部数据
+        <button
+          class="btn btn-danger"
+          id="clearAllBtn"
+        >
+          删除全部
         </button>
 
       </div>
+
 
       <input
         id="excelInput"
@@ -1189,73 +1718,105 @@ select:focus{
 </main>
 
 
+<!-- =========================================
+     时间滚轮
+========================================= -->
+
+<div
+  class="time-picker-overlay"
+  id="timePickerOverlay"
+>
+
+  <div class="time-picker-sheet">
+
+    <div class="time-picker-head">
+
+      <div class="time-picker-title">
+        选择通勤时间
+      </div>
+
+      <button
+        class="time-picker-done"
+        id="timePickerDone"
+      >
+        完成
+      </button>
+
+    </div>
+
+
+    <div class="wheel-area">
+
+      <div
+        class="wheel-highlight"
+      ></div>
+
+
+      <div
+        class="wheel-column"
+        id="hourWheel"
+      ></div>
+
+
+      <div
+        class="wheel-column"
+        id="minuteWheel"
+      ></div>
+
+
+      <div class="wheel-unit hour">
+        小时
+      </div>
+
+      <div class="wheel-unit minute">
+        分钟
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
 
-const STORAGE_KEY = "ballet_price_database_v3";
+/* =====================================================
+   STORAGE
+===================================================== */
 
-let data = JSON.parse(
-  localStorage.getItem(STORAGE_KEY) || "[]"
-);
+const STORAGE_KEY =
+  "ballet_price_database_v4";
+
+let data =
+  JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+  );
 
 let editingId = null;
 
 
-/* =================================
+/* =====================================================
    DOM
-================================= */
+===================================================== */
 
-const $ = id => document.getElementById(id);
-
-
-/* =================================
-   初始化时间选择器
-================================= */
-
-function initTimeSelects(){
-
-  const homeHour = $("homeTimeHour");
-  const workHour = $("workTimeHour");
-
-  const homeMinute = $("homeTimeMinute");
-  const workMinute = $("workTimeMinute");
-
-  for(let i=0;i<=12;i++){
-
-    const text = `${i}小时`;
-
-    homeHour.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${i}">${text}</option>`
-    );
-
-    workHour.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${i}">${text}</option>`
-    );
-  }
-
-  for(let i=0;i<60;i++){
-
-    const text = `${i}分钟`;
-
-    homeMinute.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${i}">${text}</option>`
-    );
-
-    workMinute.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${i}">${text}</option>`
-    );
-  }
-}
-
-initTimeSelects();
+const $ = id =>
+  document.getElementById(id);
 
 
-/* =================================
-   工具函数
-================================= */
+/* =====================================================
+   TIME PICKER STATE
+===================================================== */
+
+let activeTimeType = null;
+
+let tempHour = null;
+let tempMinute = null;
+
+
+/* =====================================================
+   基础函数
+===================================================== */
 
 function saveData(){
 
@@ -1263,37 +1824,58 @@ function saveData(){
     STORAGE_KEY,
     JSON.stringify(data)
   );
+
 }
 
 
 function uid(){
 
-  return Date.now().toString(36)
-    + Math.random().toString(36).slice(2);
+  return (
+    Date.now().toString(36) +
+    Math.random()
+      .toString(36)
+      .slice(2)
+  );
+
 }
 
 
 function money(value){
 
-  if(value === "" || value == null || isNaN(value)){
+  if(
+    value === "" ||
+    value == null ||
+    isNaN(value)
+  ){
     return "—";
   }
 
-  return "¥" + Number(value).toLocaleString(
-    "zh-CN",
-    {
-      minimumFractionDigits:0,
-      maximumFractionDigits:2
-    }
-  );
+  return "¥" +
+    Number(value).toLocaleString(
+      "zh-CN",
+      {
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+      }
+    );
+
 }
 
 
+/* =====================================================
+   每小时价格
+===================================================== */
+
 function getHourlyPrice(item){
 
-  const price = Number(item.price);
-  const lessons = Number(item.lessons);
-  const minutes = Number(item.minutes);
+  const price =
+    Number(item.price);
+
+  const lessons =
+    Number(item.lessons);
+
+  const minutes =
+    Number(item.minutes);
 
   if(
     !price ||
@@ -1305,67 +1887,600 @@ function getHourlyPrice(item){
   }
 
   const totalHours =
-    lessons * minutes / 60;
+    lessons *
+    minutes /
+    60;
 
-  return price / totalHours;
+  return price /
+    totalHours;
+
 }
 
 
-function formatDuration(hours, minutes){
+/* =====================================================
+   时间格式
+===================================================== */
 
-  hours = Number(hours || 0);
-  minutes = Number(minutes || 0);
+function formatDuration(hour,minute){
 
-  if(!hours && !minutes){
-    return "—";
-  }
+  const hasHour =
+    hour !== "" &&
+    hour !== null &&
+    hour !== undefined;
 
-  if(hours && minutes){
-    return `${hours}h ${minutes}min`;
-  }
+  const hasMinute =
+    minute !== "" &&
+    minute !== null &&
+    minute !== undefined;
 
-  if(hours){
-    return `${hours}h`;
-  }
+  const h =
+    hasHour
+      ? Number(hour)
+      : 0;
 
-  return `${minutes}min`;
-}
-
-
-function validityText(item){
-
-  if(item.permanent){
-    return "永久有效";
-  }
+  const m =
+    hasMinute
+      ? Number(minute)
+      : 0;
 
   if(
-    item.validityValue === "" ||
-    item.validityValue == null
+    !hasHour &&
+    !hasMinute
   ){
     return "—";
   }
 
-  const unitMap = {
-    year:"年",
-    month:"月",
-    day:"天"
-  };
+  if(
+    h === 0 &&
+    m === 0 &&
+    !hasHour
+  ){
+    return "—";
+  }
 
-  return `${item.validityValue}${unitMap[item.validityUnit] || ""}`;
+  if(h > 0 && m > 0){
+    return `${h}小时${String(m).padStart(2,"0")}分钟`;
+  }
+
+  if(h > 0){
+    return `${h}小时`;
+  }
+
+  return `${m}分钟`;
+
 }
 
 
-/* =================================
+/* =====================================================
+   时间总分钟
+===================================================== */
+
+function getTimeMinutes(hour,minute){
+
+  const h =
+    hour === "" ||
+    hour == null
+      ? 0
+      : Number(hour);
+
+  const m =
+    minute === "" ||
+    minute == null
+      ? 0
+      : Number(minute);
+
+  if(
+    hour === "" &&
+    minute === ""
+  ){
+    return null;
+  }
+
+  return h * 60 + m;
+
+}
+
+
+/* =====================================================
+   时间显示
+===================================================== */
+
+function updateTimeDisplay(type){
+
+  const hour =
+    type === "home"
+      ? $("homeTimeHour")
+      : $("workTimeHour");
+
+  const minute =
+    type === "home"
+      ? $("homeTimeMinute")
+      : $("workTimeMinute");
+
+  const display =
+    type === "home"
+      ? $("homeTimeDisplay")
+      : $("workTimeDisplay");
+
+  const h =
+    hour.value;
+
+  const m =
+    minute.value;
+
+  if(
+    h === "" &&
+    m === ""
+  ){
+
+    display.textContent =
+      "请选择时间";
+
+    display.classList.add(
+      "placeholder"
+    );
+
+    return;
+
+  }
+
+  display.textContent =
+    formatDuration(h,m);
+
+  display.classList.remove(
+    "placeholder"
+  );
+
+}
+
+
+/* =====================================================
+   初始化时间状态
+===================================================== */
+
+function createTimeInputs(){
+
+  $("homeTimeHour") = null;
+}
+
+
+/* =====================================================
+   我们不再使用原来的 select
+   使用隐藏状态保存时间
+===================================================== */
+
+function ensureHiddenTimeInputs(){
+
+  if(!$("homeTimeHour")){
+
+    const input =
+      document.createElement("input");
+
+    input.type = "hidden";
+    input.id = "homeTimeHour";
+
+    document.body.appendChild(input);
+
+  }
+
+  if(!$("homeTimeMinute")){
+
+    const input =
+      document.createElement("input");
+
+    input.type = "hidden";
+    input.id = "homeTimeMinute";
+
+    document.body.appendChild(input);
+
+  }
+
+  if(!$("workTimeHour")){
+
+    const input =
+      document.createElement("input");
+
+    input.type = "hidden";
+    input.id = "workTimeHour";
+
+    document.body.appendChild(input);
+
+  }
+
+  if(!$("workTimeMinute")){
+
+    const input =
+      document.createElement("input");
+
+    input.type = "hidden";
+    input.id = "workTimeMinute";
+
+    document.body.appendChild(input);
+
+  }
+
+}
+
+ensureHiddenTimeInputs();
+
+
+/* =====================================================
+   创建滚轮
+===================================================== */
+
+function buildWheel(){
+
+  const hourWheel =
+    $("hourWheel");
+
+  const minuteWheel =
+    $("minuteWheel");
+
+
+  /*
+    第一个空白选项非常重要：
+    允许用户只选择“30分钟”
+    而不选择小时。
+  */
+
+  hourWheel.innerHTML =
+    `<div
+      class="wheel-item"
+      data-value=""
+    >
+      —
+    </div>`;
+
+
+  for(let i=0;i<=12;i++){
+
+    hourWheel.insertAdjacentHTML(
+      "beforeend",
+
+      `<div
+        class="wheel-item"
+        data-value="${i}"
+      >
+        ${i}
+      </div>`
+    );
+
+  }
+
+
+  minuteWheel.innerHTML =
+    `<div
+      class="wheel-item"
+      data-value=""
+    >
+      —
+    </div>`;
+
+
+  /*
+    按5分钟为一个选择单位，
+    和你截图里的滚动方式类似。
+  */
+
+  for(let i=0;i<60;i+=5){
+
+    minuteWheel.insertAdjacentHTML(
+      "beforeend",
+
+      `<div
+        class="wheel-item"
+        data-value="${i}"
+      >
+        ${String(i).padStart(2,"0")}
+      </div>`
+    );
+
+  }
+
+
+  setupWheel(hourWheel,"hour");
+
+  setupWheel(minuteWheel,"minute");
+
+}
+
+
+function setupWheel(wheel,type){
+
+  wheel.addEventListener(
+    "scroll",
+    () => {
+
+      clearTimeout(
+        wheel._scrollTimer
+      );
+
+      wheel._scrollTimer =
+        setTimeout(
+          () => {
+
+            const center =
+              wheel.scrollTop +
+              wheel.clientHeight / 2;
+
+            const items =
+              [...wheel.querySelectorAll(
+                ".wheel-item"
+              )];
+
+            let closest =
+              null;
+
+            let min =
+              Infinity;
+
+            items.forEach(item => {
+
+              const itemCenter =
+                item.offsetTop +
+                item.offsetHeight / 2;
+
+              const distance =
+                Math.abs(
+                  itemCenter -
+                  center
+                );
+
+              if(distance < min){
+
+                min = distance;
+                closest = item;
+
+              }
+
+            });
+
+
+            if(closest){
+
+              items.forEach(
+                x =>
+                  x.classList.remove(
+                    "selected"
+                  )
+              );
+
+              closest.classList.add(
+                "selected"
+              );
+
+              if(type === "hour"){
+
+                tempHour =
+                  closest.dataset.value;
+
+              }else{
+
+                tempMinute =
+                  closest.dataset.value;
+
+              }
+
+            }
+
+          },
+          80
+        );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   滚动到指定值
+===================================================== */
+
+function scrollWheelTo(
+  wheelId,
+  value
+){
+
+  const wheel =
+    $(wheelId);
+
+  const items =
+    [...wheel.querySelectorAll(
+      ".wheel-item"
+    )];
+
+  let target =
+    items.find(
+      item =>
+        item.dataset.value ===
+        String(value ?? "")
+    );
+
+  if(!target){
+
+    target =
+      items[0];
+
+  }
+
+  const top =
+    target.offsetTop -
+    (
+      wheel.clientHeight -
+      target.offsetHeight
+    ) / 2;
+
+  wheel.scrollTop =
+    Math.max(0,top);
+
+  items.forEach(
+    x =>
+      x.classList.remove(
+        "selected"
+      )
+  );
+
+  target.classList.add(
+    "selected"
+  );
+
+}
+
+
+/* =====================================================
+   打开时间滚轮
+===================================================== */
+
+function openTimePicker(type){
+
+  activeTimeType =
+    type;
+
+  const hourInput =
+    type === "home"
+      ? $("homeTimeHour")
+      : $("workTimeHour");
+
+  const minuteInput =
+    type === "home"
+      ? $("homeTimeMinute")
+      : $("workTimeMinute");
+
+
+  tempHour =
+    hourInput.value || "";
+
+  tempMinute =
+    minuteInput.value || "";
+
+
+  $("timePickerOverlay")
+    .classList.add("show");
+
+
+  requestAnimationFrame(
+    () => {
+
+      scrollWheelTo(
+        "hourWheel",
+        tempHour
+      );
+
+      scrollWheelTo(
+        "minuteWheel",
+        tempMinute
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   时间选择完成
+===================================================== */
+
+$("timePickerDone")
+.addEventListener(
+  "click",
+  () => {
+
+    if(!activeTimeType){
+      return;
+    }
+
+
+    const hourInput =
+      activeTimeType === "home"
+        ? $("homeTimeHour")
+        : $("workTimeHour");
+
+    const minuteInput =
+      activeTimeType === "home"
+        ? $("homeTimeMinute")
+        : $("workTimeMinute");
+
+
+    hourInput.value =
+      tempHour ?? "";
+
+    minuteInput.value =
+      tempMinute ?? "";
+
+
+    updateTimeDisplay(
+      activeTimeType
+    );
+
+
+    $("timePickerOverlay")
+      .classList.remove("show");
+
+
+    activeTimeType =
+      null;
+
+  }
+);
+
+
+/* 点击背景关闭 */
+
+$("timePickerOverlay")
+.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      $("timePickerOverlay")
+    ){
+
+      $("timePickerOverlay")
+        .classList.remove("show");
+
+      activeTimeType =
+        null;
+
+    }
+
+  }
+);
+
+
+/* 打开 */
+
+$("homeTimeInput")
+.addEventListener(
+  "click",
+  () => openTimePicker("home")
+);
+
+$("workTimeInput")
+.addEventListener(
+  "click",
+  () => openTimePicker("work")
+);
+
+
+buildWheel();
+
+
+/* =====================================================
    表单
-================================= */
+===================================================== */
 
 function getFormData(){
 
   return {
 
-    id: editingId || uid(),
+    id:
+      editingId || uid(),
 
-    institution: $("institution").value.trim(),
+    institution:
+      $("institution").value.trim(),
 
     packageName:
       $("packageName").value.trim(),
@@ -1377,7 +2492,9 @@ function getFormData(){
       Number($("lessons").value),
 
     minutes:
-      Number($("minutes").value || 60),
+      Number(
+        $("minutes").value || 60
+      ),
 
     validityValue:
       $("validityValue").value,
@@ -1397,12 +2514,16 @@ function getFormData(){
     homeDistance:
       $("homeDistance").value === ""
         ? ""
-        : Number($("homeDistance").value),
+        : Number(
+            $("homeDistance").value
+          ),
 
     workDistance:
       $("workDistance").value === ""
         ? ""
-        : Number($("workDistance").value),
+        : Number(
+            $("workDistance").value
+          ),
 
     homeTimeHour:
       $("homeTimeHour").value,
@@ -1415,9 +2536,15 @@ function getFormData(){
 
     workTimeMinute:
       $("workTimeMinute").value
+
   };
+
 }
 
+
+/* =====================================================
+   填充表单
+===================================================== */
 
 function fillForm(item){
 
@@ -1468,8 +2595,17 @@ function fillForm(item){
 
   $("workTimeMinute").value =
     item.workTimeMinute ?? "";
+
+
+  updateTimeDisplay("home");
+  updateTimeDisplay("work");
+
 }
 
+
+/* =====================================================
+   清空
+===================================================== */
 
 function resetForm(){
 
@@ -1497,98 +2633,38 @@ function resetForm(){
   $("workTimeHour").value = "";
   $("workTimeMinute").value = "";
 
-  $("formToggleText").textContent =
+  updateTimeDisplay("home");
+  updateTimeDisplay("work");
+
+
+  $("formToggleText")
+    .textContent =
     "新建套餐";
 
-  $("cancelEditBtn").style.display =
+  $("cancelEditBtn")
+    .style.display =
     "none";
 
-  $("saveBtn").textContent =
+  $("saveBtn")
+    .textContent =
     "保存套餐";
+
+
+  $("validityValue").disabled =
+    false;
+
+  $("validityUnit").disabled =
+    false;
+
 }
 
 
-function openForm(){
+/* =====================================================
+   新建展开
+===================================================== */
 
-  $("formPanel").classList.add("open");
-}
-
-
-function closeForm(){
-
-  $("formPanel").classList.remove("open");
-}
-
-
-/* =================================
-   保存
-================================= */
-
-$("saveBtn").addEventListener(
-  "click",
-  () => {
-
-    const item = getFormData();
-
-    if(!item.institution){
-      alert("请填写机构名称");
-      return;
-    }
-
-    if(!item.packageName){
-      alert("请填写套餐名称");
-      return;
-    }
-
-    if(!item.price || item.price < 0){
-      alert("请填写正确的套餐价格");
-      return;
-    }
-
-    if(!item.lessons || item.lessons <= 0){
-      alert("请填写正确的课时数量");
-      return;
-    }
-
-    if(!item.minutes || item.minutes <= 0){
-      alert("请填写正确的每节课时长");
-      return;
-    }
-
-    if(editingId){
-
-      const index =
-        data.findIndex(
-          x => x.id === editingId
-        );
-
-      if(index !== -1){
-        data[index] = item;
-      }
-
-    }else{
-
-      data.push(item);
-
-    }
-
-    saveData();
-
-    resetForm();
-
-    closeForm();
-
-    renderAll();
-
-  }
-);
-
-
-/* =================================
-   新建套餐展开
-================================= */
-
-$("formToggle").addEventListener(
+$("formToggle")
+.addEventListener(
   "click",
   () => {
 
@@ -1599,149 +2675,302 @@ $("formToggle").addEventListener(
 );
 
 
-/* =================================
+/* =====================================================
+   保存
+===================================================== */
+
+$("saveBtn")
+.addEventListener(
+  "click",
+  () => {
+
+    const item =
+      getFormData();
+
+
+    if(!item.institution){
+
+      alert("请填写机构名称");
+
+      return;
+    }
+
+
+    if(!item.packageName){
+
+      alert("请填写套餐名称");
+
+      return;
+    }
+
+
+    if(
+      !item.price ||
+      item.price < 0
+    ){
+
+      alert("请填写正确的套餐价格");
+
+      return;
+    }
+
+
+    if(
+      !item.lessons ||
+      item.lessons <= 0
+    ){
+
+      alert("请填写正确的课时数量");
+
+      return;
+    }
+
+
+    if(
+      !item.minutes ||
+      item.minutes <= 0
+    ){
+
+      alert("请填写正确的每节课时长");
+
+      return;
+    }
+
+
+    if(editingId){
+
+      const index =
+        data.findIndex(
+          x =>
+            x.id === editingId
+        );
+
+      if(index !== -1){
+
+        data[index] =
+          item;
+
+      }
+
+    }else{
+
+      data.push(item);
+
+    }
+
+
+    saveData();
+
+    resetForm();
+
+    $("formPanel")
+      .classList.remove("open");
+
+    renderAll();
+
+  }
+);
+
+
+/* =====================================================
+   取消编辑
+===================================================== */
+
+$("cancelEditBtn")
+.addEventListener(
+  "click",
+  () => {
+
+    resetForm();
+
+    $("formPanel")
+      .classList.remove("open");
+
+  }
+);
+
+
+/* =====================================================
+   清空表单
+===================================================== */
+
+$("clearFormBtn")
+.addEventListener(
+  "click",
+  resetForm
+);
+
+
+/* =====================================================
    编辑
-================================= */
+===================================================== */
 
 function editItem(id){
 
+  closeAllSwipeCards();
+
   const item =
-    data.find(x => x.id === id);
+    data.find(
+      x => x.id === id
+    );
 
-  if(!item) return;
+  if(!item){
+    return;
+  }
 
-  editingId = id;
+  editingId =
+    id;
 
   fillForm(item);
 
-  $("formToggleText").textContent =
+
+  $("formToggleText")
+    .textContent =
     "编辑套餐";
 
-  $("cancelEditBtn").style.display =
+  $("cancelEditBtn")
+    .style.display =
     "inline-block";
 
-  $("saveBtn").textContent =
+  $("saveBtn")
+    .textContent =
     "保存修改";
 
-  openForm();
+
+  $("formPanel")
+    .classList.add("open");
+
 
   window.scrollTo({
-    top:$("formPanel").offsetTop - 10,
+
+    top:
+      $("formPanel")
+        .offsetTop - 10,
+
     behavior:"smooth"
+
   });
+
 }
 
 
-$("cancelEditBtn").addEventListener(
-  "click",
-  () => {
-
-    resetForm();
-    closeForm();
-
-  }
-);
-
-
-$("clearFormBtn").addEventListener(
-  "click",
-  () => {
-
-    resetForm();
-
-  }
-);
-
-
-/* =================================
-   复制套餐
-================================= */
+/* =====================================================
+   复制
+===================================================== */
 
 function duplicateItem(id){
 
+  closeAllSwipeCards();
+
   const original =
-    data.find(x => x.id === id);
+    data.find(
+      x => x.id === id
+    );
 
-  if(!original) return;
+  if(!original){
+    return;
+  }
 
-  /*
-    复制全部信息，
-    但生成新的ID。
-    这样同一家机构可以快速
-    建立第二个、第三个套餐。
-  */
 
   const copy = {
+
     ...original,
+
     id:uid(),
+
     packageName:
       original.packageName
-        ? original.packageName + "（复制）"
+        ? original.packageName +
+          "（复制）"
         : "复制套餐"
+
   };
 
-  /*
-    复制不会直接保存，
-    而是放进“新建套餐”表单，
-    用户可以修改价格/课数等后再保存。
-  */
 
-  editingId = null;
+  editingId =
+    null;
+
 
   fillForm(copy);
 
-  $("formToggleText").textContent =
+
+  $("formToggleText")
+    .textContent =
     "新建套餐";
 
-  $("cancelEditBtn").style.display =
+  $("cancelEditBtn")
+    .style.display =
     "none";
 
-  $("saveBtn").textContent =
+  $("saveBtn")
+    .textContent =
     "保存套餐";
 
-  openForm();
+
+  $("formPanel")
+    .classList.add("open");
+
 
   window.scrollTo({
-    top:$("formPanel").offsetTop - 10,
+
+    top:
+      $("formPanel")
+        .offsetTop - 10,
+
     behavior:"smooth"
+
   });
 
 }
 
 
-/* =================================
+/* =====================================================
    删除
-================================= */
+===================================================== */
 
 function deleteItem(id){
 
   const item =
-    data.find(x => x.id === id);
+    data.find(
+      x => x.id === id
+    );
 
-  if(!item) return;
+  if(!item){
+    return;
+  }
+
 
   if(
     !confirm(
       `确定删除「${item.institution} · ${item.packageName}」吗？`
     )
   ){
+
     return;
+
   }
 
+
   data =
-    data.filter(x => x.id !== id);
+    data.filter(
+      x => x.id !== id
+    );
+
 
   saveData();
 
   renderAll();
+
 }
 
 
-/* =================================
+/* =====================================================
    详情
-================================= */
+===================================================== */
 
 function toggleDetail(id){
+
+  closeAllSwipeCards(id);
 
   const card =
     document.querySelector(
@@ -1749,34 +2978,206 @@ function toggleDetail(id){
     );
 
   if(card){
+
     card.classList.toggle(
       "show-detail"
     );
+
   }
+
 }
 
 
-/* =================================
-   搜索 / 排序
-================================= */
+/* =====================================================
+   滑动操作
+===================================================== */
 
-$("searchInput").addEventListener(
+function closeAllSwipeCards(exceptId){
+
+  document
+    .querySelectorAll(
+      ".package-swipe.revealed"
+    )
+    .forEach(card => {
+
+      if(
+        !exceptId ||
+        card.dataset.cardId !==
+        exceptId
+      ){
+
+        card.classList.remove(
+          "revealed"
+        );
+
+      }
+
+    });
+
+}
+
+
+function setupSwipe(card){
+
+  let startX = 0;
+  let startY = 0;
+
+  let currentX = 0;
+
+  let touching = false;
+
+
+  card.addEventListener(
+    "touchstart",
+    event => {
+
+      const touch =
+        event.touches[0];
+
+      startX =
+        touch.clientX;
+
+      startY =
+        touch.clientY;
+
+      currentX =
+        startX;
+
+      touching =
+        true;
+
+    },
+    {
+      passive:true
+    }
+  );
+
+
+  card.addEventListener(
+    "touchmove",
+    event => {
+
+      if(!touching){
+        return;
+      }
+
+      const touch =
+        event.touches[0];
+
+      currentX =
+        touch.clientX;
+
+      const dx =
+        currentX - startX;
+
+      const dy =
+        touch.clientY - startY;
+
+
+      /*
+        如果明显是上下滚动，
+        不处理横向滑动。
+      */
+
+      if(
+        Math.abs(dy) >
+        Math.abs(dx)
+      ){
+
+        return;
+
+      }
+
+    },
+    {
+      passive:true
+    }
+  );
+
+
+  card.addEventListener(
+    "touchend",
+    () => {
+
+      if(!touching){
+        return;
+      }
+
+      touching =
+        false;
+
+
+      const dx =
+        currentX - startX;
+
+
+      /*
+        向左滑：
+        显示右边操作栏
+      */
+
+      if(dx < -45){
+
+        closeAllSwipeCards(
+          card.dataset.cardId
+        );
+
+        card.classList.add(
+          "revealed"
+        );
+
+      }
+
+
+      /*
+        向右滑：
+        收回操作栏
+      */
+
+      else if(dx > 45){
+
+        card.classList.remove(
+          "revealed"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   搜索
+===================================================== */
+
+$("searchInput")
+.addEventListener(
   "input",
   renderAll
 );
 
-$("sortSelect").addEventListener(
+
+$("sortSelect")
+.addEventListener(
   "change",
   renderAll
 );
 
 
+/* =====================================================
+   筛选
+===================================================== */
+
 function getFilteredData(){
 
   const keyword =
-    $("searchInput").value
+    $("searchInput")
+      .value
       .trim()
       .toLowerCase();
+
 
   let result =
     data.filter(item => {
@@ -1786,115 +3187,167 @@ function getFilteredData(){
       }
 
       return (
-        String(item.institution || "")
-          .toLowerCase()
-          .includes(keyword)
+
+        String(
+          item.institution || ""
+        )
+        .toLowerCase()
+        .includes(keyword)
+
         ||
-        String(item.packageName || "")
-          .toLowerCase()
-          .includes(keyword)
+
+        String(
+          item.packageName || ""
+        )
+        .toLowerCase()
+        .includes(keyword)
+
       );
 
     });
 
+
   const sort =
     $("sortSelect").value;
 
-  result.sort((a,b) => {
 
-    const ah =
-      getHourlyPrice(a) ?? Infinity;
+  result.sort(
+    (a,b) => {
 
-    const bh =
-      getHourlyPrice(b) ?? Infinity;
+      const ah =
+        getHourlyPrice(a)
+        ?? Infinity;
 
-    if(sort === "hourlyAsc"){
-      return ah - bh;
-    }
+      const bh =
+        getHourlyPrice(b)
+        ?? Infinity;
 
-    if(sort === "hourlyDesc"){
-      return bh - ah;
-    }
 
-    if(sort === "priceAsc"){
-      return Number(a.price) - Number(b.price);
-    }
+      if(sort === "hourlyAsc"){
+        return ah - bh;
+      }
 
-    if(sort === "priceDesc"){
-      return Number(b.price) - Number(a.price);
-    }
 
-    if(sort === "institution"){
-      return String(a.institution)
-        .localeCompare(
+      if(sort === "hourlyDesc"){
+        return bh - ah;
+      }
+
+
+      if(sort === "priceAsc"){
+        return (
+          Number(a.price) -
+          Number(b.price)
+        );
+      }
+
+
+      if(sort === "priceDesc"){
+        return (
+          Number(b.price) -
+          Number(a.price)
+        );
+      }
+
+
+      if(sort === "institution"){
+
+        return String(
+          a.institution
+        ).localeCompare(
           String(b.institution),
           "zh-CN"
         );
+
+      }
+
+
+      return 0;
+
     }
+  );
 
-    return 0;
-
-  });
 
   return result;
+
 }
 
 
-/* =================================
-   价格总览
-================================= */
+/* =====================================================
+   SUMMARY
+===================================================== */
 
 function renderSummary(){
 
   const institutions =
     new Set(
       data
-        .map(x => x.institution)
+        .map(
+          x => x.institution
+        )
         .filter(Boolean)
     );
 
+
   const hourlyPrices =
     data
-      .map(getHourlyPrice)
-      .filter(x =>
-        x !== null &&
-        Number.isFinite(x)
+      .map(
+        getHourlyPrice
+      )
+      .filter(
+        x =>
+          x !== null &&
+          Number.isFinite(x)
       );
 
-  $("institutionCount").textContent =
+
+  $("institutionCount")
+    .textContent =
     institutions.size;
 
-  $("packageCountText").textContent =
+
+  $("packageCountText")
+    .textContent =
     `${data.length} 个套餐`;
+
 
   if(hourlyPrices.length){
 
-    const min =
-      Math.min(...hourlyPrices);
+    $("lowestHourly")
+      .textContent =
+      money(
+        Math.min(
+          ...hourlyPrices
+        )
+      );
 
-    const max =
-      Math.max(...hourlyPrices);
 
-    $("lowestHourly").textContent =
-      money(min);
-
-    $("highestHourly").textContent =
-      money(max);
+    $("highestHourly")
+      .textContent =
+      money(
+        Math.max(
+          ...hourlyPrices
+        )
+      );
 
   }else{
 
-    $("lowestHourly").textContent =
+    $("lowestHourly")
+      .textContent =
       "—";
 
-    $("highestHourly").textContent =
+    $("highestHourly")
+      .textContent =
       "—";
+
   }
+
 }
 
 
-/* =================================
-   价格图表
-================================= */
+/* =====================================================
+   PRICE COMPARISON
+   无长条
+===================================================== */
 
 function renderPriceChart(){
 
@@ -1904,6 +3357,7 @@ function renderPriceChart(){
   const list =
     getFilteredData();
 
+
   if(!list.length){
 
     container.innerHTML =
@@ -1912,223 +3366,430 @@ function renderPriceChart(){
       </div>`;
 
     return;
+
   }
 
-  const prices =
-    list
-      .map(getHourlyPrice)
-      .filter(
-        x =>
-          x !== null &&
-          Number.isFinite(x)
-      );
-
-  if(!prices.length){
-
-    container.innerHTML =
-      `<div class="empty">
-        请先填写价格、课时数量和每节课时长
-      </div>`;
-
-    return;
-  }
-
-  const max =
-    Math.max(...prices);
 
   container.innerHTML =
-    list.map(item => {
+    list.map(
+      item => {
 
-      const value =
-        getHourlyPrice(item);
+        const hourly =
+          getHourlyPrice(item);
 
-      if(
-        value === null ||
-        !Number.isFinite(value)
-      ){
-        return "";
-      }
 
-      const width =
-        Math.max(
-          3,
-          value / max * 100
-        );
+        return `
 
-      return `
+          <div class="price-row">
 
-        <div class="bar-row">
+            <div class="price-left">
 
-          <div class="bar-name"
-               title="${escapeHtml(item.institution + " · " + item.packageName)}">
+              <div class="price-institution">
+                ${escapeHtml(
+                  item.institution
+                )}
+              </div>
 
-            ${escapeHtml(item.institution)}
-            ·
-            ${escapeHtml(item.packageName)}
+              <div class="price-package">
+                ${escapeHtml(
+                  item.packageName
+                )}
 
-          </div>
+                ·
 
-          <div class="bar-track">
+                ${item.lessons || 0}节
+                ×
+                ${item.minutes || 0}分钟
+              </div>
 
-            <div
-              class="bar-fill"
-              style="width:${width}%">
+            </div>
+
+
+            <div class="price-right">
+
+              <strong>
+                ${
+                  hourly === null
+                    ? "—"
+                    : money(hourly)
+                }
+              </strong>
+
+              <span>
+                / 小时
+              </span>
+
             </div>
 
           </div>
 
-          <div class="bar-value">
-            ${money(value)}/h
-          </div>
+        `;
 
-        </div>
-
-      `;
-
-    }).join("");
+      }
+    ).join("");
 
 }
 
 
-/* =================================
-   通勤图表
-================================= */
+/* =====================================================
+   通勤概览
+   同一家机构只显示一次
+===================================================== */
 
 function renderCommuteChart(){
 
   const container =
     $("commuteChart");
 
-  const list =
-    getFilteredData()
-      .filter(item =>
-        item.homeTimeHour !== "" ||
-        item.workTimeHour !== ""
+
+  /*
+    机构级别去重。
+
+    如果同一个机构有：
+    10节套餐
+    20节套餐
+    30节套餐
+
+    这里仍然只显示一次。
+
+    位置和通勤信息取该机构
+    第一个有完整信息的套餐。
+  */
+
+  const institutionMap =
+    new Map();
+
+
+  getFilteredData()
+    .forEach(item => {
+
+      const key =
+        String(
+          item.institution || ""
+        ).trim();
+
+
+      if(!key){
+        return;
+      }
+
+
+      if(!institutionMap.has(key)){
+
+        institutionMap.set(
+          key,
+          item
+        );
+
+        return;
+
+      }
+
+
+      /*
+        如果之前那条没有地点/时间，
+        后面的套餐有，就补进去。
+      */
+
+      const old =
+        institutionMap.get(key);
+
+
+      const merged = {
+
+        ...old,
+
+        district:
+          old.district ||
+          item.district,
+
+        metroStation:
+          old.metroStation ||
+          item.metroStation,
+
+        homeDistance:
+          old.homeDistance !== ""
+            ? old.homeDistance
+            : item.homeDistance,
+
+        workDistance:
+          old.workDistance !== ""
+            ? old.workDistance
+            : item.workDistance,
+
+        homeTimeHour:
+          old.homeTimeHour !== ""
+            ? old.homeTimeHour
+            : item.homeTimeHour,
+
+        homeTimeMinute:
+          old.homeTimeMinute !== ""
+            ? old.homeTimeMinute
+            : item.homeTimeMinute,
+
+        workTimeHour:
+          old.workTimeHour !== ""
+            ? old.workTimeHour
+            : item.workTimeHour,
+
+        workTimeMinute:
+          old.workTimeMinute !== ""
+            ? old.workTimeMinute
+            : item.workTimeMinute
+
+      };
+
+
+      institutionMap.set(
+        key,
+        merged
       );
+
+    });
+
+
+  const list =
+    [...institutionMap.values()]
+      .filter(item => {
+
+        return (
+
+          item.homeTimeHour !== "" ||
+
+          item.homeTimeMinute !== "" ||
+
+          item.workTimeHour !== "" ||
+
+          item.workTimeMinute !== ""
+
+        );
+
+      });
+
 
   if(!list.length){
 
     container.innerHTML =
       `<div class="empty">
+
+        <div class="empty-icon">
+          ✧
+        </div>
+
         还没有填写通勤时间
+
       </div>`;
 
     return;
+
   }
 
-  const times =
-    list.flatMap(item => [
 
-      Number(item.homeTimeHour || 0) * 60 +
-      Number(item.homeTimeMinute || 0),
+  const allTimes =
+    list.flatMap(
+      item => [
 
-      Number(item.workTimeHour || 0) * 60 +
-      Number(item.workTimeMinute || 0)
+        getTimeMinutes(
+          item.homeTimeHour,
+          item.homeTimeMinute
+        ) || 0,
 
-    ]);
+        getTimeMinutes(
+          item.workTimeHour,
+          item.workTimeMinute
+        ) || 0
 
-  const max =
+      ]
+    );
+
+
+  const maxTime =
     Math.max(
-      ...times,
+      ...allTimes,
       1
     );
 
+
   container.innerHTML =
-    list.map(item => {
+    list.map(
+      item => {
 
-      const home =
-        Number(item.homeTimeHour || 0) * 60 +
-        Number(item.homeTimeMinute || 0);
+        const home =
+          getTimeMinutes(
+            item.homeTimeHour,
+            item.homeTimeMinute
+          );
 
-      const work =
-        Number(item.workTimeHour || 0) * 60 +
-        Number(item.workTimeMinute || 0);
 
-      const homeWidth =
-        home ? Math.max(4,home/max*100) : 0;
+        const work =
+          getTimeMinutes(
+            item.workTimeHour,
+            item.workTimeMinute
+          );
 
-      const workWidth =
-        work ? Math.max(4,work/max*100) : 0;
 
-      return `
+        const homeWidth =
+          home
+            ? Math.max(
+                4,
+                home /
+                maxTime *
+                100
+              )
+            : 0;
 
-        <div class="commute-row">
 
-          <div class="commute-name">
+        const workWidth =
+          work
+            ? Math.max(
+                4,
+                work /
+                maxTime *
+                100
+              )
+            : 0;
 
-            <div class="commute-institution">
-              ${escapeHtml(item.institution)}
+
+        const locationParts =
+          [];
+
+
+        if(item.district){
+
+          locationParts.push(
+            escapeHtml(
+              item.district
+            )
+          );
+
+        }
+
+
+        if(item.metroStation){
+
+          locationParts.push(
+            escapeHtml(
+              item.metroStation
+            )
+          );
+
+        }
+
+
+        return `
+
+          <div class="commute-card">
+
+            <div class="commute-head">
+
+              <div class="commute-title">
+
+                <div class="commute-institution">
+
+                  ${escapeHtml(
+                    item.institution
+                  )}
+
+                </div>
+
+
+                <div class="commute-location">
+
+                  <span class="location-decoration">
+                    ✧
+                  </span>
+
+                  ${
+                    locationParts.length
+                      ? locationParts.join(
+                          " · "
+                        )
+                      : "未填写位置"
+                  }
+
+                </div>
+
+              </div>
+
             </div>
 
-            <div class="commute-district">
-              ${escapeHtml(
-                item.district || "未填写区域"
-              )}
+
+            <div class="commute-stats">
+
+
+              <div class="commute-stat">
+
+                <div class="commute-stat-label">
+                  回家
+                </div>
+
+                <div class="commute-stat-time">
+
+                  ${
+                    formatDuration(
+                      item.homeTimeHour,
+                      item.homeTimeMinute
+                    )
+                  }
+
+                </div>
+
+                <div class="commute-bar">
+
+                  <div
+                    class="commute-bar-fill"
+                    style="width:${homeWidth}%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="commute-stat work">
+
+                <div class="commute-stat-label">
+                  去公司
+                </div>
+
+                <div class="commute-stat-time">
+
+                  ${
+                    formatDuration(
+                      item.workTimeHour,
+                      item.workTimeMinute
+                    )
+                  }
+
+                </div>
+
+                <div class="commute-bar">
+
+                  <div
+                    class="commute-bar-fill"
+                    style="width:${workWidth}%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
             </div>
 
           </div>
 
+        `;
 
-          <div class="commute-bars">
+      }
+    ).join("");
 
-            <div class="commute-line">
-
-              <div class="commute-icon">
-                🏠
-              </div>
-
-              <div class="commute-track">
-                <div
-                  class="commute-fill-home"
-                  style="width:${homeWidth}%">
-                </div>
-              </div>
-
-              <div class="commute-time">
-                ${formatDuration(
-                  item.homeTimeHour,
-                  item.homeTimeMinute
-                )}
-              </div>
-
-            </div>
-
-
-            <div class="commute-line">
-
-              <div class="commute-icon">
-                💼
-              </div>
-
-              <div class="commute-track">
-                <div
-                  class="commute-fill-work"
-                  style="width:${workWidth}%">
-                </div>
-              </div>
-
-              <div class="commute-time">
-                ${formatDuration(
-                  item.workTimeHour,
-                  item.workTimeMinute
-                )}
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
 }
 
 
-/* =================================
-   套餐列表
-================================= */
+/* =====================================================
+   PACKAGE LIST
+===================================================== */
 
 function renderPackages(){
 
@@ -2138,287 +3799,389 @@ function renderPackages(){
   const list =
     getFilteredData();
 
+
   if(!list.length){
 
     container.innerHTML =
       `<div class="empty">
 
-        <div class="empty-icon">🩰</div>
-
-        <div>还没有套餐数据</div>
-
-        <div style="font-size:11px;margin-top:5px">
-          点击上面的「新建套餐」开始记录
+        <div class="empty-icon">
+          🩰
         </div>
+
+        暂无套餐数据
 
       </div>`;
 
     return;
+
   }
 
 
   container.innerHTML =
-    list.map(item => {
+    list.map(
+      item => {
 
-      const hourly =
-        getHourlyPrice(item);
-
-      const totalHours =
-        item.lessons &&
-        item.minutes
-          ? item.lessons *
-            item.minutes /
-            60
-          : null;
-
-      return `
-
-        <div
-          class="package-card"
-          data-card-id="${item.id}"
-        >
-
-          <div class="package-main">
-
-            <div class="package-top">
-
-              <div class="package-title">
-
-                <div class="institution">
-                  ${escapeHtml(
-                    item.institution
-                  )}
-                </div>
-
-                <div class="package-name">
-                  ${escapeHtml(
-                    item.packageName
-                  )}
-                </div>
-
-              </div>
+        const hourly =
+          getHourlyPrice(item);
 
 
-              <div class="package-price">
+        const totalHours =
+          item.lessons &&
+          item.minutes
 
-                <strong>
-                  ${money(item.price)}
-                </strong>
+            ? item.lessons *
+              item.minutes /
+              60
 
-                <span>
-                  套餐总价
-                </span>
-
-              </div>
-
-            </div>
+            : null;
 
 
-            <div class="package-metrics">
+        return `
 
-              <div class="metric">
-
-                <div class="metric-label">
-                  每小时
-                </div>
-
-                <div class="metric-value">
-                  ${hourly === null
-                    ? "—"
-                    : money(hourly)}
-                </div>
-
-              </div>
+          <div
+            class="package-swipe"
+            data-card-id="${item.id}"
+          >
 
 
-              <div class="metric">
+            <!-- 右侧操作栏 -->
 
-                <div class="metric-label">
-                  课时
-                </div>
+            <div class="package-actions-reveal">
 
-                <div class="metric-value">
-                  ${item.lessons || "—"}节
-                </div>
-
-              </div>
-
-
-              <div class="metric">
-
-                <div class="metric-label">
-                  每节
-                </div>
-
-                <div class="metric-value">
-                  ${item.minutes || "—"}min
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="package-actions">
 
               <button
-                class="btn btn-soft"
+                class="swipe-action action-detail"
                 onclick="toggleDetail('${item.id}')"
               >
+
+                <span class="swipe-action-icon">
+                  ✧
+                </span>
+
                 详情
+
               </button>
 
+
               <button
-                class="btn btn-lavender"
+                class="swipe-action action-copy"
                 onclick="duplicateItem('${item.id}')"
               >
+
+                <span class="swipe-action-icon">
+                  ⧉
+                </span>
+
                 复制
+
               </button>
 
+
               <button
-                class="btn"
+                class="swipe-action action-edit"
                 onclick="editItem('${item.id}')"
               >
+
+                <span class="swipe-action-icon">
+                  ↗
+                </span>
+
                 编辑
+
               </button>
+
 
               <button
-                class="btn btn-danger"
+                class="swipe-action action-delete"
                 onclick="deleteItem('${item.id}')"
               >
+
+                <span class="swipe-action-icon">
+                  ♢
+                </span>
+
                 删除
+
               </button>
 
             </div>
 
-          </div>
+
+            <!-- 套餐主体 -->
+
+            <div class="package-content">
 
 
-          <!-- 详情 -->
-          <div class="detail">
+              <div class="package-main">
 
-            <div class="detail-grid">
+                <div class="package-top">
 
-              <div class="detail-item">
 
-                <label>总课时</label>
+                  <div class="package-title">
 
-                <div>
-                  ${
-                    totalHours
-                      ? totalHours.toFixed(2) + " 小时"
-                      : "—"
-                  }
+                    <div class="institution">
+
+                      ${escapeHtml(
+                        item.institution
+                      )}
+
+                    </div>
+
+
+                    <div class="package-name">
+
+                      ${escapeHtml(
+                        item.packageName
+                      )}
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="package-price">
+
+                    <strong>
+                      ${money(item.price)}
+                    </strong>
+
+                    <span>
+                      套餐总价
+                    </span>
+
+                  </div>
+
+
+                </div>
+
+
+                <div class="package-metrics">
+
+
+                  <div class="metric">
+
+                    <div class="metric-label">
+                      每小时
+                    </div>
+
+                    <div class="metric-value">
+
+                      ${
+                        hourly === null
+                          ? "—"
+                          : money(hourly)
+                      }
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="metric">
+
+                    <div class="metric-label">
+                      课时
+                    </div>
+
+                    <div class="metric-value">
+                      ${item.lessons || "—"}节
+                    </div>
+
+                  </div>
+
+
+                  <div class="metric">
+
+                    <div class="metric-label">
+                      每节
+                    </div>
+
+                    <div class="metric-value">
+                      ${item.minutes || "—"}min
+                    </div>
+
+                  </div>
+
+
+                </div>
+
+
+                <div class="swipe-hint">
+
+                  向左滑动查看操作
+                  <span>›</span>
+
                 </div>
 
               </div>
 
 
-              <div class="detail-item">
+              <!-- 详情 -->
 
-                <label>每小时价格</label>
+              <div class="detail">
 
-                <div>
-                  ${
-                    hourly === null
-                      ? "—"
-                      : money(hourly)
-                  }
-                </div>
-
-              </div>
+                <div class="detail-grid">
 
 
-              <div class="detail-item">
+                  <div class="detail-item">
 
-                <label>有效期</label>
+                    <label>
+                      总课时
+                    </label>
 
-                <div>
-                  ${validityText(item)}
-                </div>
+                    <div>
 
-              </div>
+                      ${
+                        totalHours
+                          ? totalHours.toFixed(2) +
+                            " 小时"
+                          : "—"
+                      }
 
+                    </div>
 
-              <div class="detail-item">
-
-                <label>区域</label>
-
-                <div>
-                  ${escapeHtml(
-                    item.district || "—"
-                  )}
-                </div>
-
-              </div>
+                  </div>
 
 
-              <div class="detail-item">
+                  <div class="detail-item">
 
-                <label>最近地铁站</label>
+                    <label>
+                      每小时价格
+                    </label>
 
-                <div>
-                  ${escapeHtml(
-                    item.metroStation || "—"
-                  )}
-                </div>
+                    <div>
 
-              </div>
+                      ${
+                        hourly === null
+                          ? "—"
+                          : money(hourly)
+                      }
 
+                    </div>
 
-              <div class="detail-item">
-
-                <label>距家</label>
-
-                <div>
-                  ${
-                    item.homeDistance !== ""
-                      ? item.homeDistance + " km"
-                      : "—"
-                  }
-                </div>
-
-              </div>
+                  </div>
 
 
-              <div class="detail-item">
+                  <div class="detail-item">
 
-                <label>距公司</label>
+                    <label>
+                      有效期
+                    </label>
 
-                <div>
-                  ${
-                    item.workDistance !== ""
-                      ? item.workDistance + " km"
-                      : "—"
-                  }
-                </div>
+                    <div>
+                      ${validityText(item)}
+                    </div>
 
-              </div>
+                  </div>
 
 
-              <div class="detail-item">
+                  <div class="detail-item">
 
-                <label>到家时间</label>
+                    <label>
+                      区域
+                    </label>
 
-                <div>
-                  ${formatDuration(
-                    item.homeTimeHour,
-                    item.homeTimeMinute
-                  )}
-                </div>
+                    <div>
+                      ${escapeHtml(
+                        item.district || "—"
+                      )}
+                    </div>
 
-              </div>
+                  </div>
 
 
-              <div class="detail-item">
+                  <div class="detail-item">
 
-                <label>到公司时间</label>
+                    <label>
+                      最近地铁站
+                    </label>
 
-                <div>
-                  ${formatDuration(
-                    item.workTimeHour,
-                    item.workTimeMinute
-                  )}
+                    <div>
+                      ${escapeHtml(
+                        item.metroStation || "—"
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-item">
+
+                    <label>
+                      距家
+                    </label>
+
+                    <div>
+                      ${
+                        item.homeDistance !== ""
+                          ? item.homeDistance +
+                            " km"
+                          : "—"
+                      }
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-item">
+
+                    <label>
+                      距公司
+                    </label>
+
+                    <div>
+                      ${
+                        item.workDistance !== ""
+                          ? item.workDistance +
+                            " km"
+                          : "—"
+                      }
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-item">
+
+                    <label>
+                      到家
+                    </label>
+
+                    <div>
+
+                      ${
+                        formatDuration(
+                          item.homeTimeHour,
+                          item.homeTimeMinute
+                        )
+                      }
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="detail-item">
+
+                    <label>
+                      到公司
+                    </label>
+
+                    <div>
+
+                      ${
+                        formatDuration(
+                          item.workTimeHour,
+                          item.workTimeMinute
+                        )
+                      }
+
+                    </div>
+
+                  </div>
+
+
                 </div>
 
               </div>
@@ -2427,138 +4190,258 @@ function renderPackages(){
 
           </div>
 
-        </div>
+        `;
 
-      `;
+      }
+    ).join("");
 
-    }).join("");
+
+  /*
+    给每个卡片增加滑动监听
+  */
+
+  document
+    .querySelectorAll(
+      ".package-swipe"
+    )
+    .forEach(
+      setupSwipe
+    );
+
 }
 
 
-/* =================================
-   HTML安全
-================================= */
+/* =====================================================
+   有效期
+===================================================== */
+
+function validityText(item){
+
+  if(item.permanent){
+    return "永久有效";
+  }
+
+
+  if(
+    item.validityValue === "" ||
+    item.validityValue == null
+  ){
+
+    return "—";
+
+  }
+
+
+  const map = {
+
+    year:"年",
+    month:"月",
+    day:"天"
+
+  };
+
+
+  return (
+    item.validityValue +
+    (
+      map[
+        item.validityUnit
+      ] || ""
+    )
+  );
+
+}
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
 
 function escapeHtml(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
 }
 
 
-/* =================================
-   Excel 导出
-================================= */
+/* =====================================================
+   永久有效
+===================================================== */
 
-$("exportExcelBtn").addEventListener(
+$("permanent")
+.addEventListener(
+  "change",
+  () => {
+
+    const disabled =
+      $("permanent").checked;
+
+
+    $("validityValue")
+      .disabled =
+      disabled;
+
+
+    $("validityUnit")
+      .disabled =
+      disabled;
+
+
+    if(disabled){
+
+      $("validityValue")
+        .value = "";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   EXCEL 导出
+===================================================== */
+
+$("exportExcelBtn")
+.addEventListener(
   "click",
   () => {
 
     if(!data.length){
 
-      alert("目前没有数据可以导出");
+      alert(
+        "目前没有数据可以导出"
+      );
 
       return;
+
     }
 
+
     const rows =
-      data.map(item => {
+      data.map(
+        item => {
 
-        const hourly =
-          getHourlyPrice(item);
+          const hourly =
+            getHourlyPrice(item);
 
-        return {
 
-          "机构名称":
-            item.institution,
+          return {
 
-          "套餐名称":
-            item.packageName,
+            "机构名称":
+              item.institution,
 
-          "套餐价格":
-            item.price,
+            "套餐名称":
+              item.packageName,
 
-          "课时数量":
-            item.lessons,
+            "套餐价格":
+              item.price,
 
-          "每节课时长":
-            item.minutes,
+            "课时数量":
+              item.lessons,
 
-          "总课时":
-            item.lessons *
-            item.minutes /
-            60,
+            "每节课时长":
+              item.minutes,
 
-          "每小时价格":
-            hourly,
+            "总课时":
+              item.lessons *
+              item.minutes /
+              60,
 
-          "有效期数值":
-            item.validityValue,
+            "每小时价格":
+              hourly,
 
-          "有效期单位":
-            item.permanent
-              ? "永久"
-              : item.validityUnit,
+            "有效期数值":
+              item.validityValue,
 
-          "有效期":
-            validityText(item),
+            "有效期单位":
+              item.permanent
+                ? "永久"
+                : item.validityUnit,
 
-          "区域":
-            item.district,
+            "有效期":
+              validityText(item),
 
-          "最近地铁站":
-            item.metroStation,
+            "区域":
+              item.district,
 
-          "距家距离(km)":
-            item.homeDistance,
+            "最近地铁站":
+              item.metroStation,
 
-          "距公司距离(km)":
-            item.workDistance,
+            "距家距离(km)":
+              item.homeDistance,
 
-          "到家时间":
-            formatDuration(
+            "距公司距离(km)":
+              item.workDistance,
+
+            "到家时间":
+              formatDuration(
+                item.homeTimeHour,
+                item.homeTimeMinute
+              ),
+
+            "到公司时间":
+              formatDuration(
+                item.workTimeHour,
+                item.workTimeMinute
+              ),
+
+            "到家小时":
               item.homeTimeHour,
-              item.homeTimeMinute
-            ),
 
-          "到公司时间":
-            formatDuration(
+            "到家分钟":
+              item.homeTimeMinute,
+
+            "到公司小时":
               item.workTimeHour,
+
+            "到公司分钟":
               item.workTimeMinute
-            ),
 
-          "到家小时":
-            item.homeTimeHour,
+          };
 
-          "到家分钟":
-            item.homeTimeMinute,
-
-          "到公司小时":
-            item.workTimeHour,
-
-          "到公司分钟":
-            item.workTimeMinute
-
-        };
-
-      });
+        }
+      );
 
 
     const ws =
-      XLSX.utils.json_to_sheet(rows);
+      XLSX.utils.json_to_sheet(
+        rows
+      );
+
 
     const wb =
       XLSX.utils.book_new();
+
 
     XLSX.utils.book_append_sheet(
       wb,
       ws,
       "芭蕾价格"
     );
+
 
     XLSX.writeFile(
       wb,
@@ -2569,11 +4452,12 @@ $("exportExcelBtn").addEventListener(
 );
 
 
-/* =================================
-   Excel 导入
-================================= */
+/* =====================================================
+   EXCEL 导入
+===================================================== */
 
-$("importExcelBtn").addEventListener(
+$("importExcelBtn")
+.addEventListener(
   "click",
   () => {
 
@@ -2583,157 +4467,199 @@ $("importExcelBtn").addEventListener(
 );
 
 
-$("excelInput").addEventListener(
+$("excelInput")
+.addEventListener(
   "change",
   async event => {
 
     const file =
       event.target.files[0];
 
-    if(!file) return;
+
+    if(!file){
+      return;
+    }
+
 
     try{
 
       const buffer =
         await file.arrayBuffer();
 
+
       const workbook =
-        XLSX.read(buffer,{
-          type:"array"
-        });
+        XLSX.read(
+          buffer,
+          {
+            type:"array"
+          }
+        );
+
 
       const sheet =
         workbook.Sheets[
           workbook.SheetNames[0]
         ];
 
+
       const rows =
-        XLSX.utils.sheet_to_json(sheet);
+        XLSX.utils.sheet_to_json(
+          sheet
+        );
+
 
       if(!rows.length){
 
-        alert("Excel里没有数据");
+        alert(
+          "Excel里没有数据"
+        );
 
         return;
+
       }
 
 
       const imported =
-        rows.map(row => {
+        rows.map(
+          row => {
 
-          let unit =
-            row["有效期单位"];
+            let unit =
+              row["有效期单位"];
 
-          let permanent =
-            unit === "永久";
 
-          if(unit === "年"){
-            unit = "year";
+            const permanent =
+              unit === "永久";
+
+
+            if(unit === "年"){
+              unit = "year";
+            }
+
+            else if(unit === "月"){
+              unit = "month";
+            }
+
+            else if(unit === "天"){
+              unit = "day";
+            }
+
+            else if(
+              unit !== "year" &&
+              unit !== "month" &&
+              unit !== "day"
+            ){
+
+              unit = "month";
+
+            }
+
+
+            return {
+
+              id:uid(),
+
+              institution:
+                String(
+                  row["机构名称"] ||
+                  ""
+                ),
+
+              packageName:
+                String(
+                  row["套餐名称"] ||
+                  ""
+                ),
+
+              price:
+                Number(
+                  row["套餐价格"] ||
+                  0
+                ),
+
+              lessons:
+                Number(
+                  row["课时数量"] ||
+                  0
+                ),
+
+              minutes:
+                Number(
+                  row["每节课时长"] ||
+                  60
+                ),
+
+              validityValue:
+                row["有效期数值"] ??
+                "",
+
+              validityUnit:
+                unit,
+
+              permanent,
+
+              district:
+                String(
+                  row["区域"] ||
+                  ""
+                ),
+
+              metroStation:
+                String(
+                  row["最近地铁站"] ||
+                  ""
+                ),
+
+              homeDistance:
+                row["距家距离(km)"] ??
+                "",
+
+              workDistance:
+                row["距公司距离(km)"] ??
+                "",
+
+              homeTimeHour:
+                row["到家小时"] ??
+                "",
+
+              homeTimeMinute:
+                row["到家分钟"] ??
+                "",
+
+              workTimeHour:
+                row["到公司小时"] ??
+                "",
+
+              workTimeMinute:
+                row["到公司分钟"] ??
+                ""
+
+            };
+
           }
-
-          else if(unit === "月"){
-            unit = "month";
-          }
-
-          else if(unit === "天"){
-            unit = "day";
-          }
-
-          else if(
-            unit !== "year" &&
-            unit !== "month" &&
-            unit !== "day"
-          ){
-
-            unit = "month";
-
-          }
-
-
-          return {
-
-            id:uid(),
-
-            institution:
-              String(
-                row["机构名称"] || ""
-              ),
-
-            packageName:
-              String(
-                row["套餐名称"] || ""
-              ),
-
-            price:
-              Number(
-                row["套餐价格"] || 0
-              ),
-
-            lessons:
-              Number(
-                row["课时数量"] || 0
-              ),
-
-            minutes:
-              Number(
-                row["每节课时长"] || 60
-              ),
-
-            validityValue:
-              row["有效期数值"] ?? "",
-
-            validityUnit:
-              unit,
-
-            permanent,
-
-            district:
-              String(
-                row["区域"] || ""
-              ),
-
-            metroStation:
-              String(
-                row["最近地铁站"] || ""
-              ),
-
-            homeDistance:
-              row["距家距离(km)"] ?? "",
-
-            workDistance:
-              row["距公司距离(km)"] ?? "",
-
-            homeTimeHour:
-              row["到家小时"] ?? "",
-
-            homeTimeMinute:
-              row["到家分钟"] ?? "",
-
-            workTimeHour:
-              row["到公司小时"] ?? "",
-
-            workTimeMinute:
-              row["到公司分钟"] ?? ""
-
-          };
-
-        });
+        );
 
 
       data =
-        data.concat(imported);
+        data.concat(
+          imported
+        );
+
 
       saveData();
 
       renderAll();
 
+
       alert(
         `成功导入 ${imported.length} 个套餐`
       );
 
+
     }catch(error){
 
-      console.error(error);
+      console.error(
+        error
+      );
 
       alert(
         "Excel导入失败，请检查文件格式"
@@ -2741,17 +4667,20 @@ $("excelInput").addEventListener(
 
     }
 
-    event.target.value = "";
+
+    event.target.value =
+      "";
 
   }
 );
 
 
-/* =================================
-   JSON备份
-================================= */
+/* =====================================================
+   JSON 导出
+===================================================== */
 
-$("exportJsonBtn").addEventListener(
+$("exportJsonBtn")
+.addEventListener(
   "click",
   () => {
 
@@ -2765,34 +4694,48 @@ $("exportJsonBtn").addEventListener(
           )
         ],
         {
-          type:"application/json"
+          type:
+            "application/json"
         }
       );
 
+
     const url =
-      URL.createObjectURL(blob);
+      URL.createObjectURL(
+        blob
+      );
+
 
     const a =
-      document.createElement("a");
+      document.createElement(
+        "a"
+      );
 
-    a.href = url;
+
+    a.href =
+      url;
 
     a.download =
       "芭蕾机构价格备份.json";
 
+
     a.click();
 
-    URL.revokeObjectURL(url);
+
+    URL.revokeObjectURL(
+      url
+    );
 
   }
 );
 
 
-/* =================================
-   JSON恢复
-================================= */
+/* =====================================================
+   JSON 导入
+===================================================== */
 
-$("importJsonBtn").addEventListener(
+$("importJsonBtn")
+.addEventListener(
   "click",
   () => {
 
@@ -2802,24 +4745,37 @@ $("importJsonBtn").addEventListener(
 );
 
 
-$("jsonInput").addEventListener(
+$("jsonInput")
+.addEventListener(
   "change",
   async event => {
 
     const file =
       event.target.files[0];
 
-    if(!file) return;
+
+    if(!file){
+      return;
+    }
+
 
     try{
 
       const text =
         await file.text();
 
-      const imported =
-        JSON.parse(text);
 
-      if(!Array.isArray(imported)){
+      const imported =
+        JSON.parse(
+          text
+        );
+
+
+      if(
+        !Array.isArray(
+          imported
+        )
+      ){
 
         throw new Error(
           "格式错误"
@@ -2827,21 +4783,31 @@ $("jsonInput").addEventListener(
 
       }
 
+
       if(
         !confirm(
           `确定用备份数据替换现在的 ${data.length} 条数据吗？`
         )
       ){
+
         return;
+
       }
 
-      data = imported;
+
+      data =
+        imported;
+
 
       saveData();
 
       renderAll();
 
-      alert("恢复成功");
+
+      alert(
+        "恢复成功"
+      );
+
 
     }catch(error){
 
@@ -2851,26 +4817,33 @@ $("jsonInput").addEventListener(
 
     }
 
-    event.target.value = "";
+
+    event.target.value =
+      "";
 
   }
 );
 
 
-/* =================================
+/* =====================================================
    删除全部
-================================= */
+===================================================== */
 
-$("clearAllBtn").addEventListener(
+$("clearAllBtn")
+.addEventListener(
   "click",
   () => {
 
     if(!data.length){
 
-      alert("目前没有数据");
+      alert(
+        "目前没有数据"
+      );
 
       return;
+
     }
+
 
     if(
       !confirm(
@@ -2882,6 +4855,7 @@ $("clearAllBtn").addEventListener(
 
     }
 
+
     data = [];
 
     saveData();
@@ -2892,36 +4866,36 @@ $("clearAllBtn").addEventListener(
 );
 
 
-/* =================================
-   永久有效联动
-================================= */
+/* =====================================================
+   点击空白处关闭滑动卡片
+===================================================== */
 
-$("permanent").addEventListener(
-  "change",
-  () => {
+document.addEventListener(
+  "touchstart",
+  event => {
 
-    const disabled =
-      $("permanent").checked;
+    const insideCard =
+      event.target.closest(
+        ".package-swipe"
+      );
 
-    $("validityValue").disabled =
-      disabled;
 
-    $("validityUnit").disabled =
-      disabled;
+    if(!insideCard){
 
-    if(disabled){
-
-      $("validityValue").value = "";
+      closeAllSwipeCards();
 
     }
 
+  },
+  {
+    passive:true
   }
 );
 
 
-/* =================================
-   渲染
-================================= */
+/* =====================================================
+   初始渲染
+===================================================== */
 
 function renderAll(){
 
